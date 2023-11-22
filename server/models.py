@@ -1,4 +1,7 @@
 from flask_sqlalchemy import SQLAlchemy
+from sqlalchemy_serializer import SerializerMixin 
+
+#Remember to Serialize when all tables are added
 
 db = SQLAlchemy()
 
