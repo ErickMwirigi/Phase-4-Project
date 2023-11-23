@@ -1,4 +1,4 @@
-from flask import Flask, make_response, jsonify
+from flask import Flask, make_response, jsonify, request
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 from models import db, Customer, Item
@@ -91,6 +91,97 @@ def item_by_id(id):
     response.headers["Content-Type"] = "application/json"
 
     return response
+
+@app.route('/customers', methods=['GET', 'POST'])
+def post_customers():
+
+    if request.method == 'GET':
+        customers = []
+        for c in Customer.query.all():
+            customer_dict = c.to_dict()
+            customers.append(customer_dict)
+
+        response = make_response(
+            jsonify(customers),
+            200
+        )
+
+        return response
+
+    elif request.method == 'POST':
+        new_customer = Customer(
+            name=request.form.get("name"),
+        )
+
+        db.session.add(new_customer)
+        db.session.commit()
+
+        customer_dict = new_customer.to_dict()
+
+        response = make_response(
+            jsonify(customer_dict),
+            201
+        )
+
+        return response
+
+
+@app.route('/customers/<int:id>', methods=['GET', 'PATCH', 'DELETE'])
+def cutomer_update(id):
+    customer = Customer.query.filter_by(id=id).first()
+
+    if customer == None:
+        response_body = {
+            "message": "This record does not exist in our database. Please try again."
+        }
+        response = make_response(jsonify(response_body), 404)
+
+        return response
+
+    else:
+        if request.method == 'GET':
+            customer_dict = customer.to_dict()
+
+            response = make_response(
+                jsonify(customer_dict),
+                200
+            )
+
+            return response
+
+        elif request.method == 'PATCH':
+            customer = Customer.query.filter_by(id=id).first()
+
+            for attr in request.form:
+                setattr(customer, attr, request.form.get(attr))
+
+            db.session.add(customer)
+            db.session.commit()
+
+            customer_dict = customer.to_dict()
+
+            response = make_response(
+                jsonify(customer_dict),
+                200
+            )
+
+            return response
+
+        elif request.method == 'DELETE':
+            db.session.delete(customer)
+            db.session.commit()
+
+            response_body = {
+                "delete_successful": True,
+                "message": "Review deleted."    
+            }
+
+            response = make_response(
+                jsonify(response_body),
+                200
+            )
+
+            return response
 
 
 
