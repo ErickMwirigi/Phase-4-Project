@@ -183,6 +183,98 @@ def cutomer_update(id):
 
             return response
 
+@app.route('/items', methods=['GET', 'POST'])
+def post_items():
+
+    if request.method == 'GET':
+        items = []
+        for i in Item.query.all():
+            item_dict = i.to_dict()
+            items.append(item_dict)
+
+        response = make_response(
+            jsonify(items),
+            200
+        )
+
+        return response
+
+    elif request.method == 'POST':
+        new_item = Item(
+            name=request.form.get("name"),
+            rating=request.form.get("rating")
+        )
+
+        db.session.add(new_item)
+        db.session.commit()
+
+        item_dict = new_item.to_dict()
+
+        response = make_response(
+            jsonify(item_dict),
+            201
+        )
+
+        return response
+
+
+@app.route('/items/<int:id>', methods=['GET', 'PATCH', 'DELETE'])
+def item_update(id):
+    item = Item.query.filter_by(id=id).first()
+
+    if item == None:
+        response_body = {
+            "message": "This record does not exist in our database. Please try again."
+        }
+        response = make_response(jsonify(response_body), 404)
+
+        return response
+
+    else:
+        if request.method == 'GET':
+            item_dict = item.to_dict()
+
+            response = make_response(
+                jsonify(item_dict),
+                200
+            )
+
+            return response
+
+        elif request.method == 'PATCH':
+            item = Item.query.filter_by(id=id).first()
+
+            for attr in request.form:
+                setattr(item, attr, request.form.get(attr))
+
+            db.session.add(item)
+            db.session.commit()
+
+            item_dict = item.to_dict()
+
+            response = make_response(
+                jsonify(item_dict),
+                200
+            )
+
+            return response
+
+        elif request.method == 'DELETE':
+            db.session.delete(item)
+            db.session.commit()
+
+            response_body = {
+                "delete_successful": True,
+                "message": "Review deleted."    
+            }
+
+            response = make_response(
+                jsonify(response_body),
+                200
+            )
+
+            return response
+
 
 
 if __name__ == '__main__':
