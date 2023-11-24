@@ -4,7 +4,7 @@ import React from 'react'
 export default function Mwirigi() {
   return (
     <View>
-      <Text>Mwirigi</Text>
+      <Text>Mwirigi erivk</Text>
     </View>
   )
 }
