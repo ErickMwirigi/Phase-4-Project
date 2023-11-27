@@ -1,0 +1,44 @@
+* {
+    font-family: Merriweather;
+}
+
+.homepage {
+    overflow-x: hidden;
+    display: flex;
+    flex-direction: column;
+    /* row-gap: 10px; */
+}
+
+.cover {
+    height: 70vh;
+    width: 100vw;
+    background-image: url(https://images.unsplash.com/photo-1522204523234-8729aa6e3d5f?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+
+.cover>.title {
+    width: 420px;
+    position: absolute;
+    left: 20px;
+    top: 12%;
+    /* background: rgba(0, 0, 0, 0.5); */
+    padding: 10px;
+    border-radius: 8px;
+}
+.cover>.title>.tagline {
+    color: white;
+    font-weight: 200;
+}
+.cover>.title>.heading {
+    font-size: 3em;
+    font-weight: bolder;
+
+}
+
+.cover>.title>.heading>.image {
+    width: 180px;
+    height: 30vh;
+}
