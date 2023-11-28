@@ -1,17 +1,16 @@
 import React, { useState, useEffect } from "react";
-import Erick from "./Erick";
 import Cover from "./components/Cover";
 import ProductsPage from "./components/ProductsPage";
-
 import './App.css';
-
-const productURL = "http://localhost:3000/products";
+import LogIn from './LogIn';
+import SignUp from './SignUp';
 
 function App() {
+  const productURL = "http://localhost:3000/products";
+
   const [products, setProducts] = useState([]);
   const [favoriteProducts, setFavoriteProducts] = useState([]);
   const [productsDictionary, setProductsDictionary] = useState({});
-
 
 
   function fetchProductData() {
@@ -33,13 +32,14 @@ function App() {
   }
   useEffect(() => fetchProductData(), []);
   return (
-    <div>
-      {/* <Erick /> */}
+    <div className='first-page'>
+      <LogIn />
+      <SignUp />
       <Cover />
       <ProductsPage products={products} favoriteProducts={favoriteProducts} setFavoriteProducts={setFavoriteProducts} />
 
     </div>
-  );
+  )
 }
 
 export default App;
