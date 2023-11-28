@@ -112,3 +112,62 @@ h3 {
     flex-direction: row;
     column-gap: 20px;
 }
+
+.favorite-collection {
+    display: flex;
+    flex-direction: column;
+    row-gap: 10px;
+    justify-content: left;
+}
+
+
+.fav-product-cards {
+    border: 1px solid lightgray;
+    border-radius: 16px;
+    background-color: white;
+    padding: 10px;
+    width: 100%;
+
+
+}
+
+.fav-product-details {
+    width: 20vh;
+    height: auto;
+    background-color: white;
+    border: 1px;
+    border-radius: 16px;
+}
+
+.fav-product-details>.fav-image {
+    width: 20vh;
+    height: 20vh;
+    border-radius: 10px;
+}
+
+.remove-fav {
+    display: flex;
+    flex-direction: row;
+    column-gap: 20px;
+}
+
+.remove-fav-btn {
+    font-size: 12px;
+    background-color: darkgrey;
+    width: 180px;
+    border-radius: 5px;
+    padding: 6px;
+    text-transform: uppercase;
+    cursor: pointer;
+    color: white;
+    border: none;
+    margin-top: 10px;
+}
+
+.heading-h4,
+.heading-h3 {
+    background-color: white;
+    color: maroon;
+    padding: 2px;
+    border: none;
+}
