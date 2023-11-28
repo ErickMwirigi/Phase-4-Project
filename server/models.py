@@ -5,13 +5,13 @@ from sqlalchemy.orm import relationship, backref
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.ext.associationproxy import association_proxy
 from sqlalchemy.ext.associationproxy import AssociationProxy
-#from sqlalchemy_serializer import SerializerMixin 
+from sqlalchemy_serializer import SerializerMixin 
 
 #Remember to Serialize when all tables are added
 
 db = SQLAlchemy()
 
-class  Customer(db.Model):
+class  Customer(db.Model, SerializerMixin):
     __tablename__ = 'customers'
 
     id = db.Column(db.Integer, primary_key=True)
@@ -34,13 +34,15 @@ class  Customer(db.Model):
     items = association_proxy('reviews', 'item',
         creator=lambda it: Review(item=it))
 
-    
+    serialize_rules = ('-orders.customer',),
+    serialize_rules = ('-payments.customer',),
+    serialize_rules = ('-reviews.customer',)
 
 
     def __repr__(self):
         return f'<Customer Item {self.name}>'
 
-class Item(db.Model):
+class Item(db.Model, SerializerMixin):
     __tablename__ = 'items'
 
     id = db.Column(db.Integer, primary_key=True)
@@ -65,12 +67,16 @@ class Item(db.Model):
     customers = association_proxy('payments', 'customer',
         creator=lambda cu: Review(customer=cu))
 
-   
+    serialize_rules = ('-orders.item',),   
+    serialize_rules = ('-payments.item',),
+    serialize_rules = ('-reviews.item',)
 
     def __repr__(self):
         return f'<Item {self.name}, {self.Quantity}>'
 
-class Order(db.Model):
+
+
+class Order(db.Model, SerializerMixin):
     __tablename__ = 'orders'
 
     id = db.Column(db.Integer, primary_key=True)
@@ -86,8 +92,10 @@ class Order(db.Model):
     customer = relationship('Customer', back_populates='orders')
     item = relationship('Item', back_populates='orders')
 
+    serialize_rules = ('-customer.orders', '-item.orders',)
 
-class Payment(db.Model):
+
+class Payment(db.Model, SerializerMixin):
     __tablename__ = 'payments'
 
     id = db.Column(db.Integer, primary_key=True)
@@ -103,8 +111,10 @@ class Payment(db.Model):
     customer = relationship('Customer', back_populates='payments')
     item = relationship('Item', back_populates='payments')
 
+    serialize_rules = ('-customer.payments', '-item.reviews',)
+
     
-class Review(db.Model):
+class Review(db.Model, SerializerMixin):
     __tablename__ = 'reviews'
 
     id = db.Column(db.Integer, primary_key=True)
@@ -119,6 +129,8 @@ class Review(db.Model):
 
     customer = relationship('Customer', back_populates='reviews')
     item = relationship('Item', back_populates='reviews')
+
+    serialize_rules = ('-customer.reviews', '-item.reviews',)
     
 
 

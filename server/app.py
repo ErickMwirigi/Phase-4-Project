@@ -269,7 +269,7 @@ def post_customers():
 
 
 @app.route('/customers/<int:id>', methods=['GET', 'PATCH', 'DELETE'])
-def cutomer_update(id):
+def customer_update(id):
     customer = Customer.query.filter_by(id=id).first()
 
     if customer == None:
@@ -659,7 +659,7 @@ def post_reviews():
         return response
 
 
-@app.route('/payments/<int:id>', methods=['GET', 'PATCH', 'DELETE'])
+@app.route('/reviews/<int:id>', methods=['GET', 'PATCH', 'DELETE'])
 def review_update(id):
     review = Review.query.filter_by(id=id).first()
 
