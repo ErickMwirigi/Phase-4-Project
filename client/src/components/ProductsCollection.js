@@ -2,16 +2,16 @@ import React from "react";
 
 import ProductCard from "./ProductCard";
 
-function ProductsCollection({}) {
+function ProductsCollection({ products, setFavoriteProducts }) {
     return (
         <div className="market-collection">
             <h2>Products</h2>
             <div className="product-collection">
-                {albums.map((album) => (
+                {products.map((product) => (
                     <ProductCard
-                        key={album.id}
-                        album={album}
-                        addToFavorite={() => setFavoriteAlbums(album)}
+                        key={product.id}
+                        product={product}
+                        addToFavorite={() => setFavoriteProducts(product)}
                     />
                 ))}
             </div>

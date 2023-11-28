@@ -50,7 +50,7 @@
     flex-direction: column;
     row-gap: 30px;
     align-items: center;
-  }
+}
 
 .market-collection {
     display: flex;
@@ -65,4 +65,50 @@
     column-gap: 15px;
     row-gap: 10px;
     justify-content: center;
-  }
+}
+
+.product-cards {
+    display: flex;
+    flex-wrap: wrap;
+    column-gap: 15px;
+    row-gap: 10px;
+    justify-content: center;
+    border: 1px solid lightgray;
+    border-radius: 16px;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    width: 49vh
+}
+
+
+
+.product-cards img {
+    width: 46vh;
+    height: 46vh;
+    background-color: white;
+    border: 1px;
+    border-radius: 16px;
+}
+
+.product-cards h4,
+h3 {
+    background-color: white;
+    color: maroon;
+    padding: 2px;
+    border: none;
+}
+
+.product-cards p {
+    background-color: white;
+    color: maroon;
+    font-size: small;
+    border: none;
+}
+
+.view-add-btns {
+    display: flex;
+    flex-direction: row;
+    column-gap: 20px;
+}

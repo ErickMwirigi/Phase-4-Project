@@ -1,6 +1,7 @@
 import React from "react";
 
 import ProductsCollection from "./ProductsCollection";
+import FavoriteProducts from "./FavoriteProducts";
 
 
 function ProductsPage({ products, favoriteProducts, setFavoriteProducts }) {
@@ -28,7 +29,7 @@ function ProductsPage({ products, favoriteProducts, setFavoriteProducts }) {
                 products={products}
                 setFavoriteProducts={setToFavoriteProducts}
             />
-            <FavoriteAlbums
+            <FavoriteProducts
                 favoriteProducts={favoriteProducts}
                 removeFromFavorites={removeFromFavorites}
             />
