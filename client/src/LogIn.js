@@ -11,7 +11,13 @@ export default function LogIn({prop}) {
 
     function handleSubmit(e){
         e.preventDefault()
-        console.log(formData)
+        if(!formData) return 
+        setFormData({
+            username: "",
+            password:"",
+    
+        })
+        alert(`Welcome ${formData.username}`)
         // fetch("url", {
         //     method:"POST",
         //     body:
@@ -30,7 +36,6 @@ export default function LogIn({prop}) {
         const nam = e.target.name
         const value = e.target.value
         setFormData({...formData, [nam] : value})
-        console.log(formData)
     }
 
   return (

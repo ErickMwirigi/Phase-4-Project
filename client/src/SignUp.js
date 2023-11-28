@@ -22,8 +22,16 @@ export default function SignUp({ formdata }){
 
     function handleSubmit(e){
         e.preventDefault()
-        // if(!formData) return 
-        console.log(formData)
+        if(!formData) return 
+        setFormData({
+            firstname: "",
+            lastname: "",
+            email: "",
+            contact:"",
+            password:"",
+    
+        })
+        alert(`Welcome ${formData.lastname}`)
     }
 
 
@@ -34,45 +42,45 @@ export default function SignUp({ formdata }){
                 <form onSubmit={handleSubmit}>
                     <h2>Welcome to Our App!</h2>
                     <label htmlFor='firstname'> Firstname :
-                    <input
-                    type="text"
-                    id="firstname"
-                    value={formData.firstname}
-                    autoComplete="off"
-                    onChange={handleChange}
-                    />
+                        <input
+                        type="text"
+                        id="firstname"
+                        value={formData.firstname}
+                        autoComplete="off"
+                        onChange={handleChange}
+                        />
                     </label>
                     <label htmlFor='lastname'> Lastname :
-                    <input
-                    type="text"
-                    id="lastname"
-                    value={formData.lastname}
-                    onChange={handleChange}
-                    />
+                        <input
+                        type="text"
+                        id="lastname"
+                        value={formData.lastname}
+                        onChange={handleChange}
+                        />
                     </label>
                     <label htmlFor='email'> Email :
-                    <input
-                    type="email"
-                    id="email"
-                    value={formData.email}
-                    onChange={handleChange}
-                    />
+                        <input
+                        type="email"
+                        id="email"
+                        value={formData.email}
+                        onChange={handleChange}
+                        />
                     </label>
                     <label htmlFor='contact'> Contact :
-                    <input
-                    type="number"vfsed
-                    id="contact"
-                    value={formData.contact}
-                    onChange={handleChange}
-                    />
+                        <input
+                        type="number"vfsed
+                        id="contact"
+                        value={formData.contact}
+                        onChange={handleChange}
+                        />
                     </label>
                     <label htmlFor='password'> Password :
-                    <input
-                    type="password"
-                    id="password"
-                    value={formData.password}
-                    onChange={handleChange}
-                    />
+                        <input
+                        type="password"
+                        id="password"
+                        value={formData.password}
+                        onChange={handleChange}
+                        />
                     </label>
                     
                     <button className='login-btn' type='submit'>Sign Up</button>

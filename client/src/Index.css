@@ -1,4 +1,11 @@
+.first-page{
+    /* width: 100%; */
+    display: flex;
+    flex-direction: row;
+}
+
 .login-dialogue{
+    width: 100%;
     color: rgb(24, 23, 23);
     background: #C7846F;
     text-align: center;
@@ -6,15 +13,16 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    margin: 20px;
 }
 .form-dialogue{
     color: rgb(24, 23, 23);
     background: #E0BABA;
     text-align: center;
-    width: auto;
     border-radius: 8px;
     margin: 40px;
     padding: 40px,20px;
+    display: inherit;
 }
 
 form{
@@ -25,6 +33,7 @@ form{
 }
 
 form > .login-btn{
+    
     font-weight: 550;
     color: #ffffff;
     padding: 10px;
@@ -35,7 +44,6 @@ form > .login-btn{
 }
 
 input{
-    /* display: inherit; */
     border: none;
     text-align: left;
     border-radius: 3px;
