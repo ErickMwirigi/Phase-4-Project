@@ -1,10 +1,12 @@
 import React from 'react';
-import Erick from './Erick';
+import LogIn from './LogIn';
+import SignUp from './SignUp';
 
 function App() {
   return (
-    <div >
-      <Erick/>
+    <div>
+      <LogIn/>
+      <SignUp/>
     </div>
   );
 }
