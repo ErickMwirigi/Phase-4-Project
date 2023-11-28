@@ -28,10 +28,12 @@
     padding: 10px;
     border-radius: 8px;
 }
+
 .cover>.title>.tagline {
     color: white;
     font-weight: 200;
 }
+
 .cover>.title>.heading {
     font-size: 3em;
     font-weight: bolder;
@@ -42,3 +44,25 @@
     width: 180px;
     height: 30vh;
 }
+
+.products {
+    display: flex;
+    flex-direction: column;
+    row-gap: 30px;
+    align-items: center;
+  }
+
+.market-collection {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 80vw;
+}
+
+.product-collection {
+    display: flex;
+    flex-wrap: wrap;
+    column-gap: 15px;
+    row-gap: 10px;
+    justify-content: center;
+  }

@@ -5,3 +5,5 @@ function ProductCard(){
         <div></div>
     )
 }
+
+export default ProductCard

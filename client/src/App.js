@@ -8,8 +8,10 @@ import './App.css';
 const productURL = "http://localhost:3000/products";
 
 function App() {
-  const [products, setProducts] = useState([])
+  const [products, setProducts] = useState([]);
+  const [favoriteProducts, setFavoriteProducts] = useState([]);
   const [productsDictionary, setProductsDictionary] = useState({});
+
 
 
   function fetchProductData() {
@@ -34,7 +36,7 @@ function App() {
     <div>
       {/* <Erick /> */}
       <Cover />
-      <ProductsPage products={products} />
+      <ProductsPage products={products} favoriteProducts={favoriteProducts} setFavoriteProducts={setFavoriteProducts} />
 
     </div>
   );
