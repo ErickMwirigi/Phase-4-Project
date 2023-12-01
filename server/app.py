@@ -53,7 +53,8 @@ def items():
             "price": i.price,
             "category": i.category,
             "imageUrl": i.imageUrl,
-            "rating": i.rating
+            "rating": i.rating,
+            "quantity": i.quantity
         }
         items.append(item_dict)
 
@@ -158,7 +159,8 @@ def item_by_id(id):
         "price": item.price,
         "category": item.category,
         "imageUrl": item.imageUrl,
-        "rating": item.rating
+        "rating": item.rating,
+        "quantity": item.quantity
     }
 
     response = make_response(
@@ -353,6 +355,7 @@ def post_items():
             category=request.form.get("category"),
             imageUrl=request.form.get("imageUrl"),
             rating=request.form.get("rating"),
+            quantity=request.form.get("quantity"),
         )
 
         db.session.add(new_item)

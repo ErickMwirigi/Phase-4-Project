@@ -33,9 +33,9 @@ function App() {
   useEffect(() => fetchProductData(), []);
   return (
     <div className='first-page'>
+      <Cover />
       <LogIn />
       <SignUp />
-      <Cover />
       <ProductsPage products={products} favoriteProducts={favoriteProducts} setFavoriteProducts={setFavoriteProducts} />
 
     </div>

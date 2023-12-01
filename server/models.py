@@ -48,10 +48,11 @@ class Item(db.Model, SerializerMixin):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String)
     description = db.Column(db.String)
-    price = db.Column(db.String)
+    price = db.Column(db.Integer)
     category = db.Column(db.String)
     imageUrl= db.Column(db.String)
-    rating = db.Column(db.String)
+    rating = db.Column(db.Integer)
+    quantity = db.Column(db.Integer)
     created_at = db.Column(DateTime(), server_default=func.now())
     updated_at = db.Column(DateTime(), onupdate=func.now())
 
@@ -118,7 +119,7 @@ class Review(db.Model, SerializerMixin):
     __tablename__ = 'reviews'
 
     id = db.Column(db.Integer, primary_key=True)
-    rating = db.Column(db.String)
+    rating = db.Column(db.Integer)
     comment = db.Column(db.String)
     date = db.Column(db.Integer)
     created_at = db.Column(DateTime(), server_default=func.now())
