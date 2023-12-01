@@ -72,7 +72,7 @@ class Item(db.Model, SerializerMixin):
     serialize_rules = ('-reviews.item',)
 
     def __repr__(self):
-        return f'<Item {self.name}, {self.Quantity}>'
+        return f'<Item {self.name}, {self.price}>'
 
 
 

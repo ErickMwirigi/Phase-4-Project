@@ -1,31 +1,22 @@
 from random import choice as rc
+import json
 
-from faker import Faker
+# from faker import Faker
 
 from app import app
 from models import db, Customer, Item
 
-
-
-fake = Faker()
-
-with app.app_context():
-
-    Item.query.delete()
-    Customer.query.delete()
-
-    customers = []
-    for n in range(50):
-        customer = Customer(name=fake.name())
-        customers.append(customer)
-
-    db.session.add_all(customers)
+with open('/home/mwagash/Development/code/Projects/Market_App/Phase-4-Project/client/db.json' , mode='r') as data:
+    items = json.load(data)
+    data = items['products']
 
     items = []
     rating = ['One', 'Two', 'Three', 'Four', 'Five']
-    for n in range(100):
-        item = Item(name=fake.first_name(), rating=rc(rating)) #, customer=rc(customers)
+    for item in data:
+        item = Item(name=item['name'], price=item['price'] , desription=item['description'] , category=item['category]'],rating=rc(rating))
         items.append(item)
+        
+    print(items)
 
-    db.session.add_all(items)
-    db.session.commit()
+    # db.session.add_all(items)
+    # db.session.commit()
