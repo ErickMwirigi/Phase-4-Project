@@ -127,21 +127,30 @@
       "payment_information": "m-pesa"
     }
   ],
+  "favoriteProducts": [
+    {
+      "id": 1,
+      "product_id": 9,
+      "user_id": "Trevour Kitavi",
+      "rating": 5,
+      "comment": "Wow. Just an amazing product to say the least"
+    }
+  ],
   "reviews": [
     {
       "id": 1,
-      "user_id": "Exe Unga All Purpose Fortified Wheat Flour - 2Kg",
-      "product_id": 195,
-      "rating": "It is milled from a blend of the finest wheat and is suitable for making pastries, pancakes, chapatis, mandazis and other confectionery products. Exe All Purpose flour is great for thickening sauces and as a coating for food when frying.",
-      "comment": "Food Cupboard",
+      "user_id": 1,
+      "product_id": 9,
+      "rating": 4,
+      "comment": "Does the job",
       "date": true
     },
     {
-      "id": 12,
-      "user_id": "Apple MacBook Pro 2021 M1 Pro 16.2 inch 16GB 512GB SSD - Gray",
-      "product_id": 327000,
-      "rating": "Introducing the Apple MacBook Pro 2021 M1 Pro, a cutting-edge powerhouse that redefines the boundaries of performance and innovation. Equipped with the revolutionary M1 Pro chip featuring a 10-core CPU and a mind-blowing 16-core GPU, this laptop delivers unparalleled speed and efficiency for both creative professionals and everyday users. Immerse yourself in the brilliance of the 16.2-inch Retina XDR display, boasting an impressive resolution of 3456 x 2234 pixels. Whether you are editing high-resolution videos, designing intricate graphics, or simply enjoying your favorite content, the clarity and vibrancy of the display will leave you captivated. With 16GB of unified memory, multitasking becomes seamless, allowing you to effortlessly switch between demanding applications without compromising performance. The 512GB internal storage ensures ample space for your files, projects, and multimedia content. Connectivity is a breeze with three Thunderbolt/USB 4 ports, an HDMI port, an SDXC card slot, and the convenient MagSafe 3 port for fast and secure charging. The MacBook Pro 2021 M1 Pro is not just a laptop; its a technological marvel that sets new standards for power, speed, and versatility in the world of computing. Elevate your experience with Apples latest masterpiece in a sleek and sophisticated Gray finish.",
-      "comment": "Electronics",
+      "id": 2,
+      "user_id": 1,
+      "product_id": 12,
+      "rating": 5,
+      "comment": "Apple is best company ever because it's products are good",
       "date": true
     }
   ]

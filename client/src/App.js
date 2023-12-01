@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Cover from "./components/Cover";
+import FavoriteProductsPage from "./components/FavoriteProductsPage";
 import ProductsPage from "./components/ProductsPage";
 import './App.css';
 import LogIn from './LogIn';
@@ -11,6 +12,7 @@ function App() {
   const [products, setProducts] = useState([]);
   const [favoriteProducts, setFavoriteProducts] = useState([]);
   const [productsDictionary, setProductsDictionary] = useState({});
+  const [commentsDictionary, setCommentsDictionary] = useState({});
 
 
   function fetchProductData() {
@@ -18,24 +20,34 @@ function App() {
       .then((response) => response.json())
       .then((data) => {
 
-        const dictionary = {}
+        const dictionary = {};
+        const commentsDict = {};
 
         data.forEach(product => {
           dictionary[product.id] = product;
+          commentsDict[product.id]=[]
 
         });
 
         setProducts(data);
         setProductsDictionary(dictionary);
-
       });
   }
   useEffect(() => fetchProductData(), []);
+
+  useEffect(() => {
+    const commentsDict = {}
+    products.forEach(product => {
+      commentsDict[product.id] = [];
+    });
+    setCommentsDictionary(commentsDict);
+  }, [products])
   return (
     <div className='first-page'>
       <LogIn />
       <SignUp />
       <Cover />
+      <FavoriteProductsPage productsDictionary={productsDictionary} commentsDictionary={commentsDictionary} setCommentsDictionary={setCommentsDictionary}/>
       <ProductsPage products={products} favoriteProducts={favoriteProducts} setFavoriteProducts={setFavoriteProducts} />
 
     </div>

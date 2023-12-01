@@ -15,7 +15,7 @@ function ratingStars(num) {
   return stars;
 }
 
-function productDetailsCard({
+function ProductDetailsCard({
   review,
   product = {},
   commentsDictionary,
@@ -46,4 +46,4 @@ function productDetailsCard({
     </div>
   );
 }
-export default productDetailsCard;
+export default ProductDetailsCard;
