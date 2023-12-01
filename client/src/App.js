@@ -5,6 +5,7 @@ import ProductsPage from "./components/ProductsPage";
 import './App.css';
 import LogIn from './LogIn';
 import SignUp from './SignUp';
+// import Navigation from "./components/Navigation";
 
 function App() {
   const productURL = "http://localhost:3000/products";
@@ -49,9 +50,10 @@ function App() {
 
   return (
     <div className='first-page'>
+      {/* <Navigation /> */}
+      <Cover />
       <LogIn />
       <SignUp />
-      <Cover />
       <ProductReviewPage products={products} productsDictionary={productsDictionary} commentsDictionary={commentsDictionary} setCommentsDictionary={setCommentsDictionary} />
       <ProductsPage products={products} favoriteProducts={favoriteProducts} setFavoriteProducts={setFavoriteProducts} />
 

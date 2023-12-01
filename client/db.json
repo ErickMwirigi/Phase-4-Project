@@ -87,7 +87,7 @@
       "description": "6 in 1 Benefits Listerine Total Care Anticavity Mouthwash is a complete mouthwash.* Every member of the family has their very own oral care needs. With six benefits, Listerine Total Care is a simple solution to keep them all taken care of.** Listerine Total Care delivers six benefits to clean your whole mouth, kill bad breath germs, prevent cavities, restore enamel, freshen breath, and strengthen teeth. Listerine Total Care gives your mouth a clean, fresh feeling and taste.",
       "category": "Health and Beauty",
       "stock": true,
-      "rating": 5,
+      "rating": 4,
       "image_url": "https://ke.jumia.is/unsafe/fit-in/680x680/filters:fill(white)/product/93/821153/1.jpg?0366"
     },
     {
@@ -161,6 +161,13 @@
       "user_name": "Trevour Kitavi",
       "rating": 5,
       "comment": "Wow. Just wow"
+    },
+    {
+      "id": 1,
+      "product_id": 1,
+      "user_name": "Michael Njogu",
+      "rating": 3,
+      "comment": "Amazing"
     }
   ],
   "comments": [
@@ -175,9 +182,15 @@
     },
     {
       "user": "Melvin Mbae",
+      "comment": "Did not work for me",
+      "product_id": 10,
+      "id": 3
+    },
+    {
+      "user": "Melvin Mbae",
       "comment": "First purchase and was not dissapointed.",
-      "product_id": 9,
-      "id": 2
+      "product_id": 1,
+      "id": 4
     }
   ]
 }

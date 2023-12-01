@@ -17,7 +17,7 @@ function Comments({ review, usercomment, product, commentsDictionary, setComment
     return (
         <div className="other-user-comments">
             <h3>
-                <u>Comments</u>
+                <u>Reviews</u>
             </h3>
             <p><b>{review.user_name}</b>: {review.comment}</p>
             <CommentsList
