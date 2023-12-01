@@ -5,8 +5,9 @@ import './App.css';
 import LogIn from './LogIn';
 import SignUp from './SignUp';
 
+// http://localhost:3000/products
 function App() {
-  const productURL = "http://localhost:3000/products";
+  const productURL = "http://127.0.0.1:5000/items";
 
   const [products, setProducts] = useState([]);
   const [favoriteProducts, setFavoriteProducts] = useState([]);
@@ -16,8 +17,9 @@ function App() {
   function fetchProductData() {
     fetch(productURL)
       .then((response) => response.json())
-      .then((data) => {
 
+            .then((data) => {
+           console.log(data)
         const dictionary = {}
 
         data.forEach(product => {
