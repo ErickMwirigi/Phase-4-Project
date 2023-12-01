@@ -17,28 +17,42 @@ function ratingStars(num) {
 
 function ProductDetailsCard({
   review,
+  products,
+  usercomment = {},
   product = {},
   commentsDictionary,
   setCommentsDictionary,
 }) {
   return (
-    <div className="product-cards">
-      <div className="product-details">
-        <div className="product-data">
-          <img className="product-image-1" src={product.image} alt="product-image" />
-          <div className="product-metadata">
-            <h3>{product.name}</h3>
-            <h4>{review.reviewer}</h4>
-            <p>{review.review}</p>
+    <div className="productdetails-cards">
+      <div className="productdetails-details">
+        <div className="productdetails-data">
+          <img className="productdetails-image-1" src={product.image_url} alt="productdetails-image" />
+          <div className="productdetails-metadata">
+            <h3>
+              <u>Product Name</u><br></br>{product.name}</h3>
+            <h3>
+              <u>Product Description</u><br></br>{product.description}
+            </h3>
+            <h3>
+              <u>Product Category</u>: <br></br>{product.category}</h3>
+            <h3>
+              <u>Product Price</u>: <br></br>Kshs.{product.price}
+            </h3>
+
             <div className="rating-stars">
-              {ratingStars(Number(review.rating)).map((star, idx) => (
+
+              <b><u>Overall Rating</u></b>:
+              {ratingStars(Number(product.rating)).map((star, idx) => (
                 <div key={idx}>{star}</div>
               ))}
             </div>
           </div>
         </div>
         <Comments
+          review={review}
           product={product}
+          usercomment={usercomment}
           commentsDictionary={commentsDictionary}
           setCommentsDictionary={setCommentsDictionary}
         />

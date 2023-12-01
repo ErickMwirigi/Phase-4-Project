@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
-import Reviews from "./Reviews";
+import Reviews from "./reviews";
 
 
-function FavoriteProductsPage(props) {
-    const favoriteProductsURL = "http://localhost:3000/favoriteProducts";
+function ProductReviewPage(props) {
+    const favoriteProductsURL = "http://localhost:3000/reviews";
 
-    const { productsDictionary, commentsDictionary, setCommentsDictionary } = props;
+    const { products, productsDictionary, commentsDictionary, setCommentsDictionary } = props;
 
     const [reviews, setReviews] = useState([]);
 
@@ -24,6 +24,7 @@ function FavoriteProductsPage(props) {
     return (
         <div className="reviews">
             <Reviews
+                products={products}
                 reviews={reviews}
                 productsDictionary={productsDictionary}
                 commentsDictionary={commentsDictionary}
@@ -32,4 +33,4 @@ function FavoriteProductsPage(props) {
         </div>
     );
 }
-export default FavoriteProductsPage;
+export default ProductReviewPage;

@@ -1,6 +1,6 @@
 import React from "react";
 
-function ProductCard({product, addToFavorite}) {
+function ProductCard({ product, addToFavorite }) {
     return (
         <div className="product-cards">
             <div className="product-image">
