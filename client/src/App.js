@@ -36,7 +36,7 @@ function App() {
   return (
     <div className='first-page'>
       <Routes>
-        <Route path="/" element={<ProductsPage products={products} favoriteProducts={favoriteProducts} setFavoriteProducts={setFavoriteProducts} />}/>
+        <Route path="/" element={<ProductsPage products={products} favoriteProducts={favoriteProducts} searchData={setProducts} setFavoriteProducts={setFavoriteProducts} />}/>
         <Route path="/login" element={<LogIn />}/>
         <Route path="/signup" element={<SignUp />}/>
         <Route path="/cover" element={ <Cover />}/>

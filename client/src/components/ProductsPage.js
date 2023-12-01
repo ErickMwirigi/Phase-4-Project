@@ -2,25 +2,16 @@
 import ProductsCollection from "./ProductsCollection";
 import FavoriteProducts from "./FavoriteProducts";
 import Searchbar from "./Searchbar";
-import React, { useState } from "react";
+import React from "react";
 
 
-function ProductsPage({ products, favoriteProducts, setFavoriteProducts }) {
-    const [ search, setSearch] = useState()
-    const [ display, setDisplay] = useState(products)
+function ProductsPage({ products, favoriteProducts, setFavoriteProducts , searchData}) {
 
     function onSearch(searched){
+
         const toDisplay = products.filter((item)=>item.name.includes(searched))
-        // setSearch(searched)
-        setDisplay(toDisplay)
-        console.log(toDisplay)
-        // console.log(products.filter((item)=> item.name.includes(searched)))
+        searchData(toDisplay)
     }
-    // function productDisplay(){
-    //     setDisplay(products)
-    //     console.log(display)
-    //     return display
-    // }
 
     function setToFavoriteProducts(product) {
         if (favoriteProducts.includes(product)) {
@@ -43,7 +34,7 @@ function ProductsPage({ products, favoriteProducts, setFavoriteProducts }) {
             <Searchbar searched={onSearch}/>
             <div className="products">
                 <ProductsCollection
-                    products={display}
+                    products={products}
                     setFavoriteProducts={setToFavoriteProducts}
                 />
                 <FavoriteProducts
