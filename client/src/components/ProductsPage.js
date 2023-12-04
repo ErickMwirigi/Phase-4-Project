@@ -6,7 +6,7 @@ import SideBar from './SideBar'
 function ProductsPage({ products, setToFavorite }) {
 
     return (
-        <>
+        <div className="mainPage">
             <div className="sidebar">
                 <SideBar />
             </div>
@@ -16,7 +16,7 @@ function ProductsPage({ products, setToFavorite }) {
                     setFavorite={setToFavorite}
                 />
             </div>
-        </>
+        </div>
         
     );
 
