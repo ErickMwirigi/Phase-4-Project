@@ -5,13 +5,15 @@ export default function SignUp({ formdata }){
 
     // const [confirmPass, setConfirmPass] = useState("")
     const [formData, setFormData] = useState({
-        firstname: "",
-        lastname: "",
+        name: "",
         email: "",
-        contact:"",
+        address:"",
         password:"",
 
     })
+    // console.log(formData)
+
+   
 
     function handleChange(e){
         const id = e.target.id
@@ -22,16 +24,19 @@ export default function SignUp({ formdata }){
 
     function handleSubmit(e){
         e.preventDefault()
-        if(!formData) return 
-        setFormData({
-            firstname: "",
-            lastname: "",
-            email: "",
-            contact:"",
-            password:"",
-    
+        // if(!formData) return 
+
+        // alert(`Welcome ${formData.name}`)
+        console.log(formData)
+        fetch("http://127.0.0.1:5555/customers",{
+            method:"POST",
+            headers:{
+                "Content-Type":"application/json"
+            },
+            body:JSON.stringify(formData)
         })
-        alert(`Welcome ${formData.lastname}`)
+        .then((r)=>r.json())
+        .then((r)=>console.log(r))
     }
 
 
@@ -41,20 +46,12 @@ export default function SignUp({ formdata }){
             <div className='form-dialogue'>
                 <form onSubmit={handleSubmit}>
                     <h2>Welcome to Our App!</h2>
-                    <label htmlFor='firstname'> Firstname :
+                    <label htmlFor='name'> name :
                         <input
                         type="text"
-                        id="firstname"
-                        value={formData.firstname}
+                        id="name"
+                        value={formData.name}
                         autoComplete="off"
-                        onChange={handleChange}
-                        />
-                    </label>
-                    <label htmlFor='lastname'> Lastname :
-                        <input
-                        type="text"
-                        id="lastname"
-                        value={formData.lastname}
                         onChange={handleChange}
                         />
                     </label>
@@ -66,11 +63,11 @@ export default function SignUp({ formdata }){
                         onChange={handleChange}
                         />
                     </label>
-                    <label htmlFor='contact'> Contact :
+                    <label htmlFor='address'> Address :
                         <input
-                        type="number"vfsed
-                        id="contact"
-                        value={formData.contact}
+                        type="text"vfsed
+                        id="address"
+                        value={formData.address}
                         onChange={handleChange}
                         />
                     </label>

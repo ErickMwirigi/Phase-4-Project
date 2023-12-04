@@ -55,58 +55,65 @@
       "image_url": "https://ke.jumia.is/unsafe/fit-in/680x680/filters:fill(white)/product/90/283585/2.jpg?1887"
     },
     {
-    "id": 7,
-    "name": "Toss Lavender Detergent Powder plastic container - 1kg",
-    "price": 355,
-    "description": "Toss Lavender Detergent Powder is a high performance washing powder that has a powerful brand image and a large widespread customer base since the mid 90s. Extremely gentle on your hands with a nice fresh smell, Toss removes even the most stubborn stains of all without affecting the colour of your clothes. Make your order today and we will deliver in just 2-4 days.",
-    "category": "Household Supplies",
-    "stock": true,
-    "image_url": "https://ke.jumia.is/unsafe/fit-in/680x680/filters:fill(white)/product/67/441925/1.jpg?2451"
+      "id": 7,
+      "name": "Toss Lavender Detergent Powder plastic container - 1kg",
+      "price": 355,
+      "description": "Toss Lavender Detergent Powder is a high performance washing powder that has a powerful brand image and a large widespread customer base since the mid 90s. Extremely gentle on your hands with a nice fresh smell, Toss removes even the most stubborn stains of all without affecting the colour of your clothes. Make your order today and we will deliver in just 2-4 days.",
+      "category": "Household Supplies",
+      "stock": true,
+      "image_url": "https://ke.jumia.is/unsafe/fit-in/680x680/filters:fill(white)/product/67/441925/1.jpg?2451"
     },
     {
-    "id": 8,
-    "name": "Hanan Toilet Paper - 8 Pack",
-    "price": 410,
-    "description":"Hanan represents compassion, warm-heartedness, love and care. Our brand represents this by providing a wide range of premium quality products. Shop from a Huge Collection - Enjoy Shopping Best Offers & Deals Online",
-    "category": "Household Supplies",
-    "stock": true,
-    "image_url": "https://ke.jumia.is/unsafe/fit-in/680x680/filters:fill(white)/product/99/399247/2.jpg?5939"
+      "id": 8,
+      "name": "Hanan Toilet Paper - 8 Pack",
+      "price": 410,
+      "description": "Hanan represents compassion, warm-heartedness, love and care. Our brand represents this by providing a wide range of premium quality products. Shop from a Huge Collection - Enjoy Shopping Best Offers & Deals Online",
+      "category": "Household Supplies",
+      "stock": true,
+      "image_url": "https://ke.jumia.is/unsafe/fit-in/680x680/filters:fill(white)/product/99/399247/2.jpg?5939"
     },
     {
-    "id": 9,
-    "name": "Listerine Mouthwash Total Care 250ml",
-    "price": 1125,
-    "description": "6 in 1 Benefits Listerine Total Care Anticavity Mouthwash is a complete mouthwash.* Every member of the family has their very own oral care needs. With six benefits, Listerine Total Care is a simple solution to keep them all taken care of.** Listerine Total Care delivers six benefits to clean your whole mouth, kill bad breath germs, prevent cavities, restore enamel, freshen breath, and strengthen teeth. Listerine Total Care gives your mouth a clean, fresh feeling and taste.",
-    "category": "Health and Beauty",
-    "stock": false,
-    "image_url": "https://ke.jumia.is/unsafe/fit-in/680x680/filters:fill(white)/product/93/821153/1.jpg?0366"
+      "id": 9,
+      "name": "Listerine Mouthwash Total Care 250ml",
+      "price": 1125,
+      "description": "6 in 1 Benefits Listerine Total Care Anticavity Mouthwash is a complete mouthwash.* Every member of the family has their very own oral care needs. With six benefits, Listerine Total Care is a simple solution to keep them all taken care of.** Listerine Total Care delivers six benefits to clean your whole mouth, kill bad breath germs, prevent cavities, restore enamel, freshen breath, and strengthen teeth. Listerine Total Care gives your mouth a clean, fresh feeling and taste.",
+      "category": "Health and Beauty",
+      "stock": false,
+      "image_url": "https://ke.jumia.is/unsafe/fit-in/680x680/filters:fill(white)/product/93/821153/1.jpg?0366"
     },
     {
-    "id": 10,
-    "name": "La Roche-Posay Cicaplast Baume B5 40ml",
-    "price": 2455,
-    "description": "Cicaplast Balm B5 is a soothing multi-purpose cream for face, hands & body to soothe and hydrate cracked, chapped, and chafed skin. This multi-purpose cream provides daily relief for dry to very dry skin. Fragrance-free.",
-    "category": "Health and Beauty",
-    "stock": true,
-    "image_url": "https://ke.jumia.is/unsafe/fit-in/680x680/filters:fill(white)/product/56/0735851/1.jpg?0564"
+      "id": 10,
+      "name": "La Roche-Posay Cicaplast Baume B5 40ml",
+      "price": 2455,
+      "description": "Cicaplast Balm B5 is a soothing multi-purpose cream for face, hands & body to soothe and hydrate cracked, chapped, and chafed skin. This multi-purpose cream provides daily relief for dry to very dry skin. Fragrance-free.",
+      "category": "Health and Beauty",
+      "stock": true,
+      "image_url": "https://ke.jumia.is/unsafe/fit-in/680x680/filters:fill(white)/product/56/0735851/1.jpg?0564"
     },
     {
-    "id": 11,
-    "name": "Hisense 65A62G, 65'' Smart UHD 4K Frameless LED TV-YouTube, Netflix-Black",
-    "price": 89999,
-    "description": "The Hisense UHD Smart TV offers truly stunning 4K resolution picture. With Precision Colour and Super Contrast, the screen delivers vivid colours, rich details and deep blacks. It is a TV that offers a more immersive viewing experience that is well designed thank to the pure metal stand and diamond cut edge. Equipped with Voice Control Technology, never has a Smart TV been easier to use.",
-    "category": "Electronics",
-    "stock": true,
-    "image_url": "https://ke.jumia.is/unsafe/fit-in/680x680/filters:fill(white)/product/42/285289/1.jpg?1559"
+      "id": 11,
+      "name": "Hisense 65A62G, 65'' Smart UHD 4K Frameless LED TV-YouTube, Netflix-Black",
+      "price": 89999,
+      "description": "The Hisense UHD Smart TV offers truly stunning 4K resolution picture. With Precision Colour and Super Contrast, the screen delivers vivid colours, rich details and deep blacks. It is a TV that offers a more immersive viewing experience that is well designed thank to the pure metal stand and diamond cut edge. Equipped with Voice Control Technology, never has a Smart TV been easier to use.",
+      "category": "Electronics",
+      "stock": true,
+      "image_url": "https://ke.jumia.is/unsafe/fit-in/680x680/filters:fill(white)/product/42/285289/1.jpg?1559"
     },
     {
-    "id": 12,
-    "name": "Apple MacBook Pro 2021 M1 Pro 16.2 inch 16GB 512GB SSD - Gray",
-    "price": 327000,
-    "description": "Introducing the Apple MacBook Pro 2021 M1 Pro, a cutting-edge powerhouse that redefines the boundaries of performance and innovation. Equipped with the revolutionary M1 Pro chip featuring a 10-core CPU and a mind-blowing 16-core GPU, this laptop delivers unparalleled speed and efficiency for both creative professionals and everyday users. Immerse yourself in the brilliance of the 16.2-inch Retina XDR display, boasting an impressive resolution of 3456 x 2234 pixels. Whether you are editing high-resolution videos, designing intricate graphics, or simply enjoying your favorite content, the clarity and vibrancy of the display will leave you captivated. With 16GB of unified memory, multitasking becomes seamless, allowing you to effortlessly switch between demanding applications without compromising performance. The 512GB internal storage ensures ample space for your files, projects, and multimedia content. Connectivity is a breeze with three Thunderbolt/USB 4 ports, an HDMI port, an SDXC card slot, and the convenient MagSafe 3 port for fast and secure charging. The MacBook Pro 2021 M1 Pro is not just a laptop; its a technological marvel that sets new standards for power, speed, and versatility in the world of computing. Elevate your experience with Apples latest masterpiece in a sleek and sophisticated Gray finish.",
-    "category": "Electronics",
-    "stock": true,
-    "image_url": "https://images.unsplash.com/photo-1531297484001-80022131f5a1?q=80&w=1420&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+      "id": 12,
+      "name": "Apple MacBook Pro 2021 M1 Pro 16.2 inch 16GB 512GB SSD - Gray",
+      "price": 327000,
+      "description": "Introducing the Apple MacBook Pro 2021 M1 Pro, a cutting-edge powerhouse that redefines the boundaries of performance and innovation. Equipped with the revolutionary M1 Pro chip featuring a 10-core CPU and a mind-blowing 16-core GPU, this laptop delivers unparalleled speed and efficiency for both creative professionals and everyday users. Immerse yourself in the brilliance of the 16.2-inch Retina XDR display, boasting an impressive resolution of 3456 x 2234 pixels. Whether you are editing high-resolution videos, designing intricate graphics, or simply enjoying your favorite content, the clarity and vibrancy of the display will leave you captivated. With 16GB of unified memory, multitasking becomes seamless, allowing you to effortlessly switch between demanding applications without compromising performance. The 512GB internal storage ensures ample space for your files, projects, and multimedia content. Connectivity is a breeze with three Thunderbolt/USB 4 ports, an HDMI port, an SDXC card slot, and the convenient MagSafe 3 port for fast and secure charging. The MacBook Pro 2021 M1 Pro is not just a laptop; its a technological marvel that sets new standards for power, speed, and versatility in the world of computing. Elevate your experience with Apples latest masterpiece in a sleek and sophisticated Gray finish.",
+      "category": "Electronics",
+      "stock": true,
+      "image_url": "https://images.unsplash.com/photo-1531297484001-80022131f5a1?q=80&w=1420&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+    },
+    {
+      "name": "Michael + mwaganu",
+      "email": "michaelfebzen.mb@gmail.com",
+      "address": "0732305900",
+      "password": "mwagash",
+      "id": 13
     }
   ]
 }

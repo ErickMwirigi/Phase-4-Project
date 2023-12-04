@@ -11,7 +11,7 @@ export default function Searchbar({ searched }) {
   return (
       <>
         <input className='search' placeholder="Search here" value={search} onChange={handleChange} type='search'/>
-        <button type="submit" onClick={()=>searched(search)}><Search /></button>
+        <button type="submit" onClick={(search)=>searched(search)}><Search /></button>
       </>
         
   )

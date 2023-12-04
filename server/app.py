@@ -2,13 +2,14 @@ from flask import Flask, make_response, jsonify, request
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 from models import db, Customer, Item, Order, Payment, Review
+from flask_cors import CORS
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///app.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 migrate = Migrate(app, db)
-
+CORS(app)
 db.init_app(app)
 
 @app.route('/')
@@ -21,26 +22,26 @@ def index():
 
 # GET for customers, items, orders, payments and reviews
 
-@app.route('/customers')
-def customers():
+# @app.route('/customers')
+# def customers():
 
-    customers = []
-    for c in Customer.query.all():
-        customer_dict = {
-            "name": c.name,
-            "email": c.email,
-            "password": c.password,
-            "address": c.address
-        }
-        customers.append(customer_dict)
+#     customers = []
+#     for c in Customer.query.all():
+#         customer_dict = {
+#             "name": c.name,
+#             "email": c.email,
+#             "password": c.password,
+#             "address": c.address
+#         }
+#         customers.append(customer_dict)
 
-    response = make_response(
-        jsonify(customers),
-        200
-    )
-    response.headers["Content-Type"] = "application/json"
+#     response = make_response(
+#         jsonify(customers),
+#         200
+#     )
+#     response.headers["Content-Type"] = "application/json"
 
-    return response
+#     return response
 
 @app.route('/items')
 def items():
@@ -248,11 +249,12 @@ def post_customers():
         return response
 
     elif request.method == 'POST':
+        data = request.get_json()
         new_customer = Customer(
-            name=request.form.get("name"),
-            email=request.form.get("email"),
-            password=request.form.get("password"),
-            address=request.form.get("address"),
+            name=data.get("name"),
+            email=data.get("email"),
+            password=data.get("password"),
+            address=data.get("address"),
         )
 
         db.session.add(new_customer)
@@ -718,4 +720,4 @@ def review_update(id):
 
 
 if __name__ == '__main__':
-    app.run(port=5555)
+    app.run(port=5555, debug=True)

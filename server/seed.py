@@ -18,5 +18,5 @@ with open('/home/mwagash/Development/code/Projects/Market_App/Phase-4-Project/cl
         
     print(items)
 
-    # db.session.add_all(items)
-    # db.session.commit()
+    db.session.add_all(items)
+    db.session.commit()

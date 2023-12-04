@@ -1,7 +1,9 @@
 import React from 'react'
 
-export default function DynamicMenu() {
+export default function DynamicMenu({ page }) {
   return (
-    <div>Dynamic Menus</div>
+    <>
+      {page}
+    </>
   )
 }
