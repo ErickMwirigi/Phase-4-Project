@@ -7,13 +7,32 @@ font-family: Inter;
 font-weight: 550; 
 }
 
+.side-menu a{
+    display: block;
+    text-decoration: none;
+    text-align: left;
+    color: #fff;
+    font-size: 18px; 
+    font-family: Inter; 
+    font-weight: 550; 
+
+}
+
 nav{
+    padding: 20px;
     display: flex;
     flex-direction: column;
-
-    margin: 0;
     color: #fff;
     background: #C7846F;
+}
+
+.nav-links{
+    padding: 5px 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-end;
+    color: #fff;
 }
 
 .first-page{
@@ -72,7 +91,7 @@ input{
     border: none;
     text-align: left;
     border-radius: 3px;
-    background-image: url("data:image/svg+xml,<svg viewBox='0 0 16 16' fill='%23333' xmlns='http://www.w3.org/2000/svg'><path fill-rule='evenodd' d='M8 9.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z' clip-rule='evenodd'/></svg>");
+    /* background-image: url("data:image/svg+xml,<svg viewBox='0 0 16 16' fill='%23333' xmlns='http://www.w3.org/2000/svg'><path fill-rule='evenodd' d='M8 9.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z' clip-rule='evenodd'/></svg>"); */
     padding: 8px;
     margin: 20px;
   }
@@ -85,13 +104,24 @@ label{
     flex-shrink: 0;
     padding: 12px;
   }
-  .search{
-    border-radius: 4px;
-    background: #D9D9D9;
-    width: 255px;
-    height: 33.267px;
-    flex-shrink: 0;
+
+  .searchbar{
+    display: flex;
+    flex-direction: row;
   }
+
+  .searchbar input{
+    width: 140px;
+    height: 150px;
+  }
+
+  button{
+    color: #ffffff;
+    height: auto;
+    border: none;
+    background: #C7846F;
+  }
+
   .account-profile{
     width: 100%;
     height: 150px;

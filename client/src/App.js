@@ -69,14 +69,14 @@ function onSearch(searched){
 
   return (
     <div className='first-page'>
-    <NavBar onSerach={onSearch}/>
       <Routes>
         <Route path="/" element={ isMember ? <LogIn /> : <SignUp />}/>
         <Route path="/login" element={ <LogIn />}/>
-        <Route path="/products">
+        <Route path="/products" element={<NavBar onSearch={onSearch}/>}>
           <Route index element={<ProductsPage products={products} setToFavorite={setToFavoriteProducts}/> }/>
-          <Route path="MarketApp" element={ <Cover />}/>
         </Route>
+          
+          <Route path="MarketApp" element={ <Cover />}/>
         <Route path="/account" element={<AccountProfile/>}>
           <Route path="inbox" element={<Inbox />}/>
           <Route path="orders" element={<Orders />}/>

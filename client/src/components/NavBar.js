@@ -7,12 +7,12 @@ export default function NavBar(onSearch) {
   return (
     <nav>
         <NavLink to={'/products'}>Logo</NavLink>
-        <ul>
+        <ul className='nav-links'>
             <NavLink to={'/login'}>Sign In</NavLink>
             <NavLink to={'/products'}>Log Out</NavLink>
             <NavLink to={'/account'}>Profile</NavLink>
         </ul>
-        <Searchbar searched={onSearch}/>
+        <Searchbar className='searchbar' searched={onSearch}/>
     </nav>
   )
 }
