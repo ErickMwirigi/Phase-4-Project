@@ -3,11 +3,6 @@ import Cover from "./components/Cover";
 import ProductReviewPage from "./components/ProductReviewPage";
 import ProductsPage from "./components/ProductsPage";
 import './App.css';
-import LogIn from './LogIn';
-import SignUp from './SignUp';
-// import Navigation from "./components/Navigation";
-import LogIn from './components/LogIn';
-import SignUp from './components/SignUp';
 import { Route , Routes } from "react-router-dom";
 import NavBar from "./components/NavBar";
 import AccountProfile from "./components/AccountProfile";
@@ -15,10 +10,9 @@ import ProfileSettings from "./components/ProfileSettings";
 import Orders from "./components/Orders";
 import Inbox from "./components/Inbox";
 import FavoriteProducts from "./components/FavoriteProducts";
+import LogIn from './components/LogIn'
+import SignUp from "./components/SignUp";
 
-
-
-// http://localhost:3000/products
 function App() {
 
   const productURL = "http://127.0.0.1:5000/items";
@@ -26,6 +20,7 @@ function App() {
   const [products, setProducts] = useState([]);
   const [favoriteProducts, setFavoriteProducts] = useState([]);
   const [ isMember , setMember ] = useState(true)
+  const [productsDictionary, setProductsDictionary] = useState({});
   const [commentsDictionary, setCommentsDictionary] = useState({});
 
 
@@ -75,7 +70,7 @@ function onSearch(searched){
   return (
     <div className='first-page'>
       <Routes>
-        <Route path="/" element={ isMember ? <LogIn /> : <SignUp />}/>
+        <Route path="/" element={ isMember ? <LogIn />: <SignUp />}/>
         <Route path="/login" element={ <LogIn />}/>
         <Route path="/products" element={<NavBar onSearch={onSearch}/>}>
           <Route index element={<ProductsPage products={products} setToFavorite={setToFavoriteProducts}/> }/>
