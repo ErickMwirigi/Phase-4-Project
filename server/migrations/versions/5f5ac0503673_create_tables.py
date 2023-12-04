@@ -1,8 +1,8 @@
 """Create tables
 
-Revision ID: 2b788b4f3375
+Revision ID: 5f5ac0503673
 Revises: 
-Create Date: 2023-11-28 09:17:31.379967
+Create Date: 2023-12-03 12:29:50.472584
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = '2b788b4f3375'
+revision = '5f5ac0503673'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -36,10 +36,11 @@ def upgrade():
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('name', sa.String(), nullable=True),
     sa.Column('description', sa.String(), nullable=True),
-    sa.Column('price', sa.String(), nullable=True),
+    sa.Column('price', sa.Integer(), nullable=True),
     sa.Column('category', sa.String(), nullable=True),
     sa.Column('imageUrl', sa.String(), nullable=True),
-    sa.Column('rating', sa.String(), nullable=True),
+    sa.Column('rating', sa.Integer(), nullable=True),
+    sa.Column('quantity', sa.Integer(), nullable=True),
     sa.Column('created_at', sa.DateTime(), server_default=sa.text('(CURRENT_TIMESTAMP)'), nullable=True),
     sa.Column('updated_at', sa.DateTime(), nullable=True),
     sa.PrimaryKeyConstraint('id')
@@ -72,7 +73,7 @@ def upgrade():
     )
     op.create_table('reviews',
     sa.Column('id', sa.Integer(), nullable=False),
-    sa.Column('rating', sa.String(), nullable=True),
+    sa.Column('rating', sa.Integer(), nullable=True),
     sa.Column('comment', sa.String(), nullable=True),
     sa.Column('date', sa.Integer(), nullable=True),
     sa.Column('created_at', sa.DateTime(), server_default=sa.text('(CURRENT_TIMESTAMP)'), nullable=True),
