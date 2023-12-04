@@ -5,7 +5,7 @@ export default function ProfileMenu() {
   return (
     <>
     <h4>Manage Account</h4>
-    <div className="side-menu" >
+    <div className="ac-menu" >
         <Link to={'/inbox'}>Inbox</Link>
         <Link to={'/profile-settings'}>Profile Settings</Link>
         <Link to={'/orders'}>Orders</Link>
@@ -15,6 +15,5 @@ export default function ProfileMenu() {
         <Outlet />
     </div> 
     </>
-
   )
 }

@@ -1,19 +1,15 @@
 import ProductsCollection from "./ProductsCollection";
-import Searchbar from "./Searchbar";
 import React from "react";
+import SideBar from './SideBar'
 
 
-function ProductsPage({ products, setToFavorite , searchData}) {
-
-    function onSearch(searched){
-
-        const toDisplay = products.filter((item)=>item.name.includes(searched))
-        searchData(toDisplay)
-    }
+function ProductsPage({ products, setToFavorite }) {
 
     return (
         <>
-            <Searchbar searched={onSearch}/>
+            <div className="sidebar">
+                <SideBar />
+            </div>
             <div className="products">
                 <ProductsCollection
                     products={products}

@@ -5,8 +5,8 @@ import './App.css';
 import LogIn from './components/LogIn';
 import SignUp from './components/SignUp';
 import { Route , Routes } from "react-router-dom";
+import NavBar from "./components/NavBar";
 import AccountProfile from "./components/AccountProfile";
-import ProfileMenu from "./components/ProfileMenu";
 import ProfileSettings from "./components/ProfileSettings";
 import Orders from "./components/Orders";
 import Inbox from "./components/Inbox";
@@ -21,6 +21,7 @@ function App() {
 
   const [products, setProducts] = useState([]);
   const [favoriteProducts, setFavoriteProducts] = useState([]);
+  const [ isMember , setMember ] = useState(true)
   // const [productsDictionary, setProductsDictionary] = useState({});
 
 
@@ -60,13 +61,28 @@ function removeFromFavorites(clickedProduct) {
     setFavoriteProducts(remProducts);
 };
 
+function onSearch(searched){
+
+  const toDisplay = products.filter((item)=>item.name.includes(searched))
+  setProducts(toDisplay)
+}
+
   return (
     <div className='first-page'>
+    <NavBar onSerach={onSearch}/>
       <Routes>
-        <Route path="/" element={<ProductsPage products={products} searchData={setProducts} setToFavorite={setToFavoriteProducts} />}/>
-        <Route path="/login" element={<LogIn />}/>
-        <Route path="/signup" element={<SignUp />}/>
-        <Route path="/cover" element={ <Cover />}/>
+        <Route path="/" element={ isMember ? <LogIn /> : <SignUp />}/>
+        <Route path="/login" element={ <LogIn />}/>
+        <Route path="/products">
+          <Route index element={<ProductsPage products={products} setToFavorite={setToFavoriteProducts}/> }/>
+          <Route path="MarketApp" element={ <Cover />}/>
+        </Route>
+        <Route path="/account" element={<AccountProfile/>}>
+          <Route path="inbox" element={<Inbox />}/>
+          <Route path="orders" element={<Orders />}/>
+          <Route path="saved-items" element={ <FavoriteProducts favoriteProducts={favoriteProducts} removeFromFavorites={removeFromFavorites}/>}/>
+          <Route path="profile-settings" element={<ProfileSettings />}/>
+        </Route>
       </Routes>
     </div>
   )
