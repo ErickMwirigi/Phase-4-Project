@@ -22,8 +22,8 @@ function App() {
       .then((response) => response.json())
 
 
-        const dictionary = {};
-        const commentsDict = {};
+        const dictionary = {}
+        const commentsDict = {}
 
             .then((data) => {
            console.log(data)
