@@ -1,9 +1,7 @@
 import React from 'react'
 import { NavLink } from 'react-router-dom'
 import Searchbar from './Searchbar'
-// import LogIn from './LogIn'
-// import ProductsPage from './ProductsPage'
-// import AccountProfile from './AccountProfile'
+
 
 
 export default function NavBar(onSearch) {
