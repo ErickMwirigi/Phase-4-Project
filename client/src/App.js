@@ -69,7 +69,6 @@ function onSearch(searched){
 
   return (
     <div className='first-page'>
-    <NavBar onSerach={onSearch}/>
       <Routes>
         <Route path="/" element={ isMember ? <LogIn /> : <SignUp />}/>
         <Route path="/login" element={ <LogIn />}/>
