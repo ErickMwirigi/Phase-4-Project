@@ -8,8 +8,9 @@ import SignUp from './SignUp';
 // import Navigation from "./components/Navigation";
 
 // http://localhost:3000/products
+// http://127.0.0.1:5000/items
 function App() {
-  const productURL = "http://127.0.0.1:5000/items";
+  const productURL = "http://localhost:3000/products";
 
   const [products, setProducts] = useState([]);
   const [favoriteProducts, setFavoriteProducts] = useState([]);
@@ -20,14 +21,11 @@ function App() {
   function fetchProductData() {
     fetch(productURL)
       .then((response) => response.json())
-
-
+      .then((data) => {
+        console.log(data)
         const dictionary = {}
+        // const dictionary = {}
         const commentsDict = {}
-
-            .then((data) => {
-           console.log(data)
-        const dictionary = {}
 
 
         data.forEach(product => {
