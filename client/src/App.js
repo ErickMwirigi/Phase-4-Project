@@ -1,7 +1,11 @@
 import React, { useState, useEffect } from "react";
 import Cover from "./components/Cover";
+import ProductReviewPage from "./components/ProductReviewPage";
 import ProductsPage from "./components/ProductsPage";
 import './App.css';
+import LogIn from './LogIn';
+import SignUp from './SignUp';
+// import Navigation from "./components/Navigation";
 import LogIn from './components/LogIn';
 import SignUp from './components/SignUp';
 import { Route , Routes } from "react-router-dom";
@@ -14,36 +18,37 @@ import FavoriteProducts from "./components/FavoriteProducts";
 
 
 
+// http://localhost:3000/products
 function App() {
-  const productURL = "http://localhost:3000/products";
-    
-  // "http://127.0.0.1:5555/customers"
+
+  const productURL = "http://127.0.0.1:5000/items";
 
   const [products, setProducts] = useState([]);
   const [favoriteProducts, setFavoriteProducts] = useState([]);
   const [ isMember , setMember ] = useState(true)
-  // const [productsDictionary, setProductsDictionary] = useState({});
+  const [commentsDictionary, setCommentsDictionary] = useState({});
 
 
   function fetchProductData() {
     fetch(productURL)
       .then((response) => response.json())
       .then((data) => {
-        // console.log(data)
 
-        // const dictionary = {}
+        const dictionary = {};
+        const commentsDict = {};
 
-        // data.forEach(product => {
-        //   dictionary[product.id] = product;
+        data.forEach(product => {
+          dictionary[product.id] = product;
+          commentsDict[product.id] = []
 
-        // });
+        });
 
         setProducts(data);
-        // setProductsDictionary(dictionary);
+        setProductsDictionary(dictionary);
 
       });
   }
-  useEffect(() => fetchProductData(), []);
+  useEffect(() => fetchProductData(), [])
 
   function setToFavoriteProducts(product) {
     if (favoriteProducts.includes(product)) {
@@ -52,7 +57,7 @@ function App() {
     else {
         setFavoriteProducts((prevProducts) => [...prevProducts, product]);
     };
-};
+}
 
 function removeFromFavorites(clickedProduct) {
     const remProducts = favoriteProducts.filter(
@@ -84,6 +89,9 @@ function onSearch(searched){
           <Route path="profile-settings" element={<ProfileSettings />}/>
         </Route>
       </Routes>
+
+      <ProductReviewPage products={products} productsDictionary={productsDictionary} commentsDictionary={commentsDictionary} setCommentsDictionary={setCommentsDictionary} />
+      <ProductsPage products={products} favoriteProducts={favoriteProducts} setFavoriteProducts={setFavoriteProducts} />
     </div>
   )
 }

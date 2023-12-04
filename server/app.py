@@ -1,722 +1,480 @@
-from flask import Flask, make_response, jsonify, request
-from flask_sqlalchemy import SQLAlchemy
+from flask import Flask, jsonify, request, make_response
 from flask_migrate import Migrate
+from flask_restful import Api, Resource
+
 from models import db, Customer, Item, Order, Payment, Review
 from flask_cors import CORS
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///app.db'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///project.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+app.json.compact = False
 
 migrate = Migrate(app, db)
 CORS(app)
 db.init_app(app)
 
-@app.route('/')
-def index():
-    response = make_response(
-        '<h1>Welcome to the Our App directory!</h1>',
-        200
-    )
-    return response
+api = Api(app)
 
-# GET for customers, items, orders, payments and reviews
+class Index(Resource):
 
-# @app.route('/customers')
-# def customers():
+    def get(self):
 
-#     customers = []
-#     for c in Customer.query.all():
-#         customer_dict = {
-#             "name": c.name,
-#             "email": c.email,
-#             "password": c.password,
-#             "address": c.address
-#         }
-#         customers.append(customer_dict)
-
-#     response = make_response(
-#         jsonify(customers),
-#         200
-#     )
-#     response.headers["Content-Type"] = "application/json"
-
-#     return response
-
-@app.route('/items')
-def items():
-
-    items = []
-    for i in Item.query.all():
-        item_dict = {
-            "name": i.name,
-            "description": i.description,
-            "price": i.price,
-            "category": i.category,
-            "imageUrl": i.imageUrl,
-            "rating": i.rating
+        response_dict = {
+            "index": "Welcome to the Project RESTful API",
         }
-        items.append(item_dict)
-
-    response = make_response(
-        jsonify(items),
-        200
-    )
-    response.headers["Content-Type"] = "application/json"
-
-    return response
-
-@app.route('/orders')
-def orders():
-
-    orders = []
-    for o in Order.query.all():
-        order_dict = {
-            "orderdate": o.orderdate,
-            "price": o.price,
-            "status": o.status
-        }
-        orders.append(order_dict)
-
-    response = make_response(
-        jsonify(orders),
-        200
-    )
-    response.headers["Content-Type"] = "application/json"
-
-    return response
-
-@app.route('/payments')
-def payments():
-
-    payments = []
-    for p in Payment.query.all():
-        payment_dict = {
-            "orderdate": o.orderdate,
-            "price": o.price,
-            "status": o.status
-        }
-        payments.append(payment_dict)
-
-    response = make_response(
-        jsonify(payments),
-        200
-    )
-    response.headers["Content-Type"] = "application/json"
-
-    return response
-
-@app.route('/reviews')
-def reviews():
-
-    reviews = []
-    for r in Review.query.all():
-        review_dict = {
-            "rating": r.rating,
-            "comment": r.comment,
-            "date": r.date
-        }
-        reviews.append(review_dict)
-
-    response = make_response(
-        jsonify(reviews),
-        200
-    )
-    response.headers["Content-Type"] = "application/json"
-
-    return response
-
-
-# Get customer by ID customers, items, orders, payments and reviews
-
-@app.route('/customers/<int:id>')
-def customer_by_id(id):
-    customer = Customer.query.filter_by(id=id).first()
-
-    customer_dict = {
-        "name": customer.name,
-        "email": customer.email,
-        "password": customer.password,
-        "address": customer.address
-    }
-
-    response = make_response(
-        jsonify(customer_dict),
-        200
-    )
-    response.headers["Content-Type"] = "application/json"
-
-    return response
-
-
-@app.route('/items/<int:id>')
-def item_by_id(id):
-    item = Item.query.filter_by(id=id).first()
-
-    item_dict = {
-        "name": item.name,
-        "description": item.description,
-        "price": item.price,
-        "category": item.category,
-        "imageUrl": item.imageUrl,
-        "rating": item.rating
-    }
-
-    response = make_response(
-        jsonify(item_dict),
-        200
-    )
-    response.headers["Content-Type"] = "application/json"
-
-    return response
-
-
-@app.route('/orders/<int:id>')
-def order_by_id(id):
-    order = Order.query.filter_by(id=id).first()
-
-    order_dict = {
-        "orderdate": order.orderdate,
-        "price": order.price,
-        "status": order.status
-    }
-
-    response = make_response(
-        jsonify(order_dict),
-        200
-    )
-    response.headers["Content-Type"] = "application/json"
-
-    return response
-
-@app.route('/payments/<int:id>')
-def payment_by_id(id):
-    payment = Payment.query.filter_by(id=id).first()
-
-    payment_dict = {
-        "paymentdate": payment.paymentdate,
-        "paymentmedhod": payment.paymentmedhod,
-        "amount": payment.amount
-    }
-
-    response = make_response(
-        jsonify(payment_dict),
-        200
-    )
-    response.headers["Content-Type"] = "application/json"
-
-    return response
-
-@app.route('/reviews/<int:id>')
-def review_by_id(id):
-    review = Review.query.filter_by(id=id).first()
-
-    review_dict = {
-        "rating": review.rating,
-        "comment": review.comment,
-        "date": review.date
-    }
-
-    response = make_response(
-        jsonify(review_dict),
-        200
-    )
-    response.headers["Content-Type"] = "application/json"
-
-    return response
-
-
-
-
-# Customers ['GET', 'POST'] + ['GET', 'PATCH', 'DELETE']
-
-
-
-@app.route('/customers', methods=['GET', 'POST'])
-def post_customers():
-
-    if request.method == 'GET':
-        customers = []
-        for c in Customer.query.all():
-            customer_dict = c.to_dict()
-            customers.append(customer_dict)
 
         response = make_response(
-            jsonify(customers),
+            jsonify(response_dict),
+            200,
+        )
+
+        return response
+
+api.add_resource(Index, '/')
+
+# CRUD for the Customer Table
+
+class Customers(Resource):
+
+    def get(self):
+
+        response_dict_list = [n.to_dict() for n in Customer.query.all()]
+
+        response = make_response(
+            jsonify(response_dict_list),
+            200,
+        )
+
+        return response
+
+    def post(self):
+
+        new_record = Customer(
+            name=request.form['name'],
+            email=request.form['email'],
+            password=request.form['password'],
+            address=request.form['address'],
+        )
+
+        db.session.add(new_record)
+        db.session.commit()
+
+        response_dict = new_record.to_dict()
+
+        response = make_response(
+            jsonify(response_dict),
+            201,
+        )
+
+        return response
+
+api.add_resource(Customers, '/customers')
+
+class CustomerByID(Resource):
+
+    def get(self, id):
+
+        response_dict = Customer.query.filter_by(id=id).first().to_dict()
+
+        response = make_response(
+            jsonify(response_dict),
+            200,
+        )
+
+        return response
+
+    def patch(self, id):
+
+        record = Customer.query.filter_by(id=id).first()
+        for attr in request.form:
+            setattr(record, attr, request.form[attr])
+
+        db.session.add(record)
+        db.session.commit()
+
+        response_dict = record.to_dict()
+
+        response = make_response(
+            jsonify(response_dict),
             200
         )
 
         return response
 
-    elif request.method == 'POST':
-        data = request.get_json()
-        new_customer = Customer(
-            name=data.get("name"),
-            email=data.get("email"),
-            password=data.get("password"),
-            address=data.get("address"),
-        )
+    def delete(self, id):
 
-        db.session.add(new_customer)
+        record = Customer.query.filter_by(id=id).first()
+
+        db.session.delete(record)
         db.session.commit()
 
-        customer_dict = new_customer.to_dict()
+        response_dict = {"message": "record successfully deleted"}
 
         response = make_response(
-            jsonify(customer_dict),
-            201
-        )
-
-        return response
-
-
-@app.route('/customers/<int:id>', methods=['GET', 'PATCH', 'DELETE'])
-def customer_update(id):
-    customer = Customer.query.filter_by(id=id).first()
-
-    if customer == None:
-        response_body = {
-            "message": "This record does not exist in our database. Please try again."
-        }
-        response = make_response(jsonify(response_body), 404)
-
-        return response
-
-    else:
-        if request.method == 'GET':
-            customer_dict = customer.to_dict()
-
-            response = make_response(
-                jsonify(customer_dict),
-                200
-            )
-
-            return response
-
-        elif request.method == 'PATCH':
-            customer = Customer.query.filter_by(id=id).first()
-
-            for attr in request.form:
-                setattr(customer, attr, request.form.get(attr))
-
-            db.session.add(customer)
-            db.session.commit()
-
-            customer_dict = customer.to_dict()
-
-            response = make_response(
-                jsonify(customer_dict),
-                200
-            )
-
-            return response
-
-        elif request.method == 'DELETE':
-            db.session.delete(customer)
-            db.session.commit()
-
-            response_body = {
-                "delete_successful": True,
-                "message": "Review deleted."    
-            }
-
-            response = make_response(
-                jsonify(response_body),
-                200
-            )
-
-            return response
-
-
-
-#Items ['GET', 'POST'] + ['GET', 'PATCH', 'DELETE']
-
-@app.route('/items', methods=['GET', 'POST'])
-def post_items():
-
-    if request.method == 'GET':
-        items = []
-        for i in Item.query.all():
-            item_dict = i.to_dict()
-            items.append(item_dict)
-
-        response = make_response(
-            jsonify(items),
+            jsonify(response_dict),
             200
         )
 
         return response
 
-    elif request.method == 'POST':
-        new_item = Item(
-            name=request.form.get("name"),
-            description=request.form.get("description"),
-            price=request.form.get("price"),
-            category=request.form.get("category"),
-            imageUrl=request.form.get("imageUrl"),
-            rating=request.form.get("rating"),
+api.add_resource(CustomerByID, '/customers/<int:id>')
+
+
+# CRUD for the Item Table
+
+class Items(Resource):
+
+    def get(self):
+
+        response_dict_list = [n.to_dict() for n in Item.query.all()]
+
+        response = make_response(
+            jsonify(response_dict_list),
+            200,
         )
 
-        db.session.add(new_item)
+        return response
+
+    def post(self):
+
+        new_record = Item(
+            name=request.form['name'],
+            description=request.form['description'],
+            price=request.form['price'],
+            category=request.form['category'],
+            imageUrl=request.form['imageUrl'],
+            rating=request.form['rating'],
+            quantity=request.form['quantity'],
+        )
+
+        db.session.add(new_record)
         db.session.commit()
 
-        item_dict = new_item.to_dict()
+        response_dict = new_record.to_dict()
 
         response = make_response(
-            jsonify(item_dict),
-            201
+            jsonify(response_dict),
+            201,
         )
 
         return response
 
+api.add_resource(Items, '/items')
 
-@app.route('/items/<int:id>', methods=['GET', 'PATCH', 'DELETE'])
-def item_update(id):
-    item = Item.query.filter_by(id=id).first()
+class ItemByID(Resource):
 
-    if item == None:
-        response_body = {
-            "message": "This record does not exist in our database. Please try again."
-        }
-        response = make_response(jsonify(response_body), 404)
+    def get(self, id):
+
+        response_dict = Item.query.filter_by(id=id).first().to_dict()
+
+        response = make_response(
+            jsonify(response_dict),
+            200,
+        )
 
         return response
 
-    else:
-        if request.method == 'GET':
-            item_dict = item.to_dict()
+    def patch(self, id):
 
-            response = make_response(
-                jsonify(item_dict),
-                200
-            )
+        record = Item.query.filter_by(id=id).first()
+        for attr in request.form:
+            setattr(record, attr, request.form[attr])
 
-            return response
+        db.session.add(record)
+        db.session.commit()
 
-        elif request.method == 'PATCH':
-            item = Item.query.filter_by(id=id).first()
-
-            for attr in request.form:
-                setattr(item, attr, request.form.get(attr))
-
-            db.session.add(item)
-            db.session.commit()
-
-            item_dict = item.to_dict()
-
-            response = make_response(
-                jsonify(item_dict),
-                200
-            )
-
-            return response
-
-        elif request.method == 'DELETE':
-            db.session.delete(item)
-            db.session.commit()
-
-            response_body = {
-                "delete_successful": True,
-                "message": "Review deleted."    
-            }
-
-            response = make_response(
-                jsonify(response_body),
-                200
-            )
-
-            return response
-
-
-#Orders ['GET', 'POST'] + ['GET', 'PATCH', 'DELETE']
-
-@app.route('/orders', methods=['GET', 'POST'])
-def post_orders():
-
-    if request.method == 'GET':
-        orders = []
-        for o in Order.query.all():
-            order_dict = o.to_dict()
-            orders.append(order_dict)
+        response_dict = record.to_dict()
 
         response = make_response(
-            jsonify(orders),
+            jsonify(response_dict),
             200
         )
 
         return response
 
-    elif request.method == 'POST':
-        new_order = Order(
-            orderdate=request.form.get("orderdate"),
-            price=request.form.get("price"),
-            status=request.form.get("status"),
+    def delete(self, id):
 
-        )
+        record = Item.query.filter_by(id=id).first()
 
-        db.session.add(new_order)
+        db.session.delete(record)
         db.session.commit()
 
-        order_dict = new_order.to_dict()
+        response_dict = {"message": "record successfully deleted"}
 
         response = make_response(
-            jsonify(order_dict),
-            201
-        )
-
-        return response
-
-
-@app.route('/orders/<int:id>', methods=['GET', 'PATCH', 'DELETE'])
-def order_update(id):
-    order = Order.query.filter_by(id=id).first()
-
-    if order == None:
-        response_body = {
-            "message": "This record does not exist in our database. Please try again."
-        }
-        response = make_response(jsonify(response_body), 404)
-
-        return response
-
-    else:
-        if request.method == 'GET':
-            order_dict = order.to_dict()
-
-            response = make_response(
-                jsonify(order_dict),
-                200
-            )
-
-            return response
-
-        elif request.method == 'PATCH':
-            order = Order.query.filter_by(id=id).first()
-
-            for attr in request.form:
-                setattr(order, attr, request.form.get(attr))
-
-            db.session.add(order)
-            db.session.commit()
-
-            order_dict = order.to_dict()
-
-            response = make_response(
-                jsonify(order_dict),
-                200
-            )
-
-            return response
-
-        elif request.method == 'DELETE':
-            db.session.delete(order)
-            db.session.commit()
-
-            response_body = {
-                "delete_successful": True,
-                "message": "Review deleted."    
-            }
-
-            response = make_response(
-                jsonify(response_body),
-                200
-            )
-
-            return response
-
-
-#Payments ['GET', 'POST'] + ['GET', 'PATCH', 'DELETE']
-
-
-@app.route('/payments', methods=['GET', 'POST'])
-def post_payments():
-
-    if request.method == 'GET':
-        payments = []
-        for p in Payment.query.all():
-            payment_dict = p.to_dict()
-            payments.append(payment_dict)
-
-        response = make_response(
-            jsonify(payments),
+            jsonify(response_dict),
             200
         )
 
         return response
 
-    elif request.method == 'POST':
-        new_payment = Payment(
-            paymentdate=request.form.get("paymentdate"),
-            paymentmedhod=request.form.get("paymentmedhod"),
-            amount=request.form.get("amount"),
+api.add_resource(ItemByID, '/items/<int:id>')
 
+
+# CRUD for the Order Table
+
+class Orders(Resource):
+
+    def get(self):
+
+        response_dict_list = [n.to_dict() for n in Order.query.all()]
+
+        response = make_response(
+            jsonify(response_dict_list),
+            200,
         )
 
-        db.session.add(new_payment)
+        return response
+
+    def post(self):
+
+        new_record = Order(
+            orderdate=request.form['orderdate'],
+            price=request.form['price'],
+            status=request.form['status'],
+        )
+
+        db.session.add(new_record)
         db.session.commit()
 
-        payment_dict = new_payment.to_dict()
+        response_dict = new_record.to_dict()
 
         response = make_response(
-            jsonify(payment_dict),
-            201
+            jsonify(response_dict),
+            201,
         )
 
         return response
 
+api.add_resource(Orders, '/orders')
 
-@app.route('/payments/<int:id>', methods=['GET', 'PATCH', 'DELETE'])
-def payment_update(id):
-    payment = Payment.query.filter_by(id=id).first()
+class OrderByID(Resource):
 
-    if payment == None:
-        response_body = {
-            "message": "This record does not exist in our database. Please try again."
-        }
-        response = make_response(jsonify(response_body), 404)
+    def get(self, id):
+
+        response_dict = Order.query.filter_by(id=id).first().to_dict()
+
+        response = make_response(
+            jsonify(response_dict),
+            200,
+        )
 
         return response
 
-    else:
-        if request.method == 'GET':
-            payment_dict = payment.to_dict()
+    def patch(self, id):
 
-            response = make_response(
-                jsonify(payment_dict),
-                200
-            )
+        record = Order.query.filter_by(id=id).first()
+        for attr in request.form:
+            setattr(record, attr, request.form[attr])
 
-            return response
+        db.session.add(record)
+        db.session.commit()
 
-        elif request.method == 'PATCH':
-            payment = Payment.query.filter_by(id=id).first()
-
-            for attr in request.form:
-                setattr(payment, attr, request.form.get(attr))
-
-            db.session.add(payment)
-            db.session.commit()
-
-            payment_dict = payment.to_dict()
-
-            response = make_response(
-                jsonify(payment_dict),
-                200
-            )
-
-            return response
-
-        elif request.method == 'DELETE':
-            db.session.delete(payment)
-            db.session.commit()
-
-            response_body = {
-                "delete_successful": True,
-                "message": "Review deleted."    
-            }
-
-            response = make_response(
-                jsonify(response_body),
-                200
-            )
-
-            return response
-
-#Reviews ['GET', 'POST'] + ['GET', 'PATCH', 'DELETE']
-
-@app.route('/reviews', methods=['GET', 'POST'])
-def post_reviews():
-
-    if request.method == 'GET':
-        reviews = []
-        for r in Review.query.all():
-            review_dict = r.to_dict()
-            reviews.append(review_dict)
+        response_dict = record.to_dict()
 
         response = make_response(
-            jsonify(reviews),
+            jsonify(response_dict),
             200
         )
 
         return response
 
-    elif request.method == 'POST':
-        new_review = Review(
-            rating=request.form.get("rating"),
-            comment=request.form.get("comment"),
-            date=request.form.get("date"),
+    def delete(self, id):
 
-        )
+        record = Order.query.filter_by(id=id).first()
 
-        db.session.add(new_review)
+        db.session.delete(record)
         db.session.commit()
 
-        review_dict = new_review.to_dict()
+        response_dict = {"message": "record successfully deleted"}
 
         response = make_response(
-            jsonify(review_dict),
-            201
+            jsonify(response_dict),
+            200
         )
 
         return response
 
+api.add_resource(OrderByID, '/orders/<int:id>')
 
-@app.route('/reviews/<int:id>', methods=['GET', 'PATCH', 'DELETE'])
-def review_update(id):
-    review = Review.query.filter_by(id=id).first()
 
-    if review == None:
-        response_body = {
-            "message": "This record does not exist in our database. Please try again."
-        }
-        response = make_response(jsonify(response_body), 404)
+# CRUD for the Payment Table
+
+class Payments(Resource):
+
+    def get(self):
+
+        response_dict_list = [n.to_dict() for n in Payment.query.all()]
+
+        response = make_response(
+            jsonify(response_dict_list),
+            200,
+        )
 
         return response
 
-    else:
-        if request.method == 'GET':
-            review_dict = review.to_dict()
+    def post(self):
 
-            response = make_response(
-                jsonify(review_dict),
-                200
-            )
+        new_record = Payment(
+            paymentdate=request.form['paymentdate'],
+            paymentmedhod=request.form['paymentmedhod'],
+            amount=request.form['amount'],
+        )
 
-            return response
+        db.session.add(new_record)
+        db.session.commit()
 
-        elif request.method == 'PATCH':
-            review = Review.query.filter_by(id=id).first()
+        response_dict = new_record.to_dict()
 
-            for attr in request.form:
-                setattr(review, attr, request.form.get(attr))
+        response = make_response(
+            jsonify(response_dict),
+            201,
+        )
 
-            db.session.add(review)
-            db.session.commit()
+        return response
 
-            review_dict = review.to_dict()
+api.add_resource(Payments, '/payments')
 
-            response = make_response(
-                jsonify(review_dict),
-                200
-            )
+class PaymentByID(Resource):
 
-            return response
+    def get(self, id):
 
-        elif request.method == 'DELETE':
-            db.session.delete(review)
-            db.session.commit()
+        response_dict = Payment.query.filter_by(id=id).first().to_dict()
 
-            response_body = {
-                "delete_successful": True,
-                "message": "Review deleted."    
-            }
+        response = make_response(
+            jsonify(response_dict),
+            200,
+        )
 
-            response = make_response(
-                jsonify(response_body),
-                200
-            )
+        return response
 
-            return response
+    def patch(self, id):
+
+        record = Payment.query.filter_by(id=id).first()
+        for attr in request.form:
+            setattr(record, attr, request.form[attr])
+
+        db.session.add(record)
+        db.session.commit()
+
+        response_dict = record.to_dict()
+
+        response = make_response(
+            jsonify(response_dict),
+            200
+        )
+
+        return response
+
+    def delete(self, id):
+
+        record = Payment.query.filter_by(id=id).first()
+
+        db.session.delete(record)
+        db.session.commit()
+
+        response_dict = {"message": "record successfully deleted"}
+
+        response = make_response(
+            jsonify(response_dict),
+            200
+        )
+
+        return response
+
+api.add_resource(PaymentByID, '/payments/<int:id>')
+
+# CRUD for the Review Table
+
+class Reviews(Resource):
+
+    def get(self):
+
+        response_dict_list = [n.to_dict() for n in Review.query.all()]
+
+        response = make_response(
+            jsonify(response_dict_list),
+            200,
+        )
+
+        return response
+
+    def post(self):
+
+        new_record = Review(
+            rating=request.form['rating'],
+            comment=request.form['comment'],
+            date=request.form['date'],
+        )
+
+        db.session.add(new_record)
+        db.session.commit()
+
+        response_dict = new_record.to_dict()
+
+        response = make_response(
+            jsonify(response_dict),
+            201,
+        )
+
+        return response
+
+api.add_resource(Reviews, '/reviews')
+
+class ReviewByID(Resource):
+
+    def get(self, id):
+
+        response_dict = Review.query.filter_by(id=id).first().to_dict()
+
+        response = make_response(
+            jsonify(response_dict),
+            200,
+        )
+
+        return response
+
+    def patch(self, id):
+
+        record = Review.query.filter_by(id=id).first()
+        for attr in request.form:
+            setattr(record, attr, request.form[attr])
+
+        db.session.add(record)
+        db.session.commit()
+
+        response_dict = record.to_dict()
+
+        response = make_response(
+            jsonify(response_dict),
+            200
+        )
+
+        return response
+
+    def delete(self, id):
+
+        record = Review.query.filter_by(id=id).first()
+
+        db.session.delete(record)
+        db.session.commit()
+
+        response_dict = {"message": "record successfully deleted"}
+
+        response = make_response(
+            jsonify(response_dict),
+            200
+        )
+
+        return response
+
+api.add_resource(ReviewByID, '/reviews/<int:id>')
+
+
+
+
+
 
 
 if __name__ == '__main__':
