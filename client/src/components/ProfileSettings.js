@@ -2,11 +2,11 @@ import React, { useState, useEffect } from 'react'
 
 export default function ProfileSettings( { userID}) {
 
-const [ user, setUser ] = useState('')
+const [ formData, setFormData ] = useState('')
 
   const fetchUser =  fetch(`http://127.0.0.1:5555/customers/${userID}`)
                     .then((r)=>r.json())
-                    .then((r)=>setUser(r))
+                    .then((r)=>setFormData(r))
 
 useEffect(()=> fetchUser(), [])
 
