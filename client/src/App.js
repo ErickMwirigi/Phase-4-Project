@@ -15,7 +15,7 @@ import SignUp from "./components/SignUp";
 
 function App() {
 
-  const productURL = "http://127.0.0.1:5000/items";
+  const productURL = "http://127.0.0.1:5555/items";
 
   const [products, setProducts] = useState([]);
   const [favoriteProducts, setFavoriteProducts] = useState([]);
@@ -73,10 +73,11 @@ function onSearch(searched){
         <Route path="/" element={ isMember ? <LogIn />: <SignUp />}/>
         <Route path="/login" element={ <LogIn />}/>
         <Route path="/products" element={<NavBar onSearch={onSearch}/>}>
+          <Route path="buy-items" element={ <Cover />}/>
           <Route index element={<ProductsPage products={products} setToFavorite={setToFavoriteProducts}/> }/>
         </Route>
-          
-          <Route path="MarketApp" element={ <Cover />}/>
+        <Route path="/products-review" element={<ProductReviewPage products={products} productsDictionary={productsDictionary} commentsDictionary={commentsDictionary} setCommentsDictionary={setCommentsDictionary} />}/>
+        <Route path="/"/>
         <Route path="/account" element={<AccountProfile/>}>
           <Route path="inbox" element={<Inbox />}/>
           <Route path="orders" element={<Orders />}/>
@@ -84,9 +85,6 @@ function onSearch(searched){
           <Route path="profile-settings" element={<ProfileSettings />}/>
         </Route>
       </Routes>
-
-      <ProductReviewPage products={products} productsDictionary={productsDictionary} commentsDictionary={commentsDictionary} setCommentsDictionary={setCommentsDictionary} />
-      <ProductsPage products={products} favoriteProducts={favoriteProducts} setFavoriteProducts={setFavoriteProducts} />
     </div>
   )
 }
