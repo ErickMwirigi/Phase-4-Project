@@ -31,8 +31,10 @@ with app.app_context():
     for n in data["products"]:
         item = Item(name= n["name"], price=n["price"], description=n["description"], category=n["category"], quantity=n["stock"], imageUrl=n["image_url"], rating=rc(rating)) #, customer=rc(customers)
         items.append(item)
+        
+    print(items)
 
-        db.session.add_all(items)
-        db.session.commit()
+    db.session.add_all(items)
+    db.session.commit()
 
 print(items)
