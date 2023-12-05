@@ -17,7 +17,7 @@ function ProductsPage({ products, setToFavorite }) {
                 />
             </div>
         </div>
-        
+
     );
 
 

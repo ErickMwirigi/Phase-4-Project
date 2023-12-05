@@ -14,8 +14,6 @@ import ProfileSettings from "./components/ProfileSettings";
 import Orders from "./components/Orders";
 import Inbox from "./components/Inbox";
 import FavoriteProducts from "./components/FavoriteProducts";
-import LogIn from './components/LogIn'
-import SignUp from "./components/SignUp";
 
 // http://localhost:3000/products
 function App() {
