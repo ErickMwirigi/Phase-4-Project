@@ -5,7 +5,7 @@ from faker import Faker
 from app import app
 from models import db, Customer, Item
 
-with open("/home/erick/Documents/Phase4/Project/Phase-4-Project/client/db.json", mode="r") as itemdata:
+with open("/home/mwagash/Development/code/Projects/Market_App/Phase-4-Project/client/db.json", mode="r") as itemdata:
     data = json.load(itemdata)
 
 item_data = [item for item in data]
@@ -31,7 +31,8 @@ with app.app_context():
     for n in data["products"]:
         item = Item(name= n["name"], price=n["price"], description=n["description"], category=n["category"], quantity=n["stock"], imageUrl=n["image_url"], rating=rc(rating)) #, customer=rc(customers)
         items.append(item)
-
+        
+    # print(items)
         db.session.add_all(items)
         db.session.commit()
 
