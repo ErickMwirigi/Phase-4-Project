@@ -2,7 +2,8 @@ import React from "react";
 
 import ProductCard from "./ProductCard";
 
-function ProductsCollection({ products, setFavoriteProducts }) {
+function ProductsCollection({ products, setFavorite }) {
+    // console.log(products)
     return (
         <div className="market-collection">
             <h2>Products</h2>
@@ -11,7 +12,7 @@ function ProductsCollection({ products, setFavoriteProducts }) {
                     <ProductCard
                         key={product.id}
                         product={product}
-                        addToFavorite={() => setFavoriteProducts(product)}
+                        addToFavorite={() => setFavorite(product)}
                     />
                 ))}
             </div>
