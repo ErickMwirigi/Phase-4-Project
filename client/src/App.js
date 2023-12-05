@@ -37,6 +37,11 @@ function App() {
         const dictionary = {};
         const commentsDict = {};
 
+      .then((data) => {
+           console.log(data)
+        const dictionary = {}
+
+
         data.forEach(product => {
           dictionary[product.id] = product;
           commentsDict[product.id] = []
