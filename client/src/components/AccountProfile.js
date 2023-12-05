@@ -2,6 +2,7 @@ import React from 'react'
 import DynamicMenu from './DynamicMenu'
 import { ReactComponent as Cart } from '../Cart.svg'
 import ProfileMenu from './ProfileMenu'
+import { Outlet } from 'react-router-dom'
 
 
 export default function AccountProfile({ customerData={'name':'Michael Njogu', "email":'michaelfebzen.mb@gmail.com',"profilePhoto":"https://upload.wikimedia.org/wikipedia/commons/9/9e/Placeholder_Person.jpg"}}) {
@@ -25,6 +26,7 @@ export default function AccountProfile({ customerData={'name':'Michael Njogu', "
             <div className="ac-menu" >
                 <ProfileMenu />
             </div>
+            <Outlet />
             <div className='dynamic-menu'>
                 <DynamicMenu />
             </div>
