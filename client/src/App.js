@@ -3,8 +3,6 @@ import Cover from "./components/Cover";
 import ProductReviewPage from "./components/ProductReviewPage";
 import ProductsPage from "./components/ProductsPage";
 import './App.css';
-import LogIn from './LogIn';
-import SignUp from './SignUp';
 // import Navigation from "./components/Navigation";
 import LogIn from './components/LogIn';
 import SignUp from './components/SignUp';
@@ -37,9 +35,7 @@ function App() {
         const dictionary = {};
         const commentsDict = {};
 
-      .then((data) => {
-           console.log(data)
-        const dictionary = {}
+       
 
 
         data.forEach(product => {
