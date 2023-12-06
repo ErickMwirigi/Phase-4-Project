@@ -3,6 +3,10 @@ import Cover from "./components/Cover";
 import ProductReviewPage from "./components/ProductReviewPage";
 import ProductsPage from "./components/ProductsPage";
 import './App.css';
+// import Navigation from "./components/Navigation";
+import LogIn from './components/LogIn';
+import SignUp from './components/SignUp';
+
 import { Route , Routes } from "react-router-dom";
 import NavBar from "./components/NavBar";
 import AccountProfile from "./components/AccountProfile";
@@ -31,6 +35,9 @@ function App() {
 
         const dictionary = {};
         const commentsDict = {};
+
+       
+
 
         data.forEach(product => {
           dictionary[product.id] = product;
