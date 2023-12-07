@@ -64,7 +64,7 @@ function handleChange(e){
                 </label>
                 <label htmlFor='address'> Address :
                     <input
-                    type="text"vfsed
+                    type="text"
                     id="address"
                     value={userData.address}
                     onChange={handleChange}
@@ -78,7 +78,6 @@ function handleChange(e){
                     onChange={handleChange}
                     />
                 </label>
-                
                 <button className='login-btn' type='submit'>Sign Up</button>
             </form>
         </div>

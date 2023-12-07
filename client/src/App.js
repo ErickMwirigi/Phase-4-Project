@@ -22,6 +22,7 @@ function App() {
   const [ isMember , setMember ] = useState('')
   const [productsDictionary, setProductsDictionary] = useState({});
   const [commentsDictionary, setCommentsDictionary] = useState({});
+  const [cart, setCart] = useState([]);
 
 
   function fetchProductData() {
@@ -72,8 +73,8 @@ function removeFromFavorites(clickedProduct) {
         <Route path="/login" element={ <LogIn onLogIn={setMember}/>}/>
         <Route path="/signup" element={ <SignUp />}/>
         <Route path="/products-review" element={<ProductReviewPage products={products} productsDictionary={productsDictionary} commentsDictionary={commentsDictionary} setCommentsDictionary={setCommentsDictionary} />}/>
-        <Route path="/account">
-          <Route index element={<AccountProfile  userData={isMember}/>}/>
+        <Route path="/account" element={<AccountProfile  userData={isMember} itemCount={cart}/>}>
+          <Route index element={<AccountProfile  userData={isMember} itemCount={cart}/>}/>
           <Route path="inbox" element={<Inbox />}/>
           <Route path="orders" element={<Orders />}/>
           <Route path="saved-items" element={ <FavoriteProducts favoriteProducts={favoriteProducts} removeFromFavorites={removeFromFavorites}/>}/>

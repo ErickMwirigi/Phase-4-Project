@@ -3,8 +3,7 @@ import { ReactComponent as Cart } from '../Cart.svg'
 import ProfileMenu from './ProfileMenu'
 
 
-export default function AccountProfile({ userData }) {
-
+export default function AccountProfile({ userData , itemCount}) {
 
   return (
     <div className="account-profile">
@@ -15,15 +14,10 @@ export default function AccountProfile({ userData }) {
                     <span>{userData.name}</span>
                     <span>{userData.email}</span>
                 </div>
-                <div className="Checkout"><Cart/> Cart Counter </div>    
-            </div>
-
-        </div>
-        <div className='account-container'>
-            <div>
-                <ProfileMenu />
+                <div className="Checkout">{itemCount === 0 ? "_" : itemCount.length}<Cart/></div>    
             </div>
         </div>
-  </div>
+        <ProfileMenu />
+    </div>
   )
 }
