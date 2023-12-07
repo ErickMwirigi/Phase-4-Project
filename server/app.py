@@ -1,4 +1,4 @@
-from flask import Flask, jsonify, request, make_response
+from flask import Flask, jsonify, request, make_response, session
 from flask_migrate import Migrate
 from flask_restful import Api, Resource
 
@@ -9,6 +9,7 @@ app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///project.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.json.compact = False
+app.secret_key = 'no_key'
 
 migrate = Migrate(app, db)
 CORS(app)
@@ -33,6 +34,31 @@ class Index(Resource):
 
 api.add_resource(Index, '/')
 
+class LogIn(Resource):
+
+    def get(self):
+        user = Customer.query.filter(Customer.id == session.get('user_id')).first()
+        if user:
+            return jsonify(user.to_dict())
+        else:
+            return jsonify({'message': '401: Not Authorized'}), 401
+    
+    def post(self):
+        user = Customer.query.filter(
+            Customer.name == request.get_json()['username']
+        ).first()
+
+        session['customer_id'] = user.id
+        response = make_response(
+            jsonify(user.to_dict()),
+            201,
+        )
+
+        return response
+
+api.add_resource(LogIn, '/login')
+
+
 # CRUD for the Customer Table
 
 class Customers(Resource):
@@ -50,11 +76,12 @@ class Customers(Resource):
 
     def post(self):
 
+        data = request.get_json()
         new_record = Customer(
-            name=request.form['name'],
-            email=request.form['email'],
-            password=request.form['password'],
-            address=request.form['address'],
+            name=data['name'],
+            email=data['email'],
+            password=data['password'],
+            address=data['address'],
         )
 
         db.session.add(new_record)

@@ -50,7 +50,7 @@ class Item(db.Model, SerializerMixin):
     description = db.Column(db.String)
     price = db.Column(db.Integer)
     category = db.Column(db.String)
-    imageUrl= db.Column(db.String)
+    imageUrl= db.Column(db.NVARCHAR)
     rating = db.Column(db.Integer)
     quantity = db.Column(db.Integer)
     created_at = db.Column(DateTime(), server_default=func.now())
