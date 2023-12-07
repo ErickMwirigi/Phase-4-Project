@@ -160,15 +160,15 @@ form > .login-btn{
     width: auto;
 }
 
-.search-results span:hover{
-    color: #292828;
-    padding: 10px 15px;
+/* .search-results span:hover{
+    height: 100%;
+    padding: 15px 10px;
     width: 100%;
-    background-color: #e0baba67;
-}
+    background-color: #e0babac2;
+} */
 
 .search-details:hover{
-    background-color: #fff;
+    background-color: #c2c1c1;
 }
 
 input{
