@@ -11,9 +11,6 @@ export default function SignUp({ formdata }){
         password:"",
 
     })
-    // console.log(formData)
-
-   
 
     function handleChange(e){
         const id = e.target.id
@@ -26,7 +23,7 @@ export default function SignUp({ formdata }){
         e.preventDefault()
         // if(!formData) return 
 
-        // alert(`Welcome ${formData.name}`)
+        alert(`Welcome ${formData.name}`)
         console.log(formData)
         fetch("http://127.0.0.1:5555/customers",{
             method:"POST",

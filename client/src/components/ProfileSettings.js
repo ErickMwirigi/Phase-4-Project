@@ -1,14 +1,19 @@
 import React, { useState, useEffect } from 'react'
 
-export default function ProfileSettings( { userID}) {
+export default function ProfileSettings( { userData }) {
 
-const [ formData, setFormData ] = useState('')
+const [formData, setFormData] = useState({
+        name: "",
+        email: "",
+        address:"",
+        password:"",
 
-  const fetchUser =  fetch(`http://127.0.0.1:5555/customers/${userID}`)
-                    .then((r)=>r.json())
-                    .then((r)=>setFormData(r))
+    })
 
-useEffect(()=> fetchUser(), [])
+useEffect(()=> {
+    fetch(`http://127.0.0.1:5555/customers/${userData.id}`)
+    .then((r)=>r.json())
+    .then((r)=>console.log(r))})
 
   function handleSubmit(e){
     e.preventDefault()
@@ -27,6 +32,12 @@ useEffect(()=> fetchUser(), [])
     .then((r)=>console.log(r))
 }
 
+function handleChange(e){
+    const id = e.target.id
+    const value = e.target.value
+
+    setFormData({...formData, [id]:value})
+}
 
   return (
     <div className='login-dialogue'>
@@ -38,7 +49,7 @@ useEffect(()=> fetchUser(), [])
                     <input
                     type="text"
                     id="name"
-                    value={formData.name}
+                    value={userData.name}
                     autoComplete="off"
                     onChange={handleChange}
                     />
@@ -47,7 +58,7 @@ useEffect(()=> fetchUser(), [])
                     <input
                     type="email"
                     id="email"
-                    value={formData.email}
+                    value={userData.email}
                     onChange={handleChange}
                     />
                 </label>
@@ -55,7 +66,7 @@ useEffect(()=> fetchUser(), [])
                     <input
                     type="text"vfsed
                     id="address"
-                    value={formData.address}
+                    value={userData.address}
                     onChange={handleChange}
                     />
                 </label>
@@ -63,7 +74,7 @@ useEffect(()=> fetchUser(), [])
                     <input
                     type="password"
                     id="password"
-                    value={formData.password}
+                    value={userData.password}
                     onChange={handleChange}
                     />
                 </label>
