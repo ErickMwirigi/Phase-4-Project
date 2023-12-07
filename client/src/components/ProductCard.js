@@ -1,10 +1,11 @@
 import React from "react";
 
 function ProductCard({ product, addToFavorite }) {
+    console.log(product)
     return (
         <div className="product-cards">
             <div className="product-image">
-                <img src={product.image_url} alt="product-cover" />
+                <img src={product.imageUrl} alt="product-cover" />
                 <h3>{product.name}</h3>
                 <h4>{product.price}</h4>
                 <p>{product.category}</p>
