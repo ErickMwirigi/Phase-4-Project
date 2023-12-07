@@ -6,7 +6,7 @@ import SideBar from './SideBar'
 function ProductsPage({ products, setToFavorite }) {
 
     return (
-        <div className="mainPage">
+        <div className="main-page">
             <div className="sidebar">
                 <SideBar />
             </div>

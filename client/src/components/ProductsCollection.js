@@ -6,7 +6,6 @@ function ProductsCollection({ products, setFavorite }) {
     // console.log(products)
     return (
         <div className="market-collection">
-            <h2>Products</h2>
             <div className="product-collection">
                 {products.map((product) => (
                     <ProductCard
