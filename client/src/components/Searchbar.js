@@ -7,7 +7,7 @@ export default function Searchbar({ products }) {
 
   function handleChange(e){
     setSearch(e.target.value)
-    // searched(e.target.value)
+
     const results = products.filter((item)=>{
       return e.target.value && item && item.name && item.name.toLowerCase().includes(e.target.value)
     })
@@ -15,7 +15,7 @@ export default function Searchbar({ products }) {
   }
 
   const searchItems = searchResults.map((item)=>{
-    return <div className="search-details" key={item.id} onClick={()=>alert(`You have selected from ${item.category} category`)}><img src={item.imageUrl}/><span>{item.name}</span></div>
+    return <div className="search-details" key={item.id} onClick={()=>alert(`You have selected from ${item.category} category`)}><img src={item.imageUrl} alt={item.name}/><span>{item.name}</span></div>
   })
   // <button className='submit' type="submit" onClick={(search)=>searched(search)}></button>
   return (

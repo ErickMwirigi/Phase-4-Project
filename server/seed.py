@@ -1,7 +1,6 @@
-from random import choice as rc
+from random import choice, randint, random
 import json 
 from faker import Faker
-
 from app import app
 from models import db, Customer, Item
 
@@ -17,19 +16,20 @@ fake = Faker()
 with app.app_context():
 
     Item.query.delete()
-#     Customer.query.delete()
+    Customer.query.delete()
 
-#     customers = []
-#     for n in range(50):
-#         customer = Customer(name=fake.name())
-#         customers.append(customer)
+    customers = []
+    passwords = ['michael', 'gooseman', 'trident', 'kenyanboys', 'nomatch', 'CIA-123', 'Benjo']
+    for n in range(15):
+        customer = Customer(name=fake.name(), email=fake.email(), address=fake.address(), password=f"{choice(passwords)}{randint(3,30)}")
+        customers.append(customer)
 
-#     db.session.add_all(customers)
+        db.session.add_all(customers)
 
     items = []
     rating = [1, 2, 3, 4, 5]
     for n in data["products"]:
-        item = Item(name= n["name"], price=n["price"], description=n["description"], category=n["category"], quantity=n["stock"], imageUrl=n["image_url"], rating=rc(rating)) #, customer=rc(customers)
+        item = Item(name= n["name"], price=n["price"], description=n["description"], category=n["category"], quantity=n["stock"], imageUrl=n["image_url"], rating=choice(rating)) #, customer=choice(customers)
         items.append(item)
         
     # print(items)

@@ -61,12 +61,6 @@ function removeFromFavorites(clickedProduct) {
     setFavoriteProducts(remProducts);
 };
 
-// function onSearch(searched){
-
-//   const toDisplay = products.filter((item)=>item.name.includes(searched))
-//   setProducts(toDisplay)
-// }
-
   return (
     <div className='first-page'>
       <Routes>
