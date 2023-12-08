@@ -64,21 +64,19 @@ function App() {
 
   function setToFavoriteProducts(item) {
   
-    if (favoriteProducts.includes(item)) {
+    if (favoriteProducts.includes(item.id)) {
       alert(`${item.name} has already been added to favorited`)
     }
     else {
-      console.log(isMember.id)
-      console.log(item.id)
-    fetch("http://127.0.0.1:5555/favorites",{
-      method:"POST",
-      headers:{
-        "Content-Type":"application/json"
-      },
-      body:JSON.stringify({
-        "customer_id": isMember.id,
-        "item_id":item.id
-      })
+      fetch("http://127.0.0.1:5555/favorites",{
+        method:"POST",
+        headers:{
+          "Content-Type":"application/json"
+        },
+        body:JSON.stringify({
+          "customer_id": isMember.id,
+          "item_id":item.id
+        })
     })
     .then((response) => response.json())
     .then((favs) => setFavoriteProducts(favs));
@@ -86,7 +84,7 @@ function App() {
 }
 
 function removeFromFavorites(item) {
-    fetch(`http://127.0.0.1:5555/${item.id}`,{
+    fetch(`http://127.0.0.1:5555/favorites/${item.id}`,{
       method:"DELETE",
       headers:{
         "Content-Type":"application/json"
