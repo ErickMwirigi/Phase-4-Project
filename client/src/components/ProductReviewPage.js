@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import Reviews from './reviews'
+import Reviews from './Reviews'
 
 function ProductReviewPage(props) {
     const favoriteProductsURL = "http://localhost:3000/reviews";
