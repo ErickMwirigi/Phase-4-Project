@@ -1,5 +1,6 @@
 import React from "react";
 import Comments from "./Comments";
+import { useParams } from "react-router-dom";
 
 function ratingStars(num) {
   let i = 0;
@@ -19,15 +20,27 @@ function ProductDetailsCard({
   review,
   products,
   usercomment = {},
-  product = {},
   commentsDictionary,
   setCommentsDictionary,
 }) {
+
+const { productId } = useParams()
+
+const product = products.filter((prod)=> prod.id === productId)
+
+// <Comments
+// review={review}
+// product={product}
+// usercomment={usercomment}
+// commentsDictionary={commentsDictionary}
+// setCommentsDictionary={setCommentsDictionary}
+// />
+
   return (
     <div className="productdetails-cards">
       <div className="productdetails-details">
         <div className="productdetails-data">
-          <img className="productdetails-image-1" src={product.image_url} alt="productdetails-image" />
+          <img className="productdetails-image-1" src={product.imageUrl} alt="productdetails-image" />
           <div className="productdetails-metadata">
             <h3>
               <u>Product Name</u><br></br>{product.name}</h3>
@@ -49,13 +62,6 @@ function ProductDetailsCard({
             </div>
           </div>
         </div>
-        <Comments
-          review={review}
-          product={product}
-          usercomment={usercomment}
-          commentsDictionary={commentsDictionary}
-          setCommentsDictionary={setCommentsDictionary}
-        />
       </div>
     </div>
   );

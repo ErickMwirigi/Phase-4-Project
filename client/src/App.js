@@ -12,6 +12,7 @@ import Inbox from "./components/Inbox";
 import FavoriteProducts from "./components/FavoriteProducts";
 import LogIn from './components/LogIn'
 import SignUp from "./components/SignUp";
+import ProductDetailsCard from "./components/ProductDetailsCard";
 
 function App() {
 
@@ -75,7 +76,8 @@ function removeFromFavorites(clickedProduct) {
         <Route path="/" element={<NavBar onSearch={products} userData={isMember}/>}>
           <Route path="buy-items" element={ <Cover />}/>
           <Route index element={<ProductsPage products={products} setToFavorite={setToFavoriteProducts}/> }/>
-          <Route path="/products/*" element={<ProductsPage products={products} setToFavorite={setToFavoriteProducts}/> }/>
+          <Route path="products" element={<ProductsPage products={products} setToFavorite={setToFavoriteProducts}/> }/>
+          <Route path="/products/:productId" element={<ProductDetailsCard products={products}/>}/>
         </Route>
         <Route path="/login" element={ <LogIn onLogIn={setMember}/>}/>
         <Route path="/signup" element={ <SignUp />}/>
