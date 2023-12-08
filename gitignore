@@ -1,3 +1,4 @@
 node_modules/
 marketenv/
-server/__pycache__
+server/__pycache__/*
+server/migrations/*

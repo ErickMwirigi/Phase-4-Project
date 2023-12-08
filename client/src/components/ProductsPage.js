@@ -6,10 +6,8 @@ import SideBar from './SideBar'
 function ProductsPage({ products, setToFavorite }) {
 
     return (
-        <div className="mainPage">
-            <div className="sidebar">
-                <SideBar />
-            </div>
+        <div className="main-page">
+            <SideBar />
             <div className="products">
                 <ProductsCollection
                     products={products}

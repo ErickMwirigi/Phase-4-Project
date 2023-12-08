@@ -1,25 +1,21 @@
 import React, { useState, useEffect } from 'react'
 
-export default function ProfileSettings({ userID }) {
+export default function ProfileSettings({ userData }) {
 
-    const [formData, setFormData] = useState('')
+    const [formData, setFormData] = useState({
+    })
 
-    const fetchUser = fetch(`http://127.0.0.1:5555/customers/${userID}`)
-        .then((r) => r.json())
-        .then((r) => setFormData(r))
+    useEffect(() => {
+        fetch(`http://127.0.0.1:5555/customers`)
+            .then((r) => r.json())
+            .then((r) => console.log(r))
+    }, [])
 
-    useEffect(() => fetchUser(), [])
-
-    function handleChange() {
-
-    }
-    function handleSubmit(e) {
-        e.preventDefault()
-        // if(!formData) return 
+    function handleSubmit() {
 
         // alert(`Welcome ${formData.name}`)
         console.log(formData)
-        fetch("http://127.0.0.1:5555/customers", {
+        fetch(`http://127.0.0.1:5555/customers/${userData.id}`, {
             method: "PATCH",
             headers: {
                 "Content-Type": "application/json"
@@ -30,50 +26,73 @@ export default function ProfileSettings({ userID }) {
             .then((r) => console.log(r))
     }
 
+    function handleChange(e) {
+        const id = e.target.id
+        const value = e.target.value
+
+        setFormData({ ...formData, [id]: value })
+    }
 
     return (
-        <div className='login-dialogue'>
-            <h1>Logo</h1>
-            <div className='form-dialogue'>
-                <form onSubmit={handleSubmit}>
-                    <h2>Welcome to Our App!</h2>
-                    <label htmlFor='name'> name :
+        <div className='settings-dialogue'>
+            <h4>User Details</h4>
+            <form onSubmit={handleSubmit}>
+                <div className='name-section'>
+                    <label htmlFor='firstname'> Firstname :
                         <input
                             type="text"
-                            id="name"
-                            value={formData.name}
+                            id="firstname"
+                            placeholder={userData.firstname}
+                            value={formData.firstname}
                             autoComplete="off"
                             onChange={handleChange}
                         />
                     </label>
+                    <label htmlFor='lastname'> Lastname :
+                        <input
+                            type="text"
+                            id="lastname"
+                            placeholder={userData.lastname}
+                            value={formData.lastname}
+                            autoComplete="off"
+                            onChange={handleChange}
+                        />
+                    </label>
+                </div>
+                <div className='addresses'>
                     <label htmlFor='email'> Email :
                         <input
                             type="email"
                             id="email"
+                            placeholder={userData.email}
                             value={formData.email}
+                            autoComplete="off"
                             onChange={handleChange}
                         />
                     </label>
                     <label htmlFor='address'> Address :
                         <input
-                            type="text" vfsed
+                            type="text"
                             id="address"
+                            placeholder={userData.address}
                             value={formData.address}
                             onChange={handleChange}
                         />
                     </label>
+                </div>
+                <div>
                     <label htmlFor='password'> Password :
                         <input
                             type="password"
                             id="password"
+                            // placeholder={userData.password}
                             value={formData.password}
                             onChange={handleChange}
                         />
                     </label>
-
-                    <button className='login-btn' type='submit'>Sign Up</button>
-                </form>
-            </div>
+                </div>
+                <button className='save-btn' type='submit'>Save Changes</button>
+            </form>
         </div>
     )
 }

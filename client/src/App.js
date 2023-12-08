@@ -22,9 +22,10 @@ function App() {
 
   const [products, setProducts] = useState([]);
   const [favoriteProducts, setFavoriteProducts] = useState([]);
-  const [ isMember , setMember ] = useState(true)
+  const [ isMember , setMember ] = useState('')
   const [productsDictionary, setProductsDictionary] = useState({});
   const [commentsDictionary, setCommentsDictionary] = useState({});
+  const [cart, setCart] = useState([]);
 
 
   function fetchProductData() {
@@ -49,7 +50,14 @@ function App() {
 
       });
   }
+
+  function fetchActiveUser(){
+    fetch("http://127.0.0.1:5555/active-session")
+    .then((response) => response.json())
+    .then((data) => console.log(data))
+  }
   useEffect(() => fetchProductData(), [])
+  useEffect(() => fetchActiveUser(), [])
 
   function setToFavoriteProducts(product) {
     if (favoriteProducts.includes(product)) {
@@ -67,28 +75,23 @@ function removeFromFavorites(clickedProduct) {
     setFavoriteProducts(remProducts);
 };
 
-function onSearch(searched){
-
-  const toDisplay = products.filter((item)=>item.name.includes(searched))
-  setProducts(toDisplay)
-}
-
   return (
     <div className='first-page'>
       <Routes>
-        <Route path="/" element={ isMember ? <LogIn />: <SignUp />}/>
-        <Route path="/login" element={ <LogIn />}/>
-        <Route path="/products" element={<NavBar onSearch={onSearch}/>}>
+        <Route path="/" element={<NavBar onSearch={products} userData={isMember}/>}>
           <Route path="buy-items" element={ <Cover />}/>
           <Route index element={<ProductsPage products={products} setToFavorite={setToFavoriteProducts}/> }/>
+          <Route path="/products/*" element={<ProductsPage products={products} setToFavorite={setToFavoriteProducts}/> }/>
         </Route>
+        <Route path="/login" element={ <LogIn onLogIn={setMember}/>}/>
+        <Route path="/signup" element={ <SignUp />}/>
         <Route path="/products-review" element={<ProductReviewPage products={products} productsDictionary={productsDictionary} commentsDictionary={commentsDictionary} setCommentsDictionary={setCommentsDictionary} />}/>
-        <Route path="/"/>
-        <Route path="/account" element={<AccountProfile/>}>
+        <Route path="/account" element={<AccountProfile  userData={isMember} itemCount={cart}/>}>
+          <Route index element={<AccountProfile  userData={isMember} itemCount={cart}/>}/>
           <Route path="inbox" element={<Inbox />}/>
           <Route path="orders" element={<Orders />}/>
           <Route path="saved-items" element={ <FavoriteProducts favoriteProducts={favoriteProducts} removeFromFavorites={removeFromFavorites}/>}/>
-          <Route path="profile-settings" element={<ProfileSettings />}/>
+          <Route path="profile-settings" element={<ProfileSettings userData={isMember}/>}/>
         </Route>
       </Routes>
     </div>
