@@ -27,8 +27,8 @@ export default function LogIn({ onLogIn }) {
         })
         .then((r)=>r.json())
         .then((resp)=>{
-            console.log(resp)
-            alert(`Welcome back ${resp.name}`)
+            
+            alert(`Welcome back ${resp.firstname}`)
             onLogIn(resp)
             navigate('/products', {replace:true})
 
