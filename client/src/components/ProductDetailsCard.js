@@ -26,7 +26,7 @@ function ProductDetailsCard({
 
 const { productId } = useParams()
 
-const product = products.filter((prod)=> prod.id === productId)
+const product = products.filter((prod)=> prod.id === parseInt(productId))[0]
 
 // <Comments
 // review={review}
@@ -35,6 +35,7 @@ const product = products.filter((prod)=> prod.id === productId)
 // commentsDictionary={commentsDictionary}
 // setCommentsDictionary={setCommentsDictionary}
 // />
+console.log(product)
 
   return (
     <div className="productdetails-cards">
