@@ -44,7 +44,14 @@ function App() {
 
       });
   }
+
+  function fetchActiveUser(){
+    fetch("http://127.0.0.1:5555/active-session")
+    .then((response) => response.json())
+    .then((data) => console.log(data))
+  }
   useEffect(() => fetchProductData(), [])
+  useEffect(() => fetchActiveUser(), [])
 
   function setToFavoriteProducts(product) {
     if (favoriteProducts.includes(product)) {
@@ -68,7 +75,7 @@ function removeFromFavorites(clickedProduct) {
         <Route path="/" element={<NavBar onSearch={products} userData={isMember}/>}>
           <Route path="buy-items" element={ <Cover />}/>
           <Route index element={<ProductsPage products={products} setToFavorite={setToFavoriteProducts}/> }/>
-          <Route path="/products" element={<ProductsPage products={products} setToFavorite={setToFavoriteProducts}/> }/>
+          <Route path="/products/*" element={<ProductsPage products={products} setToFavorite={setToFavoriteProducts}/> }/>
         </Route>
         <Route path="/login" element={ <LogIn onLogIn={setMember}/>}/>
         <Route path="/signup" element={ <SignUp />}/>
