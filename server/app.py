@@ -36,17 +36,15 @@ api.add_resource(Index, '/')
 
 class LogIn(Resource):
 
-    def get(self):
-        user = Customer.query.filter(Customer.id == session.get('user_id')).first()
-        if user:
-            return jsonify(user.to_dict())
-        else:
-            return jsonify({'message': '401: Not Authorized'}), 401
+    # def get(self):
+    #     user = Customer.query.filter(Customer.id == session.get('user_id')).first()
+    #     if user:
+    #         return make_response(jsonify(user.to_dict()),200)
+    #     else:
+    #         return make_response(jsonify({'message': '401: Not Authorized'}), 401)
     
     def post(self):
-        user = Customer.query.filter(
-            Customer.name == request.get_json()['username']
-        ).first()
+        user = Customer.query.filter(Customer.lastname == request.get_json()['username']).first()
 
         session['customer_id'] = user.id
         response = make_response(
@@ -58,6 +56,22 @@ class LogIn(Resource):
 
 api.add_resource(LogIn, '/login')
 
+class UserSession(Resource):
+
+    def get(self):
+        user = Customer.query.filter(Customer.id == session.get('customer_id')).first()
+        if user:
+            return make_response(
+                jsonify(user.to_dict()),
+                200
+            )
+        else:
+            return make_response(
+                {'message': session.get('customer_id')},
+                200
+            )
+
+api.add_resource(UserSession, '/active-session')
 
 # CRUD for the Customer Table
 
@@ -78,7 +92,8 @@ class Customers(Resource):
 
         data = request.get_json()
         new_record = Customer(
-            name=data['name'],
+            firstname=data['firstname'],
+            lastname=data['lastname'],
             email=data['email'],
             password=data['password'],
             address=data['address'],
@@ -117,8 +132,8 @@ class CustomerByID(Resource):
         for attr in request.form:
             setattr(record, attr, request.form[attr])
 
-        db.session.add(record)
-        db.session.commit()
+            db.session.add(record)
+            db.session.commit()
 
         response_dict = record.to_dict()
 

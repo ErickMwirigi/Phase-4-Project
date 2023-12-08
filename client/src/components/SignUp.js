@@ -24,7 +24,7 @@ export default function SignUp({ formdata }){
         // if(!formData) return 
 
         alert(`Welcome ${formData.firstname}`)
-        console.log(formData)
+        // console.log(formData)
         fetch("http://127.0.0.1:5555/customers",{
             method:"POST",
             headers:{

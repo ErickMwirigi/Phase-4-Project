@@ -3,15 +3,10 @@ import React, { useState, useEffect } from 'react'
 export default function ProfileSettings( { userData }) {
 
 const [formData, setFormData] = useState({
-        name: "",
-        email: "",
-        address:"",
-        password:"",
-
-    })
+})
 
 useEffect(()=> {
-    fetch(`http://127.0.0.1:5555/customers/${userData.id}`)
+    fetch(`http://127.0.0.1:5555/customers`)
     .then((r)=>r.json())
     .then((r)=>console.log(r))})
 
@@ -21,7 +16,7 @@ useEffect(()=> {
 
     // alert(`Welcome ${formData.name}`)
     console.log(formData)
-    fetch("http://127.0.0.1:5555/customers",{
+    fetch(`http://127.0.0.1:5555/customers/${userData.id}`,{
         method:"PATCH",
         headers:{
             "Content-Type":"application/json"
@@ -41,15 +36,15 @@ function handleChange(e){
 
   return (
     <div className='login-dialogue'>
-        <h1>Logo</h1>
-        <div className='form-dialogue'>
+        <h4>User Details</h4>
+        <div className='settings-dialogue'>
             <form onSubmit={handleSubmit}>
-                <h2>Welcome to Our App!</h2>
                 <label htmlFor='name'> name :
                     <input
                     type="text"
                     id="name"
-                    value={userData.name}
+                    placeholder={userData.name}
+                    value={formData.name}
                     autoComplete="off"
                     onChange={handleChange}
                     />
@@ -58,7 +53,8 @@ function handleChange(e){
                     <input
                     type="email"
                     id="email"
-                    value={userData.email}
+                    placeholder={userData.email}
+                    value={formData.email}
                     onChange={handleChange}
                     />
                 </label>
@@ -66,7 +62,8 @@ function handleChange(e){
                     <input
                     type="text"
                     id="address"
-                    value={userData.address}
+                    placeholder={userData.address}
+                    value={formData.address}
                     onChange={handleChange}
                     />
                 </label>
@@ -74,11 +71,12 @@ function handleChange(e){
                     <input
                     type="password"
                     id="password"
-                    value={userData.password}
+                    // placeholder={userData.password}
+                    value={formData.password}
                     onChange={handleChange}
                     />
                 </label>
-                <button className='login-btn' type='submit'>Sign Up</button>
+                <button className='save-btn' type='submit'>Save Changes</button>
             </form>
         </div>
     </div>

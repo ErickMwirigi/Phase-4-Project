@@ -15,7 +15,8 @@ class  Customer(db.Model, SerializerMixin):
     __tablename__ = 'customers'
 
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String, unique=True)
+    firstname = db.Column(db.String, unique=True)
+    lastname = db.Column(db.String, unique=True)
     email = db.Column(db.String, unique=True)
     password = db.Column(db.String, unique=True)
     address = db.Column(db.String, unique=True)

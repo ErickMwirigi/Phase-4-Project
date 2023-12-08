@@ -21,7 +21,7 @@ with app.app_context():
     customers = []
     passwords = ['michael', 'gooseman', 'trident', 'kenyanboys', 'nomatch', 'CIA-123', 'Benjo']
     for n in range(15):
-        customer = Customer(name=fake.name(), email=fake.email(), address=fake.address(), password=f"{choice(passwords)}{randint(3,30)}")
+        customer = Customer(firstname=fake.first_name(), lastname=fake.last_name(), email=fake.email(), address=fake.address(), password=f"{choice(passwords)}{randint(3,30)}")
         customers.append(customer)
 
         db.session.add_all(customers)
