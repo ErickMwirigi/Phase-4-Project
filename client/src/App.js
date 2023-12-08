@@ -71,7 +71,6 @@ function removeFromFavorites(clickedProduct) {
 };
 
   return (
-    <div className='first-page'>
       <Routes>
         <Route path="/" element={<NavBar onSearch={products} userData={isMember}/>}>
           <Route path="buy-items" element={ <Cover />}/>
@@ -90,7 +89,6 @@ function removeFromFavorites(clickedProduct) {
           <Route path="profile-settings" element={<ProfileSettings userData={isMember}/>}/>
         </Route>
       </Routes>
-    </div>
   )
 }
 
