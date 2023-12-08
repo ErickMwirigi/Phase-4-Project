@@ -35,50 +35,65 @@ function handleChange(e){
 }
 
   return (
-    <div className='login-dialogue'>
-        <h4>User Details</h4>
         <div className='settings-dialogue'>
+            <h4>User Details</h4>
             <form onSubmit={handleSubmit}>
-                <label htmlFor='name'> name :
-                    <input
-                    type="text"
-                    id="name"
-                    placeholder={userData.name}
-                    value={formData.name}
-                    autoComplete="off"
-                    onChange={handleChange}
-                    />
-                </label>
-                <label htmlFor='email'> Email :
-                    <input
-                    type="email"
-                    id="email"
-                    placeholder={userData.email}
-                    value={formData.email}
-                    onChange={handleChange}
-                    />
-                </label>
-                <label htmlFor='address'> Address :
-                    <input
-                    type="text"
-                    id="address"
-                    placeholder={userData.address}
-                    value={formData.address}
-                    onChange={handleChange}
-                    />
-                </label>
-                <label htmlFor='password'> Password :
-                    <input
-                    type="password"
-                    id="password"
-                    // placeholder={userData.password}
-                    value={formData.password}
-                    onChange={handleChange}
-                    />
-                </label>
+                <div className='name-section'>
+                    <label htmlFor='firstname'> Firstname :
+                        <input
+                        type="text"
+                        id="firstname"
+                        placeholder={userData.firstname}
+                        value={formData.firstname}
+                        autoComplete="off"
+                        onChange={handleChange}
+                        />
+                    </label>
+                    <label htmlFor='lastname'> Lastname :
+                        <input
+                        type="text"
+                        id="lastname"
+                        placeholder={userData.lastname}
+                        value={formData.lastname}
+                        autoComplete="off"
+                        onChange={handleChange}
+                        />
+                    </label>
+                </div>
+                <div className='addresses'>
+                    <label htmlFor='email'> Email :
+                        <input
+                        type="email"
+                        id="email"
+                        placeholder={userData.email}
+                        value={formData.email}
+                        autoComplete="off"
+                        onChange={handleChange}
+                        />
+                    </label>
+                    <label htmlFor='address'> Address :
+                        <input
+                        type="text"
+                        id="address"
+                        placeholder={userData.address}
+                        value={formData.address}
+                        onChange={handleChange}
+                        />
+                    </label>
+                </div>
+                <div>
+                    <label htmlFor='password'> Password :
+                        <input
+                        type="password"
+                        id="password"
+                        // placeholder={userData.password}
+                        value={formData.password}
+                        onChange={handleChange}
+                        />
+                    </label>
+                </div>
                 <button className='save-btn' type='submit'>Save Changes</button>
             </form>
         </div>
-    </div>
 )
 }

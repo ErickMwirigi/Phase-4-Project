@@ -24,12 +24,6 @@ font-weight: 550;
     font-weight: 550; 
 }
 
-/* .show{
-    opacity: 0;
-    visibility: hidden;
-    transition: fadeOutAnimation ease-in-out 0.5 forwards;
-} */
-
 nav{
     padding: 20px;
     display: flex;
@@ -251,4 +245,30 @@ label{
     color: rgb(10, 10, 10); 
     border-radius: 6px;
     padding: 15px;
+}
+.settings-dialogue{
+    display: flex;
+    flex-direction: column;
+    padding: 2vh;
+    width: 100%;
+    min-height: 30%;
+}
+
+.name-section{
+    width: 100%;
+    flex-basis: 200;
+}
+.addresses{
+    width: 100%;
+    flex-basis: 200;
+}
+
+.save-btn{
+    width: 20%;
+    padding: 5px;
+    color: #0a0a0a;
+    background: #ffffff;
+    border-radius: 4px;
+    font-size: 14px;
+    font-weight: bold;
 }
