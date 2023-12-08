@@ -34,10 +34,15 @@ class  Customer(db.Model, SerializerMixin):
     reviews = relationship('Review', back_populates='customer')
     items = association_proxy('reviews', 'item',
         creator=lambda it: Review(item=it))
+    
+    favorites = relationship('Favorite', back_populates='customer')
+    items = association_proxy('favorites', 'item',
+        creator=lambda it: Favorite(item=it))
 
     serialize_rules = ('-orders.customer',),
     serialize_rules = ('-payments.customer',),
-    serialize_rules = ('-reviews.customer',)
+    serialize_rules = ('-reviews.customer',),
+    serialize_rules = ('-favorites.customer',)
 
 
     def __repr__(self):
@@ -66,12 +71,17 @@ class Item(db.Model, SerializerMixin):
         creator=lambda cu: Review(customer=cu))
 
     reviews = relationship('Review', back_populates='item')
-    customers = association_proxy('payments', 'customer',
+    customers = association_proxy('reviews', 'customer',
+        creator=lambda cu: Review(customer=cu))
+    
+    favorites = relationship('Favorite', back_populates='item')
+    customers = association_proxy('favorites', 'customer',
         creator=lambda cu: Review(customer=cu))
 
     serialize_rules = ('-orders.item',),   
     serialize_rules = ('-payments.item',),
-    serialize_rules = ('-reviews.item',)
+    serialize_rules = ('-reviews.item',),
+    serialize_rules = ('-favorites.item',)
 
     def __repr__(self):
         return f'<Item {self.name}, {self.price}, {self.description}, {self.category}, {self.imageUrl},{self.quantity}>'
@@ -134,7 +144,19 @@ class Review(db.Model, SerializerMixin):
 
     serialize_rules = ('-customer.reviews', '-item.reviews',)
     
+class Favorite(db.Model, SerializerMixin):
+    __tablename__ = 'favorites'
 
+    id = db.Column(db.Integer, primary_key=True)
+    created_at = db.Column(DateTime(), server_default=func.now())
+    updated_at = db.Column(DateTime(), onupdate=func.now())
+    customer_id = Column(Integer(), ForeignKey('customers.id'))
+    item_id = Column(Integer(), ForeignKey('items.id'))
+
+    customer = relationship('Customer', back_populates='favorites')
+    item = relationship('Item', back_populates='favorites')
+
+    serialize_rules = ('-customer.favorites', '-item.favorites',)
 
 
 

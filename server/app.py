@@ -2,7 +2,7 @@ from flask import Flask, jsonify, request, make_response, session
 from flask_migrate import Migrate
 from flask_restful import Api, Resource
 
-from models import db, Customer, Item, Order, Payment, Review
+from models import db, Customer, Item, Order, Payment, Review, Favorite
 from flask_cors import CORS
 
 app = Flask(__name__)
@@ -253,6 +253,60 @@ class ItemByID(Resource):
 
 api.add_resource(ItemByID, '/items/<int:id>')
 
+#CRUD for Favorites
+
+class FavoriteItems(Resource):
+
+    def get(self):
+        
+        items = Favorite.query.all()
+        
+        response = make_response(
+            jsonify([item.to_dict() for item in items]),
+            200
+        )
+        return response
+    
+    def post(self):
+        
+        favorites = Favorite(
+            customer_id=request.get_json()['customer_id'],
+            item_id=request.get_json()['item_id'],
+        )
+
+        db.session.add(favorites)
+        db.session.commit()
+
+        response_dict = favorites.to_dict()
+
+        response = make_response(
+            jsonify(response_dict),
+            201,
+        )
+
+        return response
+
+api.add_resource(FavoriteItems, "/favorites")
+
+class FavoriteItemsID(Resource):
+
+    def delete(self,id):
+        
+        item = Favorite.query.filter_by(id=id).first()
+
+        db.session.delete(item)
+        db.session.commit()
+
+        response_dict = {"message": "record successfully deleted"}
+
+        response = make_response(
+            jsonify(response_dict),
+            200
+        )
+
+        return response
+    
+api.add_resource(FavoriteItemsID, "/favorites/<int:id>")
 
 # CRUD for the Order Table
 

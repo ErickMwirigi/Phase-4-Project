@@ -51,24 +51,54 @@ function App() {
     .then((response) => response.json())
     .then((data) => console.log(data))
   }
+
+  function fetchFavs(){
+    fetch("http://127.0.0.1:5555/favorites")
+    .then((response) => response.json())
+    .then((data) => setFavoriteProducts(data))
+  }
+
   useEffect(() => fetchProductData(), [])
   useEffect(() => fetchActiveUser(), [])
+  useEffect(() => fetchFavs(), [])
 
-  function setToFavoriteProducts(product) {
-    if (favoriteProducts.includes(product)) {
-        alert(`${product.name} has already been added to favorited`);
+  function setToFavoriteProducts(item) {
+  
+    if (favoriteProducts.includes(item)) {
+      alert(`${item.name} has already been added to favorited`)
     }
     else {
-        setFavoriteProducts((prevProducts) => [...prevProducts, product]);
-    };
+      console.log(isMember.id)
+      console.log(item.id)
+    fetch("http://127.0.0.1:5555/favorites",{
+      method:"POST",
+      headers:{
+        "Content-Type":"application/json"
+      },
+      body:JSON.stringify({
+        "customer_id": isMember.id,
+        "item_id":item.id
+      })
+    })
+    .then((response) => response.json())
+    .then((favs) => setFavoriteProducts(favs));
+    }
 }
 
-function removeFromFavorites(clickedProduct) {
-    const remProducts = favoriteProducts.filter(
-        (product) => product.id !== clickedProduct.id,
+function removeFromFavorites(item) {
+    fetch(`http://127.0.0.1:5555/${item.id}`,{
+      method:"DELETE",
+      headers:{
+        "Content-Type":"application/json"
+      },
+    })
+    .then((response) => response.json())
+    .then(() =>{ 
+      const remProducts = favoriteProducts.filter(
+        (product) => product.id !== item.id,
     );
-    setFavoriteProducts(remProducts);
-};
+    setFavoriteProducts(remProducts)}
+)};
 
   return (
       <Routes>
