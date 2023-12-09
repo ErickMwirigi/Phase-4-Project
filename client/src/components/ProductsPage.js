@@ -2,6 +2,8 @@ import ProductsCollection from "./ProductsCollection";
 import React from "react";
 import SideBar from './SideBar'
 import FeaturedProducts from "./FeaturedProducts";
+import { Route ,Routes } from "react-router-dom";
+import UserComment from "./userComment";
 
 function ProductsPage({ products, setToFavorite }) {
 
@@ -15,12 +17,10 @@ function ProductsPage({ products, setToFavorite }) {
                     setFavorite={setToFavorite}
                 />
             </div>
-            
+            <Routes>
+                <Route path="/comments" element={<UserComment />} />
+            </Routes>
         </div>
-        
     );
-
-
-
 }
 export default ProductsPage

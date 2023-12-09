@@ -133,7 +133,6 @@ class Review(db.Model, SerializerMixin):
     id = db.Column(db.Integer, primary_key=True)
     rating = db.Column(db.Integer)
     comment = db.Column(db.String)
-    date = db.Column(db.Integer)
     created_at = db.Column(DateTime(), server_default=func.now())
     updated_at = db.Column(DateTime(), onupdate=func.now())
 

@@ -43,19 +43,15 @@ function ProductDetailsCard({
         <div className="productdetails-data">
           <img className="productdetails-image-1" src={product.imageUrl} alt="productdetails-image" />
           <div className="productdetails-metadata">
-            <h3>
-              <u>Product Name</u><br></br>{product.name}</h3>
-            <h3>
-              <u>Product Description</u><br></br>{product.description}
-            </h3>
-            <h3>
-              <u>Product Category</u>: <br></br>{product.category}</h3>
-            <h3>
-              <u>Product Price</u>: <br></br>Kshs.{product.price}
-            </h3>
-
+            <h3>Product Name</h3>
+            <p>{product.name}</p>
+            <h3>Product Description</h3>
+            <p>{product.description}</p>
+            <h3>Product Category</h3>
+            <p>{product.category}</p>
+            <h3>Product Price</h3>
+            <p>Kshs.{product.price}</p>
             <div className="rating-stars">
-
               <b><u>Overall Rating</u></b>:
               {ratingStars(Number(product.rating)).map((star, idx) => (
                 <div key={idx}>{star}</div>
