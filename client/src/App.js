@@ -4,8 +4,8 @@ import ProductReviewPage from "./components/ProductReviewPage";
 import ProductsPage from "./components/ProductsPage";
 import './App.css';
 // import Navigation from "./components/Navigation";
-import LogIn from './components/LogIn';
-import SignUp from './components/SignUp';
+// import LogIn from './components/LogIn';
+// import SignUp from './components/SignUp';
 
 import { Route , Routes } from "react-router-dom";
 import NavBar from "./components/NavBar";
@@ -16,6 +16,7 @@ import Inbox from "./components/Inbox";
 import FavoriteProducts from "./components/FavoriteProducts";
 import LogIn from './components/LogIn'
 import SignUp from "./components/SignUp";
+import CheckoutPage from "./components/CheckoutPage";
 
 function App() {
 
@@ -91,6 +92,7 @@ function onSearch(searched){
           <Route path="saved-items" element={ <FavoriteProducts favoriteProducts={favoriteProducts} removeFromFavorites={removeFromFavorites}/>}/>
           <Route path="profile-settings" element={<ProfileSettings />}/>
         </Route>
+        <Route path="/checkout" element={<CheckoutPage />}/>
       </Routes>
     </div>
   )

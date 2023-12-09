@@ -26,6 +26,9 @@ useEffect(()=> fetchUser(), [])
     .then((r)=>r.json())
     .then((r)=>console.log(r))
 }
+    function handleChange(){
+        
+    }
 
 
   return (

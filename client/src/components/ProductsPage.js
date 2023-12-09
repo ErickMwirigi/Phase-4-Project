@@ -1,21 +1,25 @@
 import ProductsCollection from "./ProductsCollection";
 import React from "react";
 import SideBar from './SideBar'
-
+import FeaturedBrands from "./FeaturedBrands";
+// import Slider from "react-slick";
+// // import ProductCard from "./ProductCard";
 
 function ProductsPage({ products, setToFavorite }) {
 
     return (
         <div className="mainPage">
             <div className="sidebar">
-                <SideBar />
+                <SideBar />                
             </div>
+            
             <div className="products">
                 <ProductsCollection
                     products={products}
                     setFavorite={setToFavorite}
                 />
             </div>
+            
         </div>
         
     );
