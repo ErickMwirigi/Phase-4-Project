@@ -4,7 +4,7 @@ import ProductReviewPage from "./components/ProductReviewPage";
 import ProductsPage from "./components/ProductsPage";
 import './App.css';
 // import Navigation from "./components/Navigation";
-import LogIn from './components/LogIn';
+import LogIn from "./components/LogIn";
 import SignUp from './components/SignUp';
 
 import { Route , Routes } from "react-router-dom";
@@ -14,8 +14,7 @@ import ProfileSettings from "./components/ProfileSettings";
 import Orders from "./components/Orders";
 import Inbox from "./components/Inbox";
 import FavoriteProducts from "./components/FavoriteProducts";
-import LogIn from './components/LogIn'
-import SignUp from "./components/SignUp";
+
 
 function App() {
 
@@ -23,7 +22,7 @@ function App() {
 
   const [products, setProducts] = useState([]);
   const [favoriteProducts, setFavoriteProducts] = useState([]);
-  const [ isMember , setMember ] = useState(true)
+  const [ isMember , setMember ] = useState(false)
   const [productsDictionary, setProductsDictionary] = useState({});
   const [commentsDictionary, setCommentsDictionary] = useState({});
 

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import Reviews from "./components/reviews";
+import Reviews from "./Reviews"
 
 
 function ProductReviewPage(props) {
