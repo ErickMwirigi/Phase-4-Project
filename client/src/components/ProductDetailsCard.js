@@ -8,7 +8,7 @@ function ratingStars(num) {
   const stars = [];
 
   while (i < num) {
-    stars[i] = <span className="material-symbols-outlined">star</span>;
+    stars[i] = <i class="bi bi-star"></i>;
 
     i += 1;
   }
@@ -24,18 +24,18 @@ function ProductDetailsCard({
   setCommentsDictionary,
 }) {
 
-const { productId } = useParams()
+  const { productId } = useParams()
 
-const product = products.filter((prod)=> prod.id === parseInt(productId))[0]
+  const product = products.filter((prod) => prod.id === parseInt(productId))[0]
 
-// <Comments
-// review={review}
-// product={product}
-// usercomment={usercomment}
-// commentsDictionary={commentsDictionary}
-// setCommentsDictionary={setCommentsDictionary}
-// />
-console.log(product)
+  // <Comments
+  // review={review}
+  // product={product}
+  // usercomment={usercomment}
+  // commentsDictionary={commentsDictionary}
+  // setCommentsDictionary={setCommentsDictionary}
+  // />
+  console.log(product)
 
   return (
     <div className="productdetails-cards">

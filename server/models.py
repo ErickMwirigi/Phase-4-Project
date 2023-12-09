@@ -11,7 +11,7 @@ from sqlalchemy_serializer import SerializerMixin
 
 db = SQLAlchemy()
 
-class  Customer(db.Model, SerializerMixin):
+class Customer(db.Model, SerializerMixin):
     __tablename__ = 'customers'
 
     id = db.Column(db.Integer, primary_key=True)

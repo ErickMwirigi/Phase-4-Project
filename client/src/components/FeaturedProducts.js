@@ -1,8 +1,8 @@
 import React from "react";
 import FeaturedCards from "./FeaturedCard";
 
-function FeaturedProducts({featured}){
-    return(
+function FeaturedProducts({ featured }) {
+    return (
         <div>
             <h2>Featured Products</h2>
             <div className="Featured">
@@ -10,7 +10,7 @@ function FeaturedProducts({featured}){
                     <FeaturedCards
                         key={product.id}
                         featured={product}
-                        
+
                     />
                 ))}
             </div>
