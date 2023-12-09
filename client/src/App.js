@@ -116,9 +116,6 @@ function Checkout(){
   )))
 }
 
-
-
-
   return (
       <Routes>
         <Route path="/" element={<NavBar onSearch={products} userData={isMember}/>}>
