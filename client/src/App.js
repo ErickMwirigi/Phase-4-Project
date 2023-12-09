@@ -24,6 +24,7 @@ function App() {
 
   const [products, setProducts] = useState([]);
   const [favoriteProducts, setFavoriteProducts] = useState([]);
+  const [featuredProducts, setFeaturedProducts] = useState([])
   const [ isMember , setMember ] = useState(true)
   const [productsDictionary, setProductsDictionary] = useState({});
   const [commentsDictionary, setCommentsDictionary] = useState({});
@@ -46,8 +47,11 @@ function App() {
 
         });
 
+        const featured = data.slice(4,10) 
+
         setProducts(data);
         setProductsDictionary(dictionary);
+        setFeaturedProducts(featuredcd )
 
       });
   }
@@ -75,6 +79,8 @@ function onSearch(searched){
   setProducts(toDisplay)
 }
 
+
+
   return (
     <div className='first-page'>
       <Routes>
@@ -92,7 +98,6 @@ function onSearch(searched){
           <Route path="saved-items" element={ <FavoriteProducts favoriteProducts={favoriteProducts} removeFromFavorites={removeFromFavorites}/>}/>
           <Route path="profile-settings" element={<ProfileSettings />}/>
         </Route>
-        <Route path="/checkout" element={<CheckoutPage />}/>
       </Routes>
     </div>
   )
