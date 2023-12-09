@@ -4,7 +4,7 @@ import { Link, Outlet } from 'react-router-dom'
 export default function SideBar() {
   return (
     <aside className='show side-bar'>
-      <h4>Categories</h4>
+      <h4 className='generic-h4'>Categories</h4>
       <div className="side-menu" >
           <Link to={'/baby-products'}>Baby Products</Link>
           <Link to={'/Clothes'}>Clothes </Link>

@@ -28,13 +28,13 @@ function ProductDetailsCard({
 
   const product = products.filter((prod) => prod.id === parseInt(productId))[0]
 
-  // <Comments
-  // review={review}
-  // product={product}
-  // usercomment={usercomment}
-  // commentsDictionary={commentsDictionary}
-  // setCommentsDictionary={setCommentsDictionary}
-  // />
+  const x = < Comments
+    review={review}
+    product={product}
+    usercomment={usercomment}
+    commentsDictionary={commentsDictionary}
+    setCommentsDictionary={setCommentsDictionary}
+  />
   console.log(product)
 
   return (
@@ -61,6 +61,7 @@ function ProductDetailsCard({
                 <div key={idx}>{star}</div>
               ))}
             </div>
+            {x}
           </div>
         </div>
       </div>

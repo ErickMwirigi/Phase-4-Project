@@ -37,7 +37,13 @@ a {
     color: #fff;
     font-size: 18px;
     font-family: Inter;
-    font-weight: 550;
+    font-weight: 600;
+    
+}
+.side-menu>a:hover {
+    cursor: pointer;
+    text-decoration: underline;
+    text-decoration-thickness: 5px;
 }
 
 nav {

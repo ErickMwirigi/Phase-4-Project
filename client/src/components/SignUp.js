@@ -1,94 +1,102 @@
 import React from 'react'
 import { useState } from 'react'
+import Logo from "../assets/logo.png";
 
-export default function SignUp({ formdata }){ 
+
+export default function SignUp({ formdata }) {
 
     const [formData, setFormData] = useState({
         firstname: "",
         lastname: "",
         email: "",
-        address:"",
-        password:"",
+        address: "",
+        password: "",
 
     })
 
-    function handleChange(e){
+    function handleChange(e) {
         const id = e.target.id
         const value = e.target.value
 
-        setFormData({...formData, [id]:value})
-        }
+        setFormData({ ...formData, [id]: value })
+    }
 
-    function handleSubmit(e){
+    function handleSubmit(e) {
         e.preventDefault()
         // if(!formData) return 
 
         alert(`Welcome ${formData.firstname}`)
         // console.log(formData)
-        fetch("http://127.0.0.1:5555/customers",{
-            method:"POST",
-            headers:{
-                "Content-Type":"application/json"
+        fetch("http://127.0.0.1:5555/customers", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
             },
-            body:JSON.stringify(formData)
+            body: JSON.stringify(formData)
         })
-        .then((r)=>r.json())
-        .then((r)=>console.log(r))
+            .then((r) => r.json())
+            .then((r) => console.log(r))
     }
 
 
-  return (
+    return (
         <div className='login-dialogue'>
-            <h1>Logo</h1>
+            <img className="logo" alt='logo' src={Logo} />
             <div className='form-dialogue'>
                 <form onSubmit={handleSubmit}>
                     <h2>Welcome to Our App!</h2>
-                    <label htmlFor='firstname'> Firstname :
+                    <div className='form-item'>
+                        <label htmlFor='firstname'> First Name:</label>
                         <input
-                        type="text"
-                        id="firstname"
-                        value={formData.firstname}
-                        autoComplete="off"
-                        onChange={handleChange}
+                            type="text"
+                            id="firstname"
+                            value={formData.firstname}
+                            autoComplete="off"
+                            onChange={handleChange}
                         />
-                    </label>
-                    <label htmlFor='lastname'> Lastname :
+                    </div>
+                    <div className='form-item'>
+                        <label htmlFor='lastname'> Last Name:</label>
                         <input
-                        type="text"
-                        id="lastname"
-                        value={formData.lastname}
-                        autoComplete="off"
-                        onChange={handleChange}
+                            type="text"
+                            id="lastname"
+                            value={formData.lastname}
+                            autoComplete="off"
+                            onChange={handleChange}
                         />
-                    </label>
-                    <label htmlFor='email'> Email :
+                    </div>
+                    <div className='form-item'>
+                        <label htmlFor='email'> Email:</label>
                         <input
-                        type="email"
-                        id="email"
-                        value={formData.email}
-                        onChange={handleChange}
+                            type="email"
+                            id="email"
+                            value={formData.email}
+                            onChange={handleChange}
                         />
-                    </label>
-                    <label htmlFor='address'> Address :
+                    </div>
+                    <div className='form-item'>
+                        <label htmlFor='address'> Physical Address:</label>
+                            <input
+                                type="text" vfsed
+                                id="address"
+                                value={formData.address}
+                                onChange={handleChange}
+                            />
+                        
+                    </div>
+                    <div className='form-item'>
+                        <label htmlFor='password'> Password:</label>
                         <input
-                        type="text"vfsed
-                        id="address"
-                        value={formData.address}
-                        onChange={handleChange}
+                            type="password"
+                            id="password"
+                            value={formData.password}
+                            onChange={handleChange}
                         />
-                    </label>
-                    <label htmlFor='password'> Password :
-                        <input
-                        type="password"
-                        id="password"
-                        value={formData.password}
-                        onChange={handleChange}
-                        />
-                    </label>
-                    
+                    </div>
+
                     <button className='login-btn' type='submit'>Sign Up</button>
                 </form>
             </div>
         </div>
-  )
+    )
 }

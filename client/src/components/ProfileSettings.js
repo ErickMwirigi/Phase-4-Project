@@ -33,7 +33,7 @@ export default function ProfileSettings({ userData = {} }) {
 
     return (
         <div className='settings-dialogue'>
-            <h4 className='generic-h4'>User Details</h4>
+            <h4 className='generic-h4'>Profile Settings</h4>
             <form onSubmit={handleSubmit}>
                 <div className='profile-grid'>
                     <div>
