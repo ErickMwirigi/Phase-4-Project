@@ -51,7 +51,7 @@ function App() {
 
         setProducts(data);
         setProductsDictionary(dictionary);
-        setFeaturedProducts(featuredcd )
+        setFeaturedProducts(featured)
 
       });
   }
