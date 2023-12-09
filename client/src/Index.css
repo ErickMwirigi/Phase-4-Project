@@ -48,6 +48,15 @@ nav{
     flex-direction: column;
 }
 
+
+.items{
+    background: #817f7f;
+}
+
+.bb{
+    background: #C7846F;
+}
+
 .login-dialogue{
     width: 100%;
     color: rgb(24, 23, 23);
@@ -181,6 +190,12 @@ label{
     flex-direction: column;
     background-color: #C7846F;
 }
+.featured{
+    margin-top: 2%;
+    background-color: #b67398;
+    display: flex;
+    justify-content: center;
+}
 
 .sidebar{
     padding: 25px;
@@ -213,6 +228,17 @@ label{
     list-style-type: none;
 } */ 
 
+.Featured{
+    background: #99577b;
+    align-content: center;       
+}
+
+.split{
+    display: flex;
+    flex-direction: row;
+    
+}
+
 .dynamic-menu{
     position: absolute;
     right: 0;
@@ -223,4 +249,19 @@ label{
     color: rgb(10, 10, 10); 
     border-radius: 6px;
     padding: 15px;
+}
+
+.checkout{
+
+}
+
+.itemsOrder{
+    /* background: #817f7f; */
+    border: #292828;
+    /* display: flex; */
+}
+
+.orderdetails{
+    display: flex;
+    flex-direction: column;
 }
