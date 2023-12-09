@@ -4,13 +4,14 @@ export default function ProfileSettings({ userData = {} }) {
 
     const [formData, setFormData] = useState(userData);
 
+
     function handleSubmit(e) {
         e.preventDefault()
 
         // Remove created_at field because it needs to be parsed to DateTime in the backend
         // Yet we don't have to pass it because it gets created in the backend
 
-        const { created_at: fda, ...fd} = formData;
+        const { created_at: fda, ...fd } = formData;
 
         fetch(`http://127.0.0.1:5555/customers/${userData.id}`, {
             method: "PATCH",
@@ -32,10 +33,11 @@ export default function ProfileSettings({ userData = {} }) {
 
     return (
         <div className='settings-dialogue'>
-            <h4>User Details</h4>
+            <h4 className='generic-h4'>User Details</h4>
             <form onSubmit={handleSubmit}>
-                <div className='name-section'>
-                    <label htmlFor='firstname'> Firstname :
+                <div className='profile-grid'>
+                    <div>
+                        <label htmlFor='firstname'>First Name</label>
                         <input
                             type="text"
                             id="firstname"
@@ -44,8 +46,9 @@ export default function ProfileSettings({ userData = {} }) {
                             autoComplete="off"
                             onChange={handleChange}
                         />
-                    </label>
-                    <label htmlFor='lastname'> Lastname :
+                    </div>
+                    <div>
+                        <label htmlFor='lastname'>Last Name</label>
                         <input
                             type="text"
                             id="lastname"
@@ -54,10 +57,9 @@ export default function ProfileSettings({ userData = {} }) {
                             autoComplete="off"
                             onChange={handleChange}
                         />
-                    </label>
-                </div>
-                <div className='addresses'>
-                    <label htmlFor='email'> Email :
+                    </div>
+                    <div>
+                        <label htmlFor='email'>Email</label>
                         <input
                             type="email"
                             id="email"
@@ -66,8 +68,9 @@ export default function ProfileSettings({ userData = {} }) {
                             autoComplete="off"
                             onChange={handleChange}
                         />
-                    </label>
-                    <label htmlFor='address'> Address :
+                    </div>
+                    <div>
+                        <label htmlFor='address'>Physical Address</label>
                         <input
                             type="text"
                             id="address"
@@ -75,18 +78,17 @@ export default function ProfileSettings({ userData = {} }) {
                             value={formData.address}
                             onChange={handleChange}
                         />
-                    </label>
+                    </div>
                 </div>
-                <div>
-                    <label htmlFor='password'> Password :
-                        <input
-                            type="password"
-                            id="password"
-                            // placeholder={userData.password}
-                            value={formData.password}
-                            onChange={handleChange}
-                        />
-                    </label>
+                <div className='password'>
+                    <label htmlFor='password'>Password</label>
+                    <input
+                        type="password"
+                        id="password"
+                        // placeholder={userData.password}
+                        value={formData.password}
+                        onChange={handleChange}
+                    />
                 </div>
                 <button className='save-btn' type='submit'>Save Changes</button>
             </form>

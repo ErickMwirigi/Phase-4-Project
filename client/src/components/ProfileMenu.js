@@ -5,7 +5,7 @@ export default function ProfileMenu() {
   return (
     <div className='account-container'>
       <div className="ac-menu" >
-        <h4>Manage Account</h4>
+        <h4 className='generic-h4'>Manage Account</h4>
         <Link to={'/account/inbox'}>Inbox</Link>
         <Link to={'/account/profile-settings'}>Profile Settings</Link>
         <Link to={'/account/orders'}>Orders</Link>
@@ -13,8 +13,10 @@ export default function ProfileMenu() {
         <Link >Need Help ?</Link>
         <Link >Give Feedback</Link>
       </div>
-      <div className='dynamic-menu'>
-        <Outlet />
+      <div className='ac-content'>
+        <div className='dynamic-menu'>
+          <Outlet />
+        </div>
       </div>
     </div>
   )
