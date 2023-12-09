@@ -1,12 +1,18 @@
 import React from "react";
+import FeaturedCards from "./FeaturedCard";
 
 function FeaturedProducts({featured}){
     return(
         <div>
             <h2>Featured Products</h2>
             <div className="Featured">
-                <img src={featured.imageUrl} alt="Product"/>
-                <h2>{featured.name}</h2>
+                {featured.map(product => (
+                    <FeaturedCards
+                        key={product.id}
+                        featured={product}
+                        
+                    />
+                ))}
             </div>
         </div>
     )

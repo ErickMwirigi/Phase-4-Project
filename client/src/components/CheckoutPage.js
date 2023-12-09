@@ -4,19 +4,19 @@ function CheckoutPage({orders}){
 
     return(
         <>
-        <div>
+        <div className="checkout">
             <h2>Checkout</h2>
-            <div>
+            <div className="itemsOrder">
                 <div>
                     <h4>Items</h4>
                 </div>
-                <div>
-                    <h4>Order ID: </h4>
-                    <h4>Date Created: </h4>
-                    <div>
-                        <h5>Quantity</h5>
-                        <h5>Price</h5>
-                    </div>
+                <div className="orderdetails">
+                    <h4>Order ID: {orders.id}</h4>
+                    <h4>Date Created: {orders.name}</h4>
+                        <div>
+                            <h5>Quantity</h5>
+                            <h5>Price</h5>
+                        </div>
                 </div>
             </div>
             <div>

@@ -30,6 +30,7 @@ function App() {
   const [ isMember , setMember ] = useState(true)
   const [productsDictionary, setProductsDictionary] = useState({});
   const [commentsDictionary, setCommentsDictionary] = useState({});
+  const [orders, setOrders] = useState([])
 
 
   function fetchProductData() {
@@ -82,11 +83,13 @@ function onSearch(searched){
 }
 
 function Checkout(){
-  fetch(ordersURL)
+  fetch(productURL)
   .then(res => res.json())
-  .then(data => console.log(data))
+  .then(data => data.map(order =>(
+    setOrders(order)
+  )))
 }
-Checkout()
+
 
 
 
@@ -111,7 +114,7 @@ Checkout()
           <Route path="saved-items" element={ <FavoriteProducts favoriteProducts={favoriteProducts} removeFromFavorites={removeFromFavorites}/>}/>
           <Route path="profile-settings" element={<ProfileSettings />}/>
         </Route>
-        <Route path="/checkout" element={<CheckoutPage />}/>
+        <Route path="/checkout" element={<CheckoutPage orders={orders}/>}/>
       </Routes>
     </div>
   )
