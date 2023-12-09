@@ -16,11 +16,13 @@ import Inbox from "./components/Inbox";
 import FavoriteProducts from "./components/FavoriteProduct";
 import LogIn from './components/LogIn'
 import SignUp from "./components/SignUp";
+import CheckoutPage from "./components/CheckoutPage";
 
 
 function App() {
 
   const productURL = "http://127.0.0.1:5555/items";
+  const ordersURL = "http://127.0.0.1:5555/orders"
 
   const [products, setProducts] = useState([]);
   const [favoriteProducts, setFavoriteProducts] = useState([]);
@@ -79,6 +81,13 @@ function onSearch(searched){
   setProducts(toDisplay)
 }
 
+function Checkout(){
+  fetch(ordersURL)
+  .then(res => res.json())
+  .then(data => console.log(data))
+}
+Checkout()
+
 
 
   return (
@@ -102,6 +111,7 @@ function onSearch(searched){
           <Route path="saved-items" element={ <FavoriteProducts favoriteProducts={favoriteProducts} removeFromFavorites={removeFromFavorites}/>}/>
           <Route path="profile-settings" element={<ProfileSettings />}/>
         </Route>
+        <Route path="/checkout" element={<CheckoutPage />}/>
       </Routes>
     </div>
   )
