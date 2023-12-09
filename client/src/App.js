@@ -13,10 +13,10 @@ import AccountProfile from "./components/AccountProfile";
 import ProfileSettings from "./components/ProfileSettings";
 import Orders from "./components/Orders";
 import Inbox from "./components/Inbox";
-import FavoriteProducts from "./components/FavoriteProducts";
+import FavoriteProducts from "./components/FavoriteProduct";
 import LogIn from './components/LogIn'
 import SignUp from "./components/SignUp";
-import CheckoutPage from "./components/CheckoutPage";
+
 
 function App() {
 
@@ -88,7 +88,11 @@ function onSearch(searched){
         <Route path="/login" element={ <LogIn />}/>
         <Route path="/products" element={<NavBar onSearch={onSearch}/>}>
           <Route path="buy-items" element={ <Cover />}/>
-          <Route index element={<ProductsPage products={products} setToFavorite={setToFavoriteProducts}/> }/>
+          <Route index element={<ProductsPage 
+              products={products}
+              setToFavorite={setToFavoriteProducts} 
+              fProducts={featuredProducts}
+          /> }/>
         </Route>
         <Route path="/products-review" element={<ProductReviewPage products={products} productsDictionary={productsDictionary} commentsDictionary={commentsDictionary} setCommentsDictionary={setCommentsDictionary} />}/>
         <Route path="/"/>

@@ -1,16 +1,20 @@
 import ProductsCollection from "./ProductsCollection";
 import React from "react";
 import SideBar from './SideBar'
-import FeaturedBrands from "./FeaturedBrands";
-// import Slider from "react-slick";
-// // import ProductCard from "./ProductCard";
+import FeaturedProducts from "./FeaturedProducts";
 
-function ProductsPage({ products, setToFavorite }) {
+function ProductsPage({ products, setToFavorite, fProducts }) {
 
     return (
         <div className="mainPage">
             <div className="sidebar">
                 <SideBar />                
+            </div>
+
+            <div>
+                <FeaturedProducts 
+                    featured={fProducts}
+                />
             </div>
             
             <div className="products">

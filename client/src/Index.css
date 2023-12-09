@@ -246,6 +246,11 @@ label{
     list-style-type: none;
 } */ 
 
+.Featured{
+    background: #99577b;
+    align-items: center;    
+}
+
 .dynamic-menu{
     position: absolute;
     right: 0;
