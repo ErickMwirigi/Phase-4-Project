@@ -1,14 +1,15 @@
-from flask import Flask, jsonify, request, make_response
+from flask import Flask, jsonify, request, make_response, session
 from flask_migrate import Migrate
 from flask_restful import Api, Resource
 
-from models import db, Customer, Item, Order, Payment, Review
+from models import db, Customer, Item, Order, Payment, Review, Favorite
 from flask_cors import CORS
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///project.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.json.compact = False
+app.secret_key = 'no_key'
 
 migrate = Migrate(app, db)
 CORS(app)
@@ -33,6 +34,45 @@ class Index(Resource):
 
 api.add_resource(Index, '/')
 
+class LogIn(Resource):
+
+    # def get(self):
+    #     user = Customer.query.filter(Customer.id == session.get('user_id')).first()
+    #     if user:
+    #         return make_response(jsonify(user.to_dict()),200)
+    #     else:
+    #         return make_response(jsonify({'message': '401: Not Authorized'}), 401)
+    
+    def post(self):
+        user = Customer.query.filter(Customer.lastname == request.get_json()['username']).first()
+
+        session['customer_id'] = user.id
+        response = make_response(
+            jsonify(user.to_dict()),
+            201,
+        )
+
+        return response
+
+api.add_resource(LogIn, '/login')
+
+class UserSession(Resource):
+
+    def get(self):
+        user = Customer.query.filter(Customer.id == session.get('customer_id')).first()
+        if user:
+            return make_response(
+                jsonify(user.to_dict()),
+                200
+            )
+        else:
+            return make_response(
+                {'message': session.get('customer_id')},
+                200
+            )
+
+api.add_resource(UserSession, '/active-session')
+
 # CRUD for the Customer Table
 
 class Customers(Resource):
@@ -50,11 +90,13 @@ class Customers(Resource):
 
     def post(self):
 
+        data = request.get_json()
         new_record = Customer(
-            name=request.form['name'],
-            email=request.form['email'],
-            password=request.form['password'],
-            address=request.form['address'],
+            firstname=data['firstname'],
+            lastname=data['lastname'],
+            email=data['email'],
+            password=data['password'],
+            address=data['address'],
         )
 
         db.session.add(new_record)
@@ -90,8 +132,8 @@ class CustomerByID(Resource):
         for attr in request.form:
             setattr(record, attr, request.form[attr])
 
-        db.session.add(record)
-        db.session.commit()
+            db.session.add(record)
+            db.session.commit()
 
         response_dict = record.to_dict()
 
@@ -211,6 +253,60 @@ class ItemByID(Resource):
 
 api.add_resource(ItemByID, '/items/<int:id>')
 
+#CRUD for Favorites
+
+class FavoriteItems(Resource):
+
+    def get(self):
+        
+        items = Favorite.query.all()
+        
+        response = make_response(
+            jsonify([item.to_dict() for item in items]),
+            200
+        )
+        return response
+    
+    def post(self):
+        
+        favorites = Favorite(
+            customer_id=request.get_json()['customer_id'],
+            item_id=request.get_json()['item_id'],
+        )
+
+        db.session.add(favorites)
+        db.session.commit()
+
+        response_dict = favorites.to_dict()
+
+        response = make_response(
+            jsonify(response_dict),
+            201,
+        )
+
+        return response
+
+api.add_resource(FavoriteItems, "/favorites")
+
+class FavoriteItemsID(Resource):
+
+    def delete(self,id):
+        
+        item = Favorite.query.filter_by(id=id).first()
+
+        db.session.delete(item)
+        db.session.commit()
+
+        response_dict = {"message": "record successfully deleted"}
+
+        response = make_response(
+            jsonify(response_dict),
+            200
+        )
+
+        return response
+    
+api.add_resource(FavoriteItemsID, "/favorites/<int:id>")
 
 # CRUD for the Order Table
 

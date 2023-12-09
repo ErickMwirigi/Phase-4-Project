@@ -6,18 +6,8 @@ import FeaturedProducts from "./FeaturedProducts";
 function ProductsPage({ products, setToFavorite, fProducts }) {
 
     return (
-        <div className="mainPage">
-            <div className="split">
-            <div className="sidebar" >
-                <SideBar />                
-            </div>
-
-            <div>
-                <FeaturedProducts 
-                    featured={fProducts}
-                />
-            </div>
-            </div>
+        <div className="main-page">
+            <SideBar />
             <div className="products">
                 <ProductsCollection
                     products={products}

@@ -1,35 +1,38 @@
 import React from 'react'
 import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 
-export default function LogIn({prop}) {
+export default function LogIn({ onLogIn }) {
 
-    // const [isloggedIn, setLoggedIn] = useState(false)
     const [formData, setFormData] = useState({
         username:"",
         password:""
     })
 
+   const navigate = useNavigate()
     function handleSubmit(e){
         e.preventDefault()
         if(!formData) return 
         setFormData({
             username: "",
-            password:"",
+            password: "",
     
         })
-        alert(`Welcome ${formData.username}`)
-        // fetch("url", {
-        //     method:"POST",
-        //     body:
-        //         JSON.stringify(formData),
-        //     headers:{
-        //         "Content-Type":"application/json"
-        //     }
-        // })
-        // .then((r)=>r.json())
-        // .then((resp)=>{
-        //     return formData
-        // })
+        fetch("http://127.0.0.1:5555/login", {
+            method:"POST",
+            headers:{
+                "Content-Type":"application/json"
+            },
+            body:JSON.stringify(formData),
+        })
+        .then((r)=>r.json())
+        .then((resp)=>{
+            
+            alert(`Welcome back ${resp.firstname}`)
+            onLogIn(resp)
+            navigate('/products', {replace:true})
+
+        })
     }
 
     function handleChange(e){
