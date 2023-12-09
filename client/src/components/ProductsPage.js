@@ -3,11 +3,12 @@ import React from "react";
 import SideBar from './SideBar'
 import FeaturedProducts from "./FeaturedProducts";
 
-function ProductsPage({ products, setToFavorite, fProducts }) {
+function ProductsPage({ products, setToFavorite }) {
 
     return (
         <div className="main-page">
             <SideBar />
+            <FeaturedProducts products={products} />
             <div className="products">
                 <ProductsCollection
                     products={products}

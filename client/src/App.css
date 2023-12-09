@@ -47,22 +47,25 @@
 
 .main-page {
     display: flex;
-    flex-direction: row;
-    padding: 8vh 0;
+    flex-direction: column;
+    /* position: relative; */
+    top: 6vh;
+    padding: 6vh 0 20vh 10vh;
     width: 100%;
+    align-items: center;
 }
 
 .side-bar {
     padding: 25px;
     margin: 0;
-    width: 200px;
-    height: 400px;
+    width: 250px;
+    height: 500px;
     border-top-right-radius: 6px;
     border-bottom-right-radius: 6px;
-    position: -webkit-sticky;
+    position: absolute;
     left: 0;
-    top: 150%;
-    justify-content: center;
+    top: 35%;
+    /* justify-content: center; */
     align-items: center;
     display: flex;
     flex-direction: column;
