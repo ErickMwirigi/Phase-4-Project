@@ -248,7 +248,13 @@ label{
 
 .Featured{
     background: #99577b;
-    align-items: center;    
+    align-content: center;       
+}
+
+.split{
+    display: flex;
+    flex-direction: row;
+    
 }
 
 .dynamic-menu{

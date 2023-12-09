@@ -7,7 +7,8 @@ function ProductsPage({ products, setToFavorite, fProducts }) {
 
     return (
         <div className="mainPage">
-            <div className="sidebar">
+            <div className="split">
+            <div className="sidebar" >
                 <SideBar />                
             </div>
 
@@ -16,7 +17,7 @@ function ProductsPage({ products, setToFavorite, fProducts }) {
                     featured={fProducts}
                 />
             </div>
-            
+            </div>
             <div className="products">
                 <ProductsCollection
                     products={products}
