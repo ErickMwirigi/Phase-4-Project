@@ -521,6 +521,8 @@ class Reviews(Resource):
     def post():
         new_record = Review(
             comment=request.get_json()['comment'],
+            item_id=request.get_json()['item_id'],
+            customer_id=request.get_json()['customer_id']
         )
 
         db.session.add(new_record)
@@ -588,6 +590,23 @@ class ReviewByID(Resource):
 
 
 api.add_resource(ReviewByID, '/reviews/<int:id>')
+
+
+class ProductReviewByID(Resource):
+    @staticmethod
+    def get():
+        item_id = request.get_json()['item_id']
+
+        response_dict = Review.query.filter_by(customer_id=item_id).to_dict()
+        response = make_response(
+            jsonify(response_dict),
+            200,
+        )
+
+        return response
+
+
+api.add_resource(ProductReviewByID, '/reviews?<int:item_id>')
 
 if __name__ == '__main__':
     app.run(port=5555, debug=True)

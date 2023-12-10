@@ -99,6 +99,21 @@ function App() {
       });
   }
 
+  function fetchProductReviews() {
+    const favoriteProductsURL = "http://127.0.0.1:5555/reviews";
+
+    fetch(favoriteProductsURL)
+      .then((response) => response.json())
+      .then((data) => {
+        const parsedReviews = {};
+        console.log({ data })
+        data.forEach((review) => {
+          // const newCommentsForproduct = [...commentsDictionary[review.productID], review]
+        });
+        // setReviews(data);
+      });
+  }
+
   function Checkout() {
     fetch(productURL)
       .then((res) => res.json())
@@ -138,6 +153,7 @@ function App() {
               products={products}
               commentsDictionary={commentsDictionary}
               setCommentsDictionary={setCommentsDictionary}
+              fetchProductReviews={fetchProductReviews}
             />}
         />
       </Route>

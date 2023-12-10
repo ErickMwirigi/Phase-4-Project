@@ -221,8 +221,8 @@ h3 {
   height: fit-content;
   align-items: center;
   border: none;
-  height: 70vh;
   justify-content: center;
+  padding: 30px;
 }
 
 .productdetails-image-1 {

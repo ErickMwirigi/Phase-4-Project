@@ -3,7 +3,6 @@ import React from "react";
 import ProductCard from "./ProductCard";
 
 function ProductsCollection({ products, setFavorite }) {
-  // console.log(products)
   return (
     <div className="market-collection">
       <div className="product-collection">

@@ -1,9 +1,7 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Comments from "./Comments";
 import { useParams } from "react-router-dom";
 import { strToPrice } from "shared/helpers";
-
-
 
 function ratingStars(num) {
   let i = 0;
@@ -30,6 +28,39 @@ function ProductDetailsCard({
 
   const product = products.filter((prod) => prod.id === parseInt(productId))[0];
 
+  const fetchProductReviews = () => {
+    const favoriteProductsURL = "http://127.0.0.1:5555/reviews?item_id=1";
+
+    fetch(favoriteProductsURL)
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data)
+        if (Object.keys(data).length && product?.id) {
+          const productReviews = data.reduce((acc, curr) => {
+            console.log("curr", curr)
+            if (acc[product.id]) {
+              acc[product.id] = [...acc[product.id], curr]
+            } else {
+              acc[product.id] = [curr]
+            }
+            return acc;
+          }, {});
+          console.log({ productReviews });
+          setCommentsDictionary({
+            ...commentsDictionary,
+            ...productReviews,
+          });
+        }
+
+      })
+  }
+
+  useEffect(() => {
+    fetchProductReviews();
+  }, [product?.id]);
+
+  console.log(usercomment)
+
   const comments = (
     <Comments
       review={review}
@@ -39,7 +70,6 @@ function ProductDetailsCard({
       setCommentsDictionary={setCommentsDictionary}
     />
   );
-
 
 
   return product && (
