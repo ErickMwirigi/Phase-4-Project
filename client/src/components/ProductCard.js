@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { strToPrice } from "shared/helpers";
 
 function ProductCard({ product, addToFavorite }) {
   return (
@@ -14,7 +15,7 @@ function ProductCard({ product, addToFavorite }) {
           }}
         />
         <h3>{product.name}</h3>
-        <h4>{product.price}</h4>
+        <h4>{strToPrice(product.price)}</h4>
         <p>{product.category}</p>
       </div>
       <div className="view-add-btns">

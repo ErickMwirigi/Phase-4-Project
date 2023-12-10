@@ -1,6 +1,9 @@
 import React from "react";
 import Comments from "./Comments";
 import { useParams } from "react-router-dom";
+import { strToPrice } from "shared/helpers";
+
+
 
 function ratingStars(num) {
   let i = 0;
@@ -37,6 +40,8 @@ function ProductDetailsCard({
     />
   );
 
+
+
   return product && (
     <div className="productdetails-cards">
       <div className="productdetails-details">
@@ -60,7 +65,7 @@ function ProductDetailsCard({
               <u>Product Category:</u>
             </h3>
             <p>{product.category}</p>
-            <span>Kshs.{product.price}</span>
+            <span>{strToPrice(product.price)}</span>
             <div className="rating-stars">
               <b>
                 <u>Overall Rating:</u>
