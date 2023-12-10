@@ -8,7 +8,7 @@ function ratingStars(num) {
   const stars = [];
 
   while (i < num) {
-    stars[i] = <i class="bi bi-star"></i>;
+    stars[i] = <i className="bi bi-star"></i>;
 
     i += 1;
   }
@@ -27,7 +27,7 @@ function ProductDetailsCard({
 
   const product = products.filter((prod) => prod.id === parseInt(productId))[0];
 
-  const x = (
+  const comments = (
     <Comments
       review={review}
       product={product}
@@ -36,15 +36,14 @@ function ProductDetailsCard({
       setCommentsDictionary={setCommentsDictionary}
     />
   );
-  console.log(product);
 
-  return (
+  return product && (
     <div className="productdetails-cards">
       <div className="productdetails-details">
         <div className="productdetails-data">
           <img
             className="productdetails-image-1"
-            src={product.imageUrl}
+            src={product?.imageUrl}
             alt="productdetails-image"
           />
           <div className="productdetails-metadata">
@@ -75,7 +74,7 @@ function ProductDetailsCard({
                 <div key={idx}>{star}</div>
               ))}
             </div>
-            {x}
+            {comments}
           </div>
         </div>
       </div>

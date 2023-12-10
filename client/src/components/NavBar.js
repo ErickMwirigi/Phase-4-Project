@@ -19,15 +19,15 @@ export default function NavBar({ onSearch, userData }) {
           <ul className="nav-links">
             {userData.name === "Mwagash" ? (
               <NavLink to={"/products"}>
-                <i class="bi bi-box-arrow-left"></i> Log Out
+                <i className="bi bi-box-arrow-left"></i> Log Out
               </NavLink>
             ) : (
               <NavLink to={"/login"}>
-                <i class="bi bi-box-arrow-in-right"></i> Sign In
+                <i className="bi bi-box-arrow-in-right"></i> Sign In
               </NavLink>
             )}
             <NavLink to={"/account/profile-settings"}>
-              <i class="bi bi-person-circle"></i> Profile
+              <i className="bi bi-person-circle"></i> Profile
             </NavLink>
           </ul>
         </div>

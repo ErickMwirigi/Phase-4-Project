@@ -20,7 +20,8 @@ api = Api(app)
 
 class Index(Resource):
 
-    def get(self):
+    @staticmethod
+    def get():
         response_dict = {
             "index": "Welcome to the Project RESTful API",
         }
@@ -63,7 +64,8 @@ api.add_resource(LogIn, '/login')
 
 class UserSession(Resource):
 
-    def get(self):
+    @staticmethod
+    def get():
         user = Customer.query.filter(Customer.id == session.get('customer_id')).first()
         if user:
             return make_response(
@@ -84,7 +86,8 @@ api.add_resource(UserSession, '/active-session')
 
 class Customers(Resource):
 
-    def get(self):
+    @staticmethod
+    def get():
         response_dict_list = [n.to_dict() for n in Customer.query.all()]
 
         response = make_response(
@@ -94,7 +97,8 @@ class Customers(Resource):
 
         return response
 
-    def post(self):
+    @staticmethod
+    def post():
         data = request.get_json()
         new_record = Customer(
             firstname=data['firstname'],
@@ -122,7 +126,8 @@ api.add_resource(Customers, '/customers')
 
 class CustomerByID(Resource):
 
-    def get(self, id):
+    @staticmethod
+    def get(id):
         response_dict = Customer.query.filter_by(id=id).first().to_dict()
 
         response = make_response(
@@ -132,7 +137,8 @@ class CustomerByID(Resource):
 
         return response
 
-    def patch(self, id):
+    @staticmethod
+    def patch(id):
         record = Customer.query.filter_by(id=id).first()
         for attr in request.get_json():
             setattr(record, attr, request.get_json()[attr])
@@ -147,7 +153,8 @@ class CustomerByID(Resource):
 
         return response
 
-    def delete(self, id):
+    @staticmethod
+    def delete(id):
         record = Customer.query.filter_by(id=id).first()
 
         db.session.delete(record)
@@ -170,7 +177,8 @@ api.add_resource(CustomerByID, '/customers/<int:id>')
 
 class Items(Resource):
 
-    def get(self):
+    @staticmethod
+    def get():
         response_dict_list = [n.to_dict() for n in Item.query.all()]
 
         response = make_response(
@@ -180,7 +188,8 @@ class Items(Resource):
 
         return response
 
-    def post(self):
+    @staticmethod
+    def post():
         new_record = Item(
             name=request.form['name'],
             description=request.form['description'],
@@ -209,7 +218,8 @@ api.add_resource(Items, '/items')
 
 class ItemByID(Resource):
 
-    def get(self, id):
+    @staticmethod
+    def get(id):
         response_dict = Item.query.filter_by(id=id).first().to_dict()
 
         response = make_response(
@@ -219,7 +229,8 @@ class ItemByID(Resource):
 
         return response
 
-    def patch(self, id):
+    @staticmethod
+    def patch(id):
         record = Item.query.filter_by(id=id).first()
         for attr in request.form:
             setattr(record, attr, request.form[attr])
@@ -236,7 +247,8 @@ class ItemByID(Resource):
 
         return response
 
-    def delete(self, id):
+    @staticmethod
+    def delete(id):
         record = Item.query.filter_by(id=id).first()
 
         db.session.delete(record)
@@ -259,7 +271,8 @@ api.add_resource(ItemByID, '/items/<int:id>')
 
 class FavoriteItems(Resource):
 
-    def get(self):
+    @staticmethod
+    def get():
         items = Favorite.query.all()
 
         response = make_response(
@@ -268,7 +281,8 @@ class FavoriteItems(Resource):
         )
         return response
 
-    def post(self):
+    @staticmethod
+    def post():
         favorites = Favorite(
             customer_id=request.get_json()['customer_id'],
             item_id=request.get_json()['item_id'],
@@ -292,7 +306,8 @@ api.add_resource(FavoriteItems, "/favorites")
 
 class FavoriteItemsID(Resource):
 
-    def delete(self, id):
+    @staticmethod
+    def delete(id):
         item = Favorite.query.filter_by(id=id).first()
 
         db.session.delete(item)
@@ -315,7 +330,8 @@ api.add_resource(FavoriteItemsID, "/favorites/<int:id>")
 
 class Orders(Resource):
 
-    def get(self):
+    @staticmethod
+    def get():
         response_dict_list = [n.to_dict() for n in Order.query.all()]
 
         response = make_response(
@@ -325,7 +341,8 @@ class Orders(Resource):
 
         return response
 
-    def post(self):
+    @staticmethod
+    def post():
         new_record = Order(
             orderdate=request.form['orderdate'],
             price=request.form['price'],
@@ -350,7 +367,8 @@ api.add_resource(Orders, '/orders')
 
 class OrderByID(Resource):
 
-    def get(self, id):
+    @staticmethod
+    def get(id):
         response_dict = Order.query.filter_by(id=id).first().to_dict()
 
         response = make_response(
@@ -360,7 +378,8 @@ class OrderByID(Resource):
 
         return response
 
-    def patch(self, id):
+    @staticmethod
+    def patch(id):
         record = Order.query.filter_by(id=id).first()
         for attr in request.form:
             setattr(record, attr, request.form[attr])
@@ -377,7 +396,8 @@ class OrderByID(Resource):
 
         return response
 
-    def delete(self, id):
+    @staticmethod
+    def delete(id):
         record = Order.query.filter_by(id=id).first()
 
         db.session.delete(record)
@@ -435,7 +455,8 @@ api.add_resource(Payments, '/payments')
 
 class PaymentByID(Resource):
 
-    def get(self, id):
+    @staticmethod
+    def get(id):
         response_dict = Payment.query.filter_by(id=id).first().to_dict()
 
         response = make_response(
@@ -485,7 +506,8 @@ api.add_resource(PaymentByID, '/payments/<int:id>')
 
 class Reviews(Resource):
 
-    def get(self):
+    @staticmethod
+    def get():
         response_dict_list = [n.to_dict() for n in Review.query.all()]
 
         response = make_response(
@@ -495,11 +517,10 @@ class Reviews(Resource):
 
         return response
 
-    def post(self):
+    @staticmethod
+    def post():
         new_record = Review(
-            rating=request.form['rating'],
-            comment=request.form['comment'],
-            date=request.form['date'],
+            comment=request.get_json()['comment'],
         )
 
         db.session.add(new_record)
@@ -520,7 +541,8 @@ api.add_resource(Reviews, '/reviews')
 
 class ReviewByID(Resource):
 
-    def get(self, id):
+    @staticmethod
+    def get(id):
         response_dict = Review.query.filter_by(id=id).first().to_dict()
 
         response = make_response(
@@ -530,7 +552,8 @@ class ReviewByID(Resource):
 
         return response
 
-    def patch(self, id):
+    @staticmethod
+    def patch(id):
         record = Review.query.filter_by(id=id).first()
         for attr in request.form:
             setattr(record, attr, request.form[attr])
@@ -547,7 +570,8 @@ class ReviewByID(Resource):
 
         return response
 
-    def delete(self, id):
+    @staticmethod
+    def delete(id):
         record = Review.query.filter_by(id=id).first()
 
         db.session.delete(record)

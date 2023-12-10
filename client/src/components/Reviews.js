@@ -8,6 +8,9 @@ function Reviews({
   commentsDictionary,
   setCommentsDictionary,
 }) {
+
+  console.log(commentsDictionary,
+    setCommentsDictionary)
   return (
     <div className="reviews-component">
       <h2>Reviews</h2>

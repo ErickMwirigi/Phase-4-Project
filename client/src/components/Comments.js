@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import CommentsList from "./CommentsList";
 
-const commentURL = "http://localhost:3000/comments";
+const commentURL = "http://127.0.0.1:5555/reviews";
 
 function Comments({
   review,
@@ -11,6 +11,7 @@ function Comments({
   setCommentsDictionary,
 }) {
   const [apiComments, setApiComments] = useState([]);
+
 
   function fetchCommentData() {
     fetch(commentURL)
@@ -26,7 +27,7 @@ function Comments({
         <u>Reviews</u>
       </h3>
       <p>
-        <b>{review.user_name}</b>: {review.comment}
+        {/* <b>{review.user_name}</b>: {review.comment} */}
       </p>
       <CommentsList
         apiComments={apiComments}

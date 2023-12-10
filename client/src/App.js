@@ -51,7 +51,7 @@ function App() {
   function fetchActiveUser() {
     fetch("http://127.0.0.1:5555/active-session")
       .then((response) => response.json())
-      .then((data) => console.log(data));
+
   }
 
   function fetchFavs() {
@@ -133,12 +133,17 @@ function App() {
         />
         <Route
           path="/products/:productId"
-          element={<ProductDetailsCard products={products} />}
+          element={
+            <ProductDetailsCard
+              products={products}
+              commentsDictionary={commentsDictionary}
+              setCommentsDictionary={setCommentsDictionary}
+            />}
         />
       </Route>
       <Route path="/login" element={<LogIn onLogIn={setMember} />} />
       <Route path="/signup" element={<SignUp />} />
-      <Route
+      {/* <Route
         path="/products-review"
         element={
           <ProductReviewPage
@@ -148,7 +153,7 @@ function App() {
             setCommentsDictionary={setCommentsDictionary}
           />
         }
-      />
+      /> */}
       <Route
         path="/account"
         element={<AccountProfile userData={isMember} itemCount={cart} />}

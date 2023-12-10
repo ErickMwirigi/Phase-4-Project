@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 
-const commentURL = "http://localhost:3000/comments";
+const commentURL = "http://127.0.0.1:5555/reviews";
 
 function CommentsList(props) {
   const {
@@ -10,6 +10,8 @@ function CommentsList(props) {
     apiComments = [],
     fetchCommentData,
   } = props;
+
+  
 
   const [newComment, setNewComment] = useState("");
   const [productComments, setProductComments] = useState([]);
