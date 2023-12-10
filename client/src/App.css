@@ -123,7 +123,6 @@
 
 .product-cards h4,
 h3 {
-  background-color: white;
   color: maroon;
   padding: 2px;
   border: none;
@@ -218,18 +217,12 @@ h3 {
 
 .productdetails-cards {
   display: flex;
-  flex-wrap: wrap;
-  column-gap: 15px;
-  row-gap: 10px;
+  width: 100%;
+  height: fit-content;
+  align-items: center;
+  border: none;
+  height: 70vh;
   justify-content: center;
-  border: 1px solid lightgray;
-  border-radius: 16px;
-  background-color: white;
-  display: flex;
-  flex-direction: column;
-  padding: 10px;
-  width: 60vw;
-  margin-top: 10px;
 }
 
 .productdetails-image-1 {
@@ -252,15 +245,20 @@ h3 {
   display: flex;
   flex-direction: column;
   row-gap: 10px;
+  background-color: #fb532c;
+  border-radius: 20px;
 }
 
 .productdetails-details h3,
 h4,
 p {
-  background-color: white;
-  color: maroon;
+  color: white;
   padding: 2px;
   border: none;
+}
+
+.productdetails-metadata>h3.product-name {
+  font-size: xx-large;
 }
 
 .productdetails-data {
@@ -272,11 +270,25 @@ p {
   display: flex;
   flex-direction: column;
   width: 400px;
+  row-gap: 20px;
+}
+
+.productdetails-metadata>span,
+.productdetails-metadata>p {
+  color: white;
+  font-size: 12px;
 }
 
 .rating-stars {
   display: flex;
-  color: maroon;
+  color: white;
+  column-gap: 10px;
+  align-items: center;
+}
+
+.rating-stars>div {
+  font-size: 2em;
+  transform: translateY(-16%);
 }
 
 .reviews {
@@ -325,14 +337,14 @@ p {
   column-gap: 10px;
   margin-top: 20px;
   padding-top: 20px;
-  border-top: solid 0.5px maroon;
+  border-top: solid 0.5px white;
   justify-content: space-between;
 }
 
 .comment-input input {
   width: 30vw;
   padding: 8px;
-  border: solid 1px lightgray;
+  border: none;
   outline: none;
   height: 30px;
   border-radius: 5px;
@@ -341,16 +353,17 @@ p {
 }
 
 .comment-btn {
-  background: lightgrey;
+  background: white;
   border-radius: 8px;
   cursor: pointer;
   padding: 7px;
-  color: maroon;
+  color: #fb532c;
   width: 100px;
   display: flex;
   justify-content: center;
   align-items: center;
   transition: all 1s;
-  border: thin solid maroon;
   column-gap: 2px;
+  font-weight: bold;
+  /* border: solid thick #fb532c; */
 }
