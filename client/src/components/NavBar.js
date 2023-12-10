@@ -13,13 +13,10 @@ export default function NavBar({ onSearch, userData }) {
               <img className="logo" alt="logo" src={Logo} />
             </div>
           </NavLink>
-          {userData.name ? (
-            <span className="profile">{userData.name}</span>
-          ) : undefined}
           <ul className="nav-links">
-            {userData.name === "Mwagash" ? (
+            {userData?.firstname ? (
               <NavLink to={"/products"}>
-                <i className="bi bi-box-arrow-left"></i> Log Out
+                <i className="bi bi-box-arrow-left"></i> Log Out ({userData.firstname} {userData.lastname})
               </NavLink>
             ) : (
               <NavLink to={"/login"}>

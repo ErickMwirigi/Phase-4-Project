@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import ls from "local-storage"
 
 const commentURL = "http://127.0.0.1:5555/reviews";
 
@@ -11,6 +12,9 @@ function CommentsList(props) {
     fetchCommentData,
   } = props;
   console.log({ commentsDictionary })
+
+  const user = ls.get("user");
+  console.log({ user })
 
 
 
@@ -31,7 +35,7 @@ function CommentsList(props) {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         comment: newComment,
-        customer_id: 1, // TODO: Get persisted customer id
+        customer_id: user.id, // TODO: Get persisted customer id
         item_id: product.id,
       }),
     })

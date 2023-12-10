@@ -1,7 +1,12 @@
 import React, { useState } from "react";
 
 export default function ProfileSettings({ userData = {} }) {
-  const [formData, setFormData] = useState(userData);
+  const { id, firstname, lastname, email, address, password } = userData
+  const userAPIData = { id, firstname, lastname, email, address, password }
+  console.log({ userAPIData })
+
+  const [formData, setFormData] = useState(userAPIData);
+
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -10,6 +15,7 @@ export default function ProfileSettings({ userData = {} }) {
     // Yet we don't have to pass it because it gets created in the backend
 
     const { created_at: fda, ...fd } = formData;
+    console.log({ formData })
 
     fetch(`http://127.0.0.1:5555/customers/${userData.id}`, {
       method: "PATCH",
@@ -25,7 +31,10 @@ export default function ProfileSettings({ userData = {} }) {
   function handleChange(e) {
     const id = e.target.id;
     const value = e.target.value;
-    setFormData({ ...userData, ...formData, [id]: value });
+
+    const fd = { ...userAPIData, ...formData, [id]: value }
+    console.log(fd)
+    setFormData(fd);
   }
 
   return (

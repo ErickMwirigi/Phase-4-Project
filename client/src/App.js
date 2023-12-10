@@ -3,7 +3,7 @@ import Cover from "./components/Cover";
 import ProductReviewPage from "./components/ProductReviewPage";
 import ProductsPage from "./components/ProductsPage";
 import "./App.css";
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, useNavigate } from "react-router-dom";
 import NavBar from "./components/NavBar";
 import AccountProfile from "./components/AccountProfile";
 import ProfileSettings from "./components/ProfileSettings";
@@ -14,6 +14,7 @@ import LogIn from "./components/LogIn";
 import SignUp from "./components/SignUp";
 import CheckoutPage from "./components/CheckoutPage";
 import ProductDetailsCard from "./components/ProductDetailsCard";
+import ls from "local-storage"
 
 function App() {
   const productURL = "http://127.0.0.1:5555/items";
@@ -27,6 +28,7 @@ function App() {
   const [productsDictionary, setProductsDictionary] = useState({});
   const [commentsDictionary, setCommentsDictionary] = useState({});
   const [cart, setCart] = useState([]);
+  const [user, setUser] = useState({});
 
   function fetchProductData() {
     fetch(productURL)
@@ -120,11 +122,29 @@ function App() {
       .then((data) => data.map((order) => setOrders(order)));
   }
 
+  const onLogIn = (user) => {
+    setMember(user);
+    ls.set("user", user)
+  }
+
+  const navigate = useNavigate();
+  const checkUser = () => {
+    const user = ls.get("user");
+    setUser(user)
+    if (user?.id) {
+      if (document.location.name !== "/products") navigate("/products", { replace: true });
+    } else {
+      if (document.location.name !== "/login") navigate("/login", { replace: true });
+    }
+  }
+
+  useEffect(() => { checkUser() }, [])
+
   return (
     <Routes>
       <Route
         path="/"
-        element={<NavBar onSearch={products} userData={isMember} />}
+        element={<NavBar onSearch={products} userData={user} />}
       >
         <Route path="buy-items" element={<Cover />} />
         <Route
@@ -157,7 +177,7 @@ function App() {
             />}
         />
       </Route>
-      <Route path="/login" element={<LogIn onLogIn={setMember} />} />
+      <Route path="/login" element={<LogIn onLogIn={onLogIn} />} />
       <Route path="/signup" element={<SignUp />} />
       {/* <Route
         path="/products-review"
@@ -191,7 +211,7 @@ function App() {
         />
         <Route
           path="profile-settings"
-          element={<ProfileSettings userData={isMember} />}
+          element={<ProfileSettings userData={user} />}
         />
       </Route>
       <Route path="/checkout" element={<CheckoutPage orders={orders} />} />
