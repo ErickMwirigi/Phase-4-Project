@@ -128,10 +128,12 @@ function App() {
   }
 
   const navigate = useNavigate();
+
   const checkUser = () => {
-    const user = ls.get("user");
-    setUser(user)
-    if (user?.id) {
+    const localUser = ls.get("user") || {};
+
+    if (localUser?.id) {
+      setUser(localUser)
       if (document.location.name !== "/products") navigate("/products", { replace: true });
     } else {
       if (document.location.name !== "/login") navigate("/login", { replace: true });
