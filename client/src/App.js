@@ -66,7 +66,7 @@ function App() {
 
   function setToFavoriteProducts(item) {
     if (favoriteProducts.includes(item.id)) {
-      alert(`${item.name} has already been added to favorited`);
+      alert(`${item.name} has already been added to favorites`);
     } else {
       fetch("http://127.0.0.1:5555/favorites", {
         method: "POST",
