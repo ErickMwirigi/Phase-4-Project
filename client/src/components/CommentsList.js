@@ -88,7 +88,9 @@ function CommentsList(props) {
         {productComments.map((comment) => (
           <div className="comment-field" key={comment.id}>
             <div>
-              <p><b>{comment.user}</b>:{comment.comment}</p>
+              <p>
+                <b>{comment.user}</b>:{comment.comment}
+              </p>
             </div>
             <div className="comment-field-btns">
               <button
@@ -101,7 +103,10 @@ function CommentsList(props) {
               <button
                 className="comment-btn"
                 onClick={(_) =>
-                  handleEdit(comment.id, "First purchase and was not dissapointed.")
+                  handleEdit(
+                    comment.id,
+                    "First purchase and was not dissapointed.",
+                  )
                 }
               >
                 <span className="material-symbols-outlined">edit</span>
