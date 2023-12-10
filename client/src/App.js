@@ -76,7 +76,7 @@ function App() {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          customer_id: isMember.id,
+          customer_id: user.id,
           item_id: item.id,
         }),
       })
@@ -140,7 +140,7 @@ function App() {
     }
   }
 
-  useEffect(() => { checkUser() }, [])
+  useEffect(() => { checkUser() }, [navigate])
 
   return (
     <Routes>
@@ -181,17 +181,6 @@ function App() {
       </Route>
       <Route path="/login" element={<LogIn onLogIn={onLogIn} />} />
       <Route path="/signup" element={<SignUp />} />
-      {/* <Route
-        path="/products-review"
-        element={
-          <ProductReviewPage
-            products={products}
-            productsDictionary={productsDictionary}
-            commentsDictionary={commentsDictionary}
-            setCommentsDictionary={setCommentsDictionary}
-          />
-        }
-      /> */}
       <Route
         path="/account"
         element={<AccountProfile userData={isMember} itemCount={cart} />}
