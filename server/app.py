@@ -128,11 +128,9 @@ class CustomerByID(Resource):
 
     def patch(self, id):
 
-        record = Customer.query.filter_by(id=id).first()
-        for attr in request.form:
-            setattr(record, attr, request.form[attr])
-
-            db.session.add(record)
+        record = Customer.query.filter_by(id=id).first() 
+        for attr in request.get_json():
+            setattr(record, attr, request.get_json()[attr])
             db.session.commit()
 
         response_dict = record.to_dict()

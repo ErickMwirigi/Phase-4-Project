@@ -1,17 +1,14 @@
 from flask_sqlalchemy import SQLAlchemy
-from sqlalchemy import create_engine, func
-from sqlalchemy import ForeignKey, Table, Column, Integer, String, DateTime, MetaData
+from sqlalchemy import ForeignKey, Column, Integer, DateTime, func
 from sqlalchemy.orm import relationship, backref
-from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.ext.associationproxy import association_proxy
-from sqlalchemy.ext.associationproxy import AssociationProxy
 from sqlalchemy_serializer import SerializerMixin 
 
 #Remember to Serialize when all tables are added
 
 db = SQLAlchemy()
 
-class  Customer(db.Model, SerializerMixin):
+class Customer(db.Model, SerializerMixin):
     __tablename__ = 'customers'
 
     id = db.Column(db.Integer, primary_key=True)
@@ -133,7 +130,6 @@ class Review(db.Model, SerializerMixin):
     id = db.Column(db.Integer, primary_key=True)
     rating = db.Column(db.Integer)
     comment = db.Column(db.String)
-    date = db.Column(db.Integer)
     created_at = db.Column(DateTime(), server_default=func.now())
     updated_at = db.Column(DateTime(), onupdate=func.now())
 
