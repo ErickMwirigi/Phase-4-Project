@@ -52,7 +52,6 @@ function App() {
         setProducts(data);
         setProductsDictionary(dictionary);
         setFeaturedProducts(featured)
-        setOrders(data)
 
       });
   }
@@ -109,6 +108,22 @@ function removeFromFavorites(item) {
     setFavoriteProducts(remProducts)}
 )};
 
+function addToCart(product){
+  fetch("http://127.0.0.1:5555/orders",{
+        method:"POST",
+        headers:{
+          "Content-Type":"application/json"
+        },
+        body:JSON.stringify({
+          "item_id": product.id,
+          "price": product.price,
+          "created_at": product.created_at
+        })
+    })
+  .then(response => response.json())
+  .then(data => setOrders(data))
+}
+
 function Checkout(){
   fetch(productURL)
   .then(res => res.json())
@@ -126,7 +141,7 @@ function Checkout(){
           <Route path="buy-items" element={ <Cover />}/>
           <Route index element={<ProductsPage products={products} setToFavorite={setToFavoriteProducts}/> }/>
           <Route path="products" element={<ProductsPage products={products} setToFavorite={setToFavoriteProducts} fProducts={featuredProducts}/> }/>
-          <Route path="/products/:productId" element={<ProductDetailsCard products={products}/>}/>
+          <Route path="/products/:productId" element={<ProductDetailsCard products={products} addCart={addToCart}/>}/>
         </Route>
         <Route path="/login" element={ <LogIn onLogIn={setMember}/>}/>
         <Route path="/signup" element={ <SignUp />}/>
