@@ -34,7 +34,6 @@ function ProductDetailsCard({
     fetch(favoriteProductsURL)
       .then((response) => response.json())
       .then((data) => {
-        console.log(data)
         if (Object.keys(data).length && product?.id) {
           const productReviews = data.reduce((acc, curr) => {
             if (acc[product.id]) {
@@ -44,7 +43,6 @@ function ProductDetailsCard({
             }
             return acc;
           }, {});
-          console.log({ productReviews });
           setCommentsDictionary({
             ...commentsDictionary,
             ...productReviews,
