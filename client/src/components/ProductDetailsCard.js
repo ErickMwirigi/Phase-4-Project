@@ -22,6 +22,7 @@ function ProductDetailsCard({
   usercomment = {},
   commentsDictionary,
   setCommentsDictionary,
+  addCart
 }) {
 
 const { productId } = useParams()
@@ -60,6 +61,9 @@ console.log(product)
               {ratingStars(Number(product.rating)).map((star, idx) => (
                 <div key={idx}>{star}</div>
               ))}
+            </div>
+            <div>
+              <button onClick={addCart}>Add to Cart</button>
             </div>
           </div>
         </div>

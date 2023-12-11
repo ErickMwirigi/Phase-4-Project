@@ -47,7 +47,7 @@
 
 .main-page{
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     padding: 8vh 0;
 }
 

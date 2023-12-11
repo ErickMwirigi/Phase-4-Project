@@ -250,6 +250,7 @@ label{
     margin-top: 2%;
     background-color: #b67398;
     display: flex;
+    
     justify-content: center;
 }
 
@@ -302,4 +303,14 @@ label{
     border-radius: 4px;
     font-size: 14px;
     font-weight: bold;
+}
+
+.featured-images{
+    width: auto;
+    width: 200px;
+}
+
+.divider{
+    display: flex;
+    flex-direction: row;
 }
