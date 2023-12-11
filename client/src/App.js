@@ -18,10 +18,11 @@ import ProductDetailsCard from "./components/ProductDetailsCard";
 function App() {
 
   const productURL = "http://127.0.0.1:5555/items";
-  // const ordersURL = "http://127.0.0.1:5555/orders"
+  const ordersURL = "http://127.0.0.1:5555/orders"
 
   const [products, setProducts] = useState([]);
   const [favoriteProducts, setFavoriteProducts] = useState([]);
+  const [featuredProducts, setFeaturedProducts] = useState([])
   const [orders, setOrders] = useState([])
   const [ isMember , setMember ] = useState('')
   const [productsDictionary, setProductsDictionary] = useState({});
@@ -50,7 +51,7 @@ function App() {
 
         setProducts(data);
         setProductsDictionary(dictionary);
-        // setFeaturedProducts(featured)
+        setFeaturedProducts(featured)
 
       });
   }
@@ -115,12 +116,15 @@ function Checkout(){
   )))
 }
 
+
+
+
   return (
       <Routes>
         <Route path="/" element={<NavBar onSearch={products} userData={isMember}/>}>
           <Route path="buy-items" element={ <Cover />}/>
           <Route index element={<ProductsPage products={products} setToFavorite={setToFavoriteProducts}/> }/>
-          <Route path="products" element={<ProductsPage products={products} setToFavorite={setToFavoriteProducts} /> }/>
+          <Route path="products" element={<ProductsPage products={products} setToFavorite={setToFavoriteProducts} fProducts={featuredProducts}/> }/>
           <Route path="/products/:productId" element={<ProductDetailsCard products={products}/>}/>
         </Route>
         <Route path="/login" element={ <LogIn onLogIn={setMember}/>}/>
