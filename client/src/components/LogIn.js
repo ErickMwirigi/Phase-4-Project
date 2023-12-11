@@ -14,12 +14,12 @@ export default function LogIn({ onLogIn }) {
     const navigate = useNavigate()
     function handleSubmit(e) {
         e.preventDefault()
-        if (!formData) return
-        setFormData({
-            username: "",
-            password: "",
+        // if (!formData) return
+        // setFormData({
+        //     username: "",
+        //     password: "",
 
-        })
+        // })
         fetch("http://127.0.0.1:5555/login", {
             method: "POST",
             headers: {
@@ -29,6 +29,7 @@ export default function LogIn({ onLogIn }) {
         })
             .then((r) => r.json())
             .then((resp) => {
+                console.log(resp)
                 onLogIn(resp)
                 navigate('/products', { replace: true })
             })

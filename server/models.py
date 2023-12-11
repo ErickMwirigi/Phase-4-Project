@@ -1,10 +1,7 @@
 from flask_sqlalchemy import SQLAlchemy
-from sqlalchemy import create_engine, func
-from sqlalchemy import ForeignKey, Table, Column, Integer, String, DateTime, MetaData
+from sqlalchemy import ForeignKey, Column, Integer, DateTime, func
 from sqlalchemy.orm import relationship, backref
-from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.ext.associationproxy import association_proxy
-from sqlalchemy.ext.associationproxy import AssociationProxy
 from sqlalchemy_serializer import SerializerMixin 
 
 #Remember to Serialize when all tables are added
