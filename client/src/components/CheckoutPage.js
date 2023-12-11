@@ -4,7 +4,7 @@ import CheckoutDetails from "./CheckoutDetails";
 function CheckoutPage({orders}){
 
     return(
-        <div>
+        <div className="checkOut">
             {orders.map(order => (
                 <CheckoutDetails
                     key={order.id}

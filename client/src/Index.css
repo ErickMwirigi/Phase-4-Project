@@ -246,13 +246,7 @@ label{
     flex-direction: column;
     background-color: #C7846F;
 }
-.featured{
-    margin-top: 2%;
-    background-color: #b67398;
-    display: flex;
-    
-    justify-content: center;
-}
+
 
 .dynamic-menu{
     background-color: #C7846F;
@@ -305,9 +299,20 @@ label{
     font-weight: bold;
 }
 
+.featured{
+    display: flex;   
+    flex-direction: column;
+    justify-content: center;
+}
+
+.featuredCards{
+    columns: 3 250px;
+    
+}
+
 .featured-images{
     width: auto;
-    width: 200px;
+    width: 100px;
 }
 
 .divider{

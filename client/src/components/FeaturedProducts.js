@@ -3,9 +3,9 @@ import FeaturedCards from "./FeaturedCard";
 
 function FeaturedProducts({featured}){
     return(
-        <div>
-            <h2>Featured Products</h2>
-            <div className="Featured">
+        <div className="featured"> 
+            <h2>Featured Products:</h2>
+            <div className="featuredCards">
                 {featured.map(product => (
                     <FeaturedCards
                         key={product.id}
