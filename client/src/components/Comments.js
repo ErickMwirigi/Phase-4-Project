@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import UserComment from "./userComment";
+import CommentsList from "./CommentsList";
 
 const commentURL = "http://localhost:3000/comments";
 
@@ -20,7 +20,7 @@ function Comments({ review, usercomment, product, commentsDictionary, setComment
                 <u>Reviews</u>
             </h3>
             <p><b>{review.user_name}</b>: {review.comment}</p>
-            <UserComment
+            <CommentsList
                 apiComments={apiComments}
                 usercomment={usercomment}
                 product={product}
