@@ -18,6 +18,13 @@ db.init_app(app)
 api = Api(app)
 
 
+def parse_obj(obj):
+    res = obj.__dict__
+    del res["_sa_instance_state"]
+
+    return res
+
+
 class Index(Resource):
 
     @staticmethod
@@ -48,11 +55,13 @@ class LogIn(Resource):
 
     @staticmethod
     def post():
-        user = Customer.query.filter(Customer.lastname == request.get_json()['username']).first()
+        user = Customer.query.filter_by(lastname=request.get_json()['username']).first()
+
+        res = parse_obj(user)
 
         session['customer_id'] = user.id
         response = make_response(
-            jsonify(user.to_dict()),
+            jsonify(res),
             201,
         )
 
@@ -179,7 +188,7 @@ class Items(Resource):
 
     @staticmethod
     def get():
-        response_dict_list = [n.to_dict() for n in Item.query.all()]
+        response_dict_list = [parse_obj(n) for n in Item.query.all()]
 
         response = make_response(
             jsonify(response_dict_list),
@@ -508,10 +517,15 @@ class Reviews(Resource):
 
     @staticmethod
     def get():
+        reviews = Review.query.all()
+
         response_dict_list = [n.to_dict() for n in Review.query.all()]
+        # response_dict_list = [parse_obj(n) for n in reviews]
+        # print([dict(i) for i in Review.query.all()])
+        # print(response_dict_list)
 
         response = make_response(
-            jsonify(response_dict_list),
+            response_dict_list,
             200,
         )
 

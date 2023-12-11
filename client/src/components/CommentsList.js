@@ -14,9 +14,6 @@ function CommentsList(props) {
   console.log({ commentsDictionary })
 
   const user = ls.get("user");
-  console.log({ user })
-
-
 
   const [newComment, setNewComment] = useState("");
   const [productComments, setProductComments] = useState([]);

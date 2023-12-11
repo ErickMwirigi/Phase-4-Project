@@ -129,18 +129,24 @@ function App() {
 
   const navigate = useNavigate();
 
-  const checkUser = () => {
+  useEffect(() => {
     const localUser = ls.get("user") || {};
+    setUser(localUser)
+  }, []);
 
-    if (localUser?.id) {
-      setUser(localUser)
+
+  const checkUser = () => {
+    if (user?.id) {
       if (document.location.name == "/login") navigate("/products", { replace: true });
     } else {
       if (document.location.name !== "/login") navigate("/login", { replace: true });
     }
   }
 
-  useEffect(() => { checkUser() }, [navigate])
+  useEffect(() => {
+    checkUser();
+    console.log("check")
+  }, [user?.id])
 
   return (
     <Routes>
