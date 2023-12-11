@@ -134,7 +134,7 @@ function App() {
 
     if (localUser?.id) {
       setUser(localUser)
-      if (document.location.name !== "/products") navigate("/products", { replace: true });
+      if (document.location.name == "/login") navigate("/products", { replace: true });
     } else {
       if (document.location.name !== "/login") navigate("/login", { replace: true });
     }

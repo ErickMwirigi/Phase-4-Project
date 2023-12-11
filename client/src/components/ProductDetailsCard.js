@@ -37,7 +37,6 @@ function ProductDetailsCard({
         console.log(data)
         if (Object.keys(data).length && product?.id) {
           const productReviews = data.reduce((acc, curr) => {
-            console.log("curr", curr)
             if (acc[product.id]) {
               acc[product.id] = [...acc[product.id], curr]
             } else {
@@ -58,8 +57,6 @@ function ProductDetailsCard({
   useEffect(() => {
     fetchProductReviews();
   }, [product?.id]);
-
-  console.log(usercomment)
 
   const comments = (
     <Comments
