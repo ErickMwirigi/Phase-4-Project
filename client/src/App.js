@@ -136,7 +136,7 @@ function App() {
 
 
   const checkUser = () => {
-    if (user?.id) {
+    if (user.id) {
       if (document.location.name == "/login") navigate("/products", { replace: true });
     } else {
       if (document.location.name !== "/login") navigate("/login", { replace: true });
@@ -146,7 +146,7 @@ function App() {
   useEffect(() => {
     checkUser();
     console.log("check")
-  }, [user?.id])
+  }, [user.id])
 
   return (
     <Routes>
