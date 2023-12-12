@@ -114,10 +114,26 @@ function App() {
       });
   }
 
+  function addToCart(product){
+    fetch(ordersURL,{
+          method:"POST",
+          headers:{
+            "Content-Type":"application/json"
+          },
+          body:JSON.stringify({
+            "item_id": product.id,
+            "price": product.price,
+            "created_at": product.created_at
+          })
+      })
+    .then(response => response.json())
+    .then(data => setOrders(data))
+  }
+
   function Checkout() {
-    fetch(productURL)
+    fetch(ordersURL)
       .then((res) => res.json())
-      .then((data) => data.map((order) => setOrders(order)));
+      .then((data) => console.log(data));
   }
 
   const onLogIn = (user) => {
@@ -178,6 +194,7 @@ function App() {
             commentsDictionary={commentsDictionary}
             setCommentsDictionary={setCommentsDictionary}
             fetchProductReviews={fetchProductReviews}
+            addCart={addToCart}
           />}
       />
       </Route>
@@ -207,6 +224,7 @@ function App() {
           element={<ProfileSettings userData={user} />}
         />
       </Route>
+      
       <Route path="/checkout" element={<CheckoutPage orders={orders} />} />
     </Routes>
   );

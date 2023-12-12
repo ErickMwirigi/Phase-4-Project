@@ -73,7 +73,7 @@ function ProductDetailsCard({
         <div className="productdetails-data">
           <img
             className="productdetails-image-1"
-            src={product?.imageUrl}
+            src={product.imageUrl}
             alt="productdetails-image"
           />
           <div className="productdetails-metadata">
