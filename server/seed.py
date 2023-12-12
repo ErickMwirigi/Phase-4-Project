@@ -36,4 +36,4 @@ with app.app_context():
         db.session.add_all(items)
         db.session.commit()
 
-print(items)
+# print(items)
