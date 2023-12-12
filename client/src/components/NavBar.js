@@ -16,9 +16,9 @@ export default function NavBar({ onSearch, userData }) {
             </div>
           </NavLink>
           <ul className="nav-links">
-            {userData?.firstname ? (
+            {userData.firstname ? (
               <NavLink to={"/products"} onClick={() => {
-                if (!!userData?.firstname) {
+                if (!userData.firstname) {
                   try {
                     ls.clear();
                     document.location.assign("/login")

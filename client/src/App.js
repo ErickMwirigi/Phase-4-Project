@@ -1,6 +1,4 @@
 import React, { useState, useEffect } from "react";
-import Cover from "./components/Cover";
-import ProductReviewPage from "./components/ProductReviewPage";
 import ProductsPage from "./components/ProductsPage";
 import "./App.css";
 import { Route, Routes, useNavigate } from "react-router-dom";
@@ -154,36 +152,34 @@ function App() {
         path="/"
         element={<NavBar onSearch={products} userData={user} />}
       >
-        <Route path="buy-items" element={<Cover />} />
-        <Route
-          index
-          element={
-            <ProductsPage
-              products={products}
-              setToFavorite={setToFavoriteProducts}
-            />
-          }
-        />
-        <Route
-          path="products"
-          element={
-            <ProductsPage
-              products={products}
-              setToFavorite={setToFavoriteProducts}
-              fProducts={featuredProducts}
-            />
-          }
-        />
-        <Route
-          path="/products/:productId"
-          element={
-            <ProductDetailsCard
-              products={products}
-              commentsDictionary={commentsDictionary}
-              setCommentsDictionary={setCommentsDictionary}
-              fetchProductReviews={fetchProductReviews}
-            />}
-        />
+      <Route
+        index
+        element={
+          <ProductsPage
+            products={products}
+            setToFavorite={setToFavoriteProducts}
+          />
+        }
+      />
+      <Route
+        path="products"
+        element={
+          <ProductsPage
+            products={products}
+            setToFavorite={setToFavoriteProducts}
+          />
+        }
+      />
+      <Route
+        path="/products/:productId"
+        element={
+          <ProductDetailsCard
+            products={products}
+            commentsDictionary={commentsDictionary}
+            setCommentsDictionary={setCommentsDictionary}
+            fetchProductReviews={fetchProductReviews}
+          />}
+      />
       </Route>
       <Route path="/login" element={<LogIn onLogIn={onLogIn} />} />
       <Route path="/signup" element={<SignUp />} />
@@ -198,7 +194,7 @@ function App() {
         <Route path="inbox" element={<Inbox />} />
         <Route path="orders" element={<Orders />} />
         <Route
-          path="saved-items"
+          path="favorites"
           element={
             <FavoriteProducts
               favoriteProducts={favoriteProducts}

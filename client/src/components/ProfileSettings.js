@@ -69,7 +69,7 @@ export default function ProfileSettings({ userData = {} }) {
             <input
               type="email"
               id="email"
-              // placeholder={userData.email}
+              placeholder={userData.email}
               value={formData.email}
               autoComplete="off"
               onChange={handleChange}
@@ -80,8 +80,9 @@ export default function ProfileSettings({ userData = {} }) {
             <input
               type="text"
               id="address"
-              // placeholder={userData.address}
+              placeholder={userData.address}
               value={formData.address}
+              autoComplete="off"
               onChange={handleChange}
             />
           </div>
