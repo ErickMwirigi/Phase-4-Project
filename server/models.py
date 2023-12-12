@@ -69,7 +69,7 @@ class Order(db.Model, SerializerMixin):
     __tablename__ = 'orders'
 
     id = db.Column(db.Integer, primary_key=True)
-    # ordername = db.Column(db.string)
+    order_id = db.Column(db.String)
     orderdate = db.Column(DateTime(), server_default=func.now())
     price = db.Column(db.Integer)
     status = db.Column(db.String)

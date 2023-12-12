@@ -1,7 +1,7 @@
 from flask import Flask, jsonify, request, make_response, session
 from flask_migrate import Migrate
 from flask_restful import Api, Resource
-
+from localstorage import localstorage
 from models import db, Customer, Item, Order, Payment, Review, Favorite
 from flask_cors import CORS
 
@@ -59,7 +59,6 @@ class LogIn(Resource):
 
         res = parse_obj(user)
 
-        session['customer_id'] = user.id
         response = make_response(
             jsonify(res),
             201,
@@ -75,7 +74,7 @@ class UserSession(Resource):
 
     @staticmethod
     def get():
-        user = Customer.query.filter(Customer.id == session.get('customer_id')).first()
+        user = Customer.query.filter(Customer.id == localstorage.getItem(id)).first()
         if user:
             return make_response(
                 jsonify(user.to_dict()),
@@ -83,7 +82,7 @@ class UserSession(Resource):
             )
         else:
             return make_response(
-                {'message': session.get('customer_id')},
+                {'message': "Please enter a valid username/password"},
                 200
             )
 
@@ -352,10 +351,14 @@ class Orders(Resource):
 
     @staticmethod
     def post():
+
+        order = request.get_json()
+
         new_record = Order(
-            orderdate=request.form['orderdate'],
-            price=request.form['price'],
-            status=request.form['status'],
+            customer_id=order['customer_id'],
+            item_id=order['item_id'],
+            price=order['price'],
+            status=order['status'],
         )
 
         db.session.add(new_record)

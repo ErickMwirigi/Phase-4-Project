@@ -115,19 +115,10 @@ function App() {
   }
 
   function addToCart(product){
-    fetch(ordersURL,{
-          method:"POST",
-          headers:{
-            "Content-Type":"application/json"
-          },
-          body:JSON.stringify({
-            "item_id": product.id,
-            "price": product.price,
-            "created_at": product.created_at
-          })
-      })
-    .then(response => response.json())
-    .then(data => setOrders(data))
+    useEffect(()=>{
+      const newCart = [...cart,product]
+      setCart(newCart)
+    },[])
   }
 
   function Checkout() {
@@ -209,7 +200,7 @@ function App() {
           element={<AccountProfile userData={isMember} itemCount={cart} />}
         />
         <Route path="inbox" element={<Inbox />} />
-        <Route path="orders" element={<Orders />} />
+        <Route path="orders" element={<Orders cart={cart}/>} />
         <Route
           path="favorites"
           element={
