@@ -355,6 +355,7 @@ class Orders(Resource):
         order = request.get_json()
 
         new_record = Order(
+            order_id=order['order_id'],
             customer_id=order['customer_id'],
             item_id=order['item_id'],
             price=order['price'],
