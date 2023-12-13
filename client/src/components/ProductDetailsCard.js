@@ -72,12 +72,14 @@ function ProductDetailsCard({
     <div className="productdetails-cards">
       <div className="productdetails-details">
         <div className="productdetails-data">
-          <img
-            className="productdetails-image-1"
-            src={product.imageUrl}
-            alt="productdetails-image"
-          />
-          <button onClick={addCart(product)}> Add to Cart </button>
+          <div className="prod-layout">
+            <img
+              className="productdetails-image-1"
+              src={product.imageUrl}
+              alt="productdetails-image"
+            />
+            <button onClick={addCart(product)}> Add to Cart </button>
+          </div>
           <div className="productdetails-metadata">
             <h3 className="product-name">
               {product.name}

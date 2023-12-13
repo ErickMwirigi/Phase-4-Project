@@ -279,6 +279,12 @@ p {
   font-size: 12px;
 }
 
+.prod-layout{
+  display: flex;
+  flex-direction: column;
+  padding: 15px;
+}
+
 .rating-stars {
   display: flex;
   color: white;
