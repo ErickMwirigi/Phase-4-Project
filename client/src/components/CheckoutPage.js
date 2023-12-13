@@ -1,12 +1,16 @@
 import React from "react";
+import Orders from "./Orders";
 
-function CheckoutPage({ order }){
+function CheckoutPage({ order , cart, user , setOrder }){
 
     const ordersURL = "http://127.0.0.1:5555/orders";
 
+    console.log(cart)
+    // console.log(order)
+
     function Checkout() {
        order.map((item)=> {
-        console.log(item)
+        // console.log(item)
             fetch(ordersURL,{
                 method:"POST",
                 headers:{
@@ -23,23 +27,19 @@ function CheckoutPage({ order }){
         <>
         <div className="checkout">
             <h2>Checkout</h2>
-            <div className="itemsOrder">
+            <div className="order">
                 <div>
-                    <h4>Items</h4>
+                    {<Orders cart={cart} user={user} setOrder={setOrder}/>}
                 </div>
                 <div className="orderdetails">
-                    <h4>Order ID: </h4>
-                    <h4>Date Created: </h4>
-                        <div>
-                            <h5>Quantity</h5>
-                            <h5>Price: </h5>
-                        </div>
-                </div>
-            </div>
-            <div>
-                <h4>Order Summary</h4>
-                <div>
-                    <h5>Total Price</h5>
+                    <h4>Order Summary</h4>
+                    <div className="order-summary">
+                        <span>Number of Items: <p>{cart.length}</p></span>
+                        <span>Total Price: <p>{cart.reduce((total,value)=>{
+                            return total + value.price
+                        },0)}</p>
+                        </span>
+                    </div>
                 </div>
                 <div>
                     <button onClick={()=>Checkout()}>Checkout</button>

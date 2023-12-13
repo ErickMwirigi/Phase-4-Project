@@ -122,7 +122,7 @@ function App() {
 
   function handleOrder(order){
     useEffect(()=>{
-      console.log(orders)
+      // console.log(orders)
       const newCart = [...orders,order]
       setOrders(newCart)
     },[])
@@ -211,7 +211,7 @@ function App() {
             />
           }
         />
-        <Route path="checkout" element={<CheckoutPage order={orders} />} />
+        <Route path="checkout" element={<CheckoutPage order={orders} cart={cart} user={user} setOrder={handleOrder}/>} />
         <Route
           path="profile-settings"
           element={<ProfileSettings userData={user} />}

@@ -20,21 +20,20 @@ const order = cart.map((item) =>  {
   return (
     <div className="item-list"  key={item.id}>
     <img src={item.imageUrl} alt="item"/>
-      <p>
+      <span>
         {item.name}
-        <p>{item.description}</p>
-      </p>
+      </span>
+      <span>
+      <b>Kshs. </b>{item.price}
+    </span>
     </div>
 )
 })
   return(
-  <>
-    <div>
-      {order_id}
+  <div className="order-details">
       <div className="orders-list">
         {order}
       </div>
     </div>
-  </>
   )
 }

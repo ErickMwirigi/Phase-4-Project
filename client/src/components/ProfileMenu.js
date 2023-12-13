@@ -14,10 +14,8 @@ export default function ProfileMenu() {
         <Link>Need Help ?</Link>
         <Link>Give Feedback</Link>
       </div>
-      <div className="ac-content">
-        <div className="dynamic-menu">
-          <Outlet />
-        </div>
+      <div className="dynamic-menu">
+        <Outlet />
       </div>
     </div>
   );
