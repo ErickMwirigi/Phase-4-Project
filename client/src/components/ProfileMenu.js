@@ -9,6 +9,7 @@ export default function ProfileMenu() {
         <Link to={"/account/inbox"}>Inbox</Link>
         <Link to={"/account/profile-settings"}>Profile Settings</Link>
         <Link to={"/account/orders"}>Orders</Link>
+        <Link to={"/account/checkout"}>Checkout</Link>
         <Link to={"/account/favorites"}>Saved Items</Link>
         <Link>Need Help ?</Link>
         <Link>Give Feedback</Link>

@@ -16,7 +16,6 @@ import ls from "local-storage"
 
 function App() {
   const productURL = "http://127.0.0.1:5555/items";
-  const ordersURL = "http://127.0.0.1:5555/orders";
 
   const [products, setProducts] = useState([]);
   const [favoriteProducts, setFavoriteProducts] = useState([]);
@@ -121,10 +120,12 @@ function App() {
     },[])
   }
 
-  function Checkout() {
-    fetch(ordersURL)
-      .then((res) => res.json())
-      .then((data) => console.log(data));
+  function handleOrder(order){
+    useEffect(()=>{
+      console.log(orders)
+      const newCart = [...orders,order]
+      setOrders(newCart)
+    },[])
   }
 
   const onLogIn = (user) => {
@@ -200,7 +201,7 @@ function App() {
           element={<AccountProfile userData={isMember} itemCount={cart} />}
         />
         <Route path="inbox" element={<Inbox />} />
-        <Route path="orders" element={<Orders cart={cart}/>} />
+        <Route path="orders" element={<Orders cart={cart} user={user} setOrder={handleOrder}/>} />
         <Route
           path="favorites"
           element={
@@ -210,13 +211,12 @@ function App() {
             />
           }
         />
+        <Route path="checkout" element={<CheckoutPage order={orders} />} />
         <Route
           path="profile-settings"
           element={<ProfileSettings userData={user} />}
         />
       </Route>
-      
-      <Route path="/checkout" element={<CheckoutPage orders={orders} />} />
     </Routes>
   );
 }

@@ -1,30 +1,39 @@
 import React from "react";
 
-export default function Orders({ cart }) {
+export default function Orders({ cart, user , setOrder}) {
 
-  console.log(cart)
-//   fetch(ordersURL,{
-//     method:"POST",
-//     headers:{
-//       "Content-Type":"application/json"
-//     },
-//     body:JSON.stringify({
-//       "item_id": product.id,
-//       "price": product.price,
-//       "status":"order-set",
-//       "customer_id": user.id
-//     })
-// })
-// .then(response => response.json())
-// .then(data => console.log(data))
+const ordername = 'ORDER_NO'
+let num = Math.floor(Math.random() * (1001)) + Math.floor(Math.random() * 101)
+const order_id = ordername.concat(num)
 
+// console.log(user)
+const order = cart.map((item) =>  {
+  const newOrder = {
+    "order_id":order_id,
+    "item_id":item.id,
+    "customer_id": user.id,
+    "price":item.price,
+    "status":"confirmed"
+  }
+  setOrder(newOrder)
+
+  return (
+    <div className="item-list"  key={item.id}>
+    <img src={item.imageUrl} alt="item"/>
+      <p>
+        {item.name}
+        <p>{item.description}</p>
+      </p>
+    </div>
+)
+})
   return(
   <>
-    <div>Orders</div>
-    <div className="orders-list">
-    {cart.map((item)=>{
-      return <li key={item.id}>{item.name}</li>
-    })}
+    <div>
+      {order_id}
+      <div className="orders-list">
+        {order}
+      </div>
     </div>
   </>
   )
