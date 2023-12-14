@@ -64,7 +64,7 @@
   align-items: center;
   display: flex;
   flex-direction: column;
-  background-color: #fb532c;
+  background: #1a6f6c;
 }
 
 .products {
@@ -123,7 +123,7 @@
 
 .product-cards h4,
 h3 {
-  color: maroon;
+  color: #004b49;
   padding: 2px;
   border: none;
 }
@@ -245,7 +245,7 @@ h3 {
   display: flex;
   flex-direction: column;
   row-gap: 10px;
-  background-color: #fb532c;
+  background: #1a6f6c;
   border-radius: 20px;
 }
 
@@ -363,7 +363,7 @@ p {
   border-radius: 8px;
   cursor: pointer;
   padding: 7px;
-  color: #fb532c;
+  color: #247254e8;
   width: 100px;
   display: flex;
   justify-content: center;

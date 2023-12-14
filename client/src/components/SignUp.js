@@ -1,5 +1,6 @@
 import React from "react";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import Logo from "../assets/logo.png";
 
 export default function SignUp({ formdata }) {
@@ -10,6 +11,8 @@ export default function SignUp({ formdata }) {
     address: "",
     password: "",
   });
+
+  const navigate = useNavigate();
 
   function handleChange(e) {
     const id = e.target.id;
@@ -22,7 +25,6 @@ export default function SignUp({ formdata }) {
     e.preventDefault();
     // if(!formData) return
 
-    alert(`Welcome ${formData.firstname}`);
     // console.log(formData)
     fetch("http://127.0.0.1:5555/customers", {
       method: "POST",
@@ -32,7 +34,11 @@ export default function SignUp({ formdata }) {
       body: JSON.stringify(formData),
     })
       .then((r) => r.json())
-      .then((r) => console.log(r));
+      .then((r) => {
+        alert(`Welcome ${r.firstname}`);
+        navigate("/login", { replace: true })
+      }
+      );
   }
 
   return (

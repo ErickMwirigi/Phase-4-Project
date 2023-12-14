@@ -48,8 +48,10 @@ function App() {
   }
 
   function fetchActiveUser() {
-    fetch("http://127.0.0.1:5555/active-session")
+    fetch("http://127.0.0.1:5555/active-session", { 
+      credentials : "include" })
       .then((response) => response.json())
+      .then((response) => console.log(response))
 
   }
 
