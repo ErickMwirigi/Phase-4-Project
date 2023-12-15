@@ -43,10 +43,11 @@
   height: 30vh;
 }
 
-.main-page{
-    display: flex;
-    flex-direction: row;
-    padding: 8vh 0;
+.main-page {
+  display: flex;
+  flex-direction: row;
+  padding: 8vh 0;
+  width: 100%;
 }
 
 .side-bar {

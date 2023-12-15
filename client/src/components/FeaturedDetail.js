@@ -15,7 +15,7 @@ function ratingStars(num) {
   return stars;
 }
 
-function FeaturedDetails({featured=[],addCart}) {
+function FeaturedDetails({featured,addCart}) {
 
 const { featuredId } = useParams()
 
