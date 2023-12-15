@@ -1,68 +1,82 @@
-import React from 'react'
-import { useState } from 'react'
+import React from "react";
+import { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import Logo from "../assets/logo.png";
+import Swal from "sweetalert2";
+// import ls from "local-storage";
 
-export default function LogIn({ prop }) {
+export default function LogIn({ onLogIn }) {
+  const [formData, setFormData] = useState({
+    username: "",
+    password: "",
+  });
 
-    // const [isloggedIn, setLoggedIn] = useState(false)
-    const [formData, setFormData] = useState({
-        username: "",
-        password: ""
+
+  const navigate = useNavigate();
+  function handleSubmit(e) {
+    e.preventDefault();
+    if (!formData) return;
+    setFormData({
+      username: "",
+      password: "",
+    });
+    fetch("http://127.0.0.1:5555/login", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(formData),
     })
+      .then((r) => r.json())
+      .then((resp) => {
+        console.log(resp)
+        onLogIn(resp);
+        Swal.fire({
+          title: "Success!",
+          text: `Welcome  ${resp.lastname}`,
+          icon: "success",
+          confirmButtonText: "Okay",
+        });
+        navigate("/products", { replace: true });
+      });
+  }
 
-    function handleSubmit(e) {
-        e.preventDefault()
-        if (!formData) return
-        setFormData({
-            username: "",
-            password: "",
+  function handleChange(e) {
+    const nam = e.target.name;
+    const value = e.target.value;
+    setFormData({ ...formData, [nam]: value });
+  }
 
-        })
-        alert(`Welcome ${formData.username}`)
-        // fetch("url", {
-        //     method:"POST",
-        //     body:
-        //         JSON.stringify(formData),
-        //     headers:{
-        //         "Content-Type":"application/json"
-        //     }
-        // })
-        // .then((r)=>r.json())
-        // .then((resp)=>{
-        //     return formData
-        // })
-    }
-
-    function handleChange(e) {
-        const nam = e.target.name
-        const value = e.target.value
-        setFormData({ ...formData, [nam]: value })
-    }
-
-    return (
-        <div className='login-dialogue'>
-            <span id='logo'><h1>Logo</h1></span>
-            <div className='form-dialogue'>
-                <form onSubmit={handleSubmit}>
-                    <h2>Welcome Back</h2>
-                    <label className='username'> Username :
-                        <input
-                            type='text'
-                            name='username'
-                            value={formData.username}
-                            onChange={handleChange}
-                        />
-                    </label>
-                    <label className='password'> Password :
-                        <input
-                            type='password'
-                            name='password'
-                            value={formData.password}
-                            onChange={handleChange}
-                        />
-                    </label>
-                    <button className='login-btn' type='submit'>Log In</button>
-                </form>
-            </div>
-        </div>
-    )
+  return (
+    <div className="login-dialogue">
+      <img className="logo" alt="logo" src={Logo} />
+      <div className="form-dialogue">
+        <form onSubmit={handleSubmit}>
+          <h2>Welcome Back</h2>
+          <div className="form-item">
+            <label className="username">Username:</label>
+            <input
+              type="text"
+              name="username"
+              value={formData.username}
+              onChange={handleChange}
+            />
+          </div>
+          <div className="form-item">
+            <label className="password">Password:</label>
+            <input
+              type="password"
+              name="password"
+              value={formData.password}
+              onChange={handleChange}
+            />
+          </div>
+          <button className="login-btn" type="submit">
+            Log In
+          </button>
+          <Link to={'/signup'}>Sign Up</Link>
+        </form>
+      </div>
+    </div>
+  );
 }

@@ -1,46 +1,50 @@
 from flask_sqlalchemy import SQLAlchemy
-from sqlalchemy import create_engine, func
-from sqlalchemy import ForeignKey, Table, Column, Integer, String, DateTime, MetaData
-from sqlalchemy.orm import relationship, backref
-from sqlalchemy.ext.declarative import declarative_base
+from sqlalchemy import func
+from sqlalchemy import ForeignKey, Column, Integer, DateTime
+from sqlalchemy.orm import relationship
 from sqlalchemy.ext.associationproxy import association_proxy
-from sqlalchemy.ext.associationproxy import AssociationProxy
-from sqlalchemy_serializer import SerializerMixin 
+from sqlalchemy_serializer import SerializerMixin
 
 #Remember to Serialize when all tables are added
 
 db = SQLAlchemy()
 
-class  Customer(db.Model, SerializerMixin):
+class Customer(db.Model, SerializerMixin):
     __tablename__ = 'customers'
 
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String, unique=True)
+    firstname = db.Column(db.String, unique=True)
+    lastname = db.Column(db.String, unique=True)
     email = db.Column(db.String, unique=True)
     password = db.Column(db.String, unique=True)
     address = db.Column(db.String, unique=True)
     created_at = db.Column(DateTime(), server_default=func.now())
     updated_at = db.Column(DateTime(), onupdate=func.now())
 
-    orders = relationship('Order', back_populates='customer')
+    # orders = relationship('Order', back_populates='customer')
     items = association_proxy('orders', 'item',
         creator=lambda it: Review(item=it))
 
-    payments = relationship('Payment', back_populates='customer')
-    items = association_proxy('payments', 'item',
-        creator=lambda it: Review(item=it))
-
-    reviews = relationship('Review', back_populates='customer')
-    items = association_proxy('reviews', 'item',
-        creator=lambda it: Review(item=it))
-
-    serialize_rules = ('-orders.customer',),
-    serialize_rules = ('-payments.customer',),
-    serialize_rules = ('-reviews.customer',)
+    # payments = relationship('Payment', back_populates='customer')
+    # items = association_proxy('payments', 'item',
+    #     creator=lambda it: Review(item=it))
+    #
+    # reviews = relationship('Review', back_populates='customer')
+    # items = association_proxy('reviews', 'item',
+    #     creator=lambda it: Review(item=it))
+    #
+    # favorites = relationship('Favorite', back_populates='customer')
+    # items = association_proxy('favorites', 'item',
+    #     creator=lambda it: Favorite(item=it))
+    #
+    # serialize_rules = ('-orders.customer',),
+    # serialize_rules = ('-payments.customer',),
+    # serialize_rules = ('-reviews.customer',),
+    # serialize_rules = ('-favorites.customer',)
 
 
     def __repr__(self):
-        return f'<Customer Item {self.name}>'
+        return f'<Customer Item {self.firstname}>'
 
 class Item(db.Model, SerializerMixin):
     __tablename__ = 'items'
@@ -50,27 +54,11 @@ class Item(db.Model, SerializerMixin):
     description = db.Column(db.String)
     price = db.Column(db.Integer)
     category = db.Column(db.String)
-    imageUrl= db.Column(db.String)
+    imageUrl= db.Column(db.NVARCHAR)
     rating = db.Column(db.Integer)
     quantity = db.Column(db.Integer)
     created_at = db.Column(DateTime(), server_default=func.now())
     updated_at = db.Column(DateTime(), onupdate=func.now())
-
-    orders = relationship('Order', back_populates='item')
-    customers = association_proxy('orders', 'customer',
-        creator=lambda cu: Review(customer=cu))
-
-    payments = relationship('Payment', back_populates='item')
-    customers = association_proxy('payments', 'customer',
-        creator=lambda cu: Review(customer=cu))
-
-    reviews = relationship('Review', back_populates='item')
-    customers = association_proxy('payments', 'customer',
-        creator=lambda cu: Review(customer=cu))
-
-    serialize_rules = ('-orders.item',),   
-    serialize_rules = ('-payments.item',),
-    serialize_rules = ('-reviews.item',)
 
     def __repr__(self):
         return f'<Item {self.name}, {self.price}, {self.description}, {self.category}, {self.imageUrl},{self.quantity}>'
@@ -81,19 +69,18 @@ class Order(db.Model, SerializerMixin):
     __tablename__ = 'orders'
 
     id = db.Column(db.Integer, primary_key=True)
-    orderdate = db.Column(db.Integer)
+    order_id = db.Column(db.String)
+    orderdate = db.Column(DateTime(), server_default=func.now())
     price = db.Column(db.Integer)
     status = db.Column(db.String)
-    created_at = db.Column(DateTime(), server_default=func.now())
+    # created_at = db.Column(DateTime(), server_default=func.now())
     updated_at = db.Column(DateTime(), onupdate=func.now())
+    customer_id = db.Column(db.Integer(), db.ForeignKey('customers.id'))
+    item_id = db.Column(db.Integer(), db.ForeignKey('items.id'))
 
-    customer_id = Column(Integer(), ForeignKey('customers.id'))
-    item_id = Column(Integer(), ForeignKey('items.id'))
+    customer = db.relationship("Customer")
+    items = db.relationship("Item")
 
-    customer = relationship('Customer', back_populates='orders')
-    item = relationship('Item', back_populates='orders')
-
-    serialize_rules = ('-customer.orders', '-item.orders',)
 
 
 class Payment(db.Model, SerializerMixin):
@@ -106,14 +93,6 @@ class Payment(db.Model, SerializerMixin):
     created_at = db.Column(DateTime(), server_default=func.now())
     updated_at = db.Column(DateTime(), onupdate=func.now())
 
-    customer_id = Column(Integer(), ForeignKey('customers.id'))
-    item_id = Column(Integer(), ForeignKey('items.id'))
-
-    customer = relationship('Customer', back_populates='payments')
-    item = relationship('Item', back_populates='payments')
-
-    serialize_rules = ('-customer.payments', '-item.reviews',)
-
     
 class Review(db.Model, SerializerMixin):
     __tablename__ = 'reviews'
@@ -125,14 +104,26 @@ class Review(db.Model, SerializerMixin):
     created_at = db.Column(DateTime(), server_default=func.now())
     updated_at = db.Column(DateTime(), onupdate=func.now())
 
-    customer_id = Column(Integer(), ForeignKey('customers.id'))
-    item_id = Column(Integer(), ForeignKey('items.id'))
+    customer_id = db.Column(db.Integer(), db.ForeignKey('customers.id'))
+    item_id = db.Column(db.Integer(), db.ForeignKey('items.id'))
 
-    customer = relationship('Customer', back_populates='reviews')
-    item = relationship('Item', back_populates='reviews')
+    customer = db.relationship("Customer")
 
-    serialize_rules = ('-customer.reviews', '-item.reviews',)
+
+
     
+class Favorite(db.Model, SerializerMixin):
+    __tablename__ = 'favorites'
+
+    id = db.Column(db.Integer, primary_key=True)
+    created_at = db.Column(DateTime(), server_default=func.now())
+    updated_at = db.Column(DateTime(), onupdate=func.now())
+
+    customer_id = db.Column(Integer(), ForeignKey('customers.id'))
+    item_id = db.Column(Integer(), ForeignKey('items.id'))
+
+    item = db.relationship("Item")
+
 
 
 

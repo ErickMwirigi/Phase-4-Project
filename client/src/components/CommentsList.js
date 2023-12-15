@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
+import ls from "local-storage"
 
-const commentURL = "http://localhost:3000/comments";
+const commentURL = "http://127.0.0.1:5555/reviews";
 
 function CommentsList(props) {
   const {
@@ -10,6 +11,9 @@ function CommentsList(props) {
     apiComments = [],
     fetchCommentData,
   } = props;
+  console.log({ commentsDictionary })
+
+  const user = ls.get("user");
 
   const [newComment, setNewComment] = useState("");
   const [productComments, setProductComments] = useState([]);
@@ -17,7 +21,7 @@ function CommentsList(props) {
   useEffect(
     () =>
       setProductComments(
-        apiComments.filter((comment) => comment.product_id === product.id),
+        apiComments.filter((comment) => comment.item_id === product.id),
       ),
     [apiComments],
   );
@@ -27,9 +31,9 @@ function CommentsList(props) {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
-        user: "Melvin Mbae",
         comment: newComment,
-        product_id: product.id,
+        customer_id: user.id, // TODO: Get persisted customer id
+        item_id: product.id,
       }),
     })
       .then((res) => res.json())
@@ -88,23 +92,28 @@ function CommentsList(props) {
         {productComments.map((comment) => (
           <div className="comment-field" key={comment.id}>
             <div>
-              <p><b>{comment.user}</b>:{comment.comment}</p>
+              <p>
+                <b>{comment.customer.firstname}</b>:{comment.comment}
+              </p>
             </div>
             <div className="comment-field-btns">
               <button
                 className="comment-btn"
                 onClick={(_) => handleDelete(comment.id)}
               >
-                <span className="material-symbols-outlined">delete</span>
+                <i className="bi bi-trash"></i>
                 Delete
               </button>
               <button
                 className="comment-btn"
                 onClick={(_) =>
-                  handleEdit(comment.id, "First purchase and was not dissapointed.")
+                  handleEdit(
+                    comment.id,
+                    "First purchase and was not dissapointed.",
+                  )
                 }
               >
-                <span className="material-symbols-outlined">edit</span>
+                <i className="bi bi-pen"></i>
                 Edit
               </button>
             </div>
