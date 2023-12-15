@@ -143,6 +143,7 @@ function Checkout(){
           <Route index element={<ProductsPage products={products} setToFavorite={setToFavoriteProducts}/> }/>
           <Route path="products" element={<ProductsPage products={products} setToFavorite={setToFavoriteProducts} fProducts={featuredProducts}/> }/>
           <Route path="/products/:productId" element={<ProductDetailsCard products={products} addCart={addToCart}/>}/>
+          <Route path="/products/:featuredProdcutsId" element={<ProductDetailsCard products={featuredProducts}/>}/>
         </Route>
         <Route path="/login" element={ <LogIn onLogIn={setMember}/>}/>
         <Route path="/signup" element={ <SignUp />}/>

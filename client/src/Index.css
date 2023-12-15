@@ -257,10 +257,6 @@ label{
     padding: 15px;
 }
 
-/* .checkout{
-
-} */
-
 .itemsOrder{
     /* background: #817f7f; */
     border: #292828;
@@ -318,4 +314,10 @@ label{
 .divider{
     display: flex;
     flex-direction: row;
+}
+
+
+.trial{
+    display: flex;
+    justify-content: space-between;
 }

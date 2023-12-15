@@ -6,15 +6,14 @@ function CheckoutDetails({orders}){
         <>
         <div className="checkout">
             <h2>Checkout</h2>
+            <div className="trial">
             <div className="itemsOrder">
-                <div>
-                    <h4>Items</h4>
-                </div>
+                <h4>Items:</h4>
                 <div className="orderdetails">
                     <h4>Order ID: {orders.id}</h4>
-                    <h4>Date Created: {orders.name}</h4>
+                    <h4>Date Created: {orders.created_at}</h4>
                         <div>
-                            <h5>Quantity</h5>
+                            <h5>Quantity:</h5>
                             <h5>Price: {orders.price}</h5>
                         </div>
                 </div>
@@ -28,6 +27,7 @@ function CheckoutDetails({orders}){
                 <div>
                     <button>Checkout</button>
                 </div>
+            </div>
             </div>
         </div>
         
