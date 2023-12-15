@@ -1,5 +1,4 @@
-import React, { useState } from "react";
-import { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import ProductsPage from "./components/ProductsPage";
 import "./App.css";
 import { Route, Routes, useNavigate } from "react-router-dom";
@@ -13,8 +12,6 @@ import LogIn from "./components/LogIn";
 import SignUp from "./components/SignUp";
 import CheckoutPage from "./components/CheckoutPage";
 import ProductDetailsCard from "./components/ProductDetailsCard";
-import FeaturedDetails from "./components/FeaturedDetail";
-import FeaturedProducts from "./components/FeaturedProducts";
 import ls from "local-storage"
 
 function App() {
