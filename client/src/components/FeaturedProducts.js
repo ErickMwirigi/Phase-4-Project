@@ -19,4 +19,4 @@ function FeaturedProducts({featured}){
 
 }
 
-export default FeaturedProducts
+export default FeaturedProducts;

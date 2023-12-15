@@ -27,7 +27,9 @@ function ProductDetailsCard({
 
 const { productId } = useParams()
 
+
 const product = products.filter((prod)=> prod.id === parseInt(productId))[0]
+
 
 // <Comments
 // review={review}

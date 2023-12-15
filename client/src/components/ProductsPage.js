@@ -1,7 +1,7 @@
 import ProductsCollection from "./ProductsCollection";
 import React from "react";
-import SideBar from './SideBar'
-import FeaturedProducts from "./FeaturedProducts";
+import SideBar from "./SideBar";
+// import FeaturedProducts from "./FeaturedProducts";
 
 function ProductsPage({ products, setToFavorite, fProducts }) {
 
@@ -27,4 +27,4 @@ function ProductsPage({ products, setToFavorite, fProducts }) {
 
 
 }
-export default ProductsPage
+export default ProductsPage;

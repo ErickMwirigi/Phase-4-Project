@@ -17,4 +17,4 @@ function FeaturedCards({featured}){
     )
 }
 
-export default FeaturedCards
+export default FeaturedCards;

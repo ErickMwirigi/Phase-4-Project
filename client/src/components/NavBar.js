@@ -1,23 +1,47 @@
-import React from 'react'
-import { NavLink, Outlet } from 'react-router-dom'
-import Searchbar from './Searchbar'
+import React from "react";
+import { NavLink, Outlet, useNavigate } from "react-router-dom";
+import Searchbar from "./Searchbar";
+import Logo from "../assets/logo.png";
+import ls from "local-storage"
 
-
-
-export default function NavBar({onSearch , userData}) {
+export default function NavBar({ onSearch, userData }) {
+  const navigate = useNavigate();
   return (
     <>
       <nav>
-          <NavLink to={'/products'}>Logo</NavLink>
-          {userData.name ? <span className='profile'>{userData.name}</span> : undefined}
-          <ul className='nav-links'>
-              {userData.name === 'Mwagash' ? <NavLink to={'/products'}>Log Out</NavLink> : <NavLink to={'/login'}>Sign In</NavLink>}
-              <NavLink to={'/account/profile-settings'}>Profile</NavLink>
+        <div className="nav-items">
+          <NavLink to={"/products"}>
+            <div className="logo-container">
+              <img className="logo" alt="logo" src={Logo} />
+            </div>
+          </NavLink>
+          <ul className="nav-links">
+            {userData.firstname ? (
+              <NavLink to={"/products"} onClick={() => {
+                if (!userData.firstname) {
+                  try {
+                    ls.clear();
+                    document.location.assign("/login")
+                  } catch (e) {
+                    console.log(e)
+                  }
+                }
+              }}>
+                <i className="bi bi-box-arrow-left"></i> Log Out ({userData.firstname} {userData.lastname})
+              </NavLink>
+            ) : (
+              <NavLink to={"/login"}>
+                <i className="bi bi-box-arrow-in-right"></i> Sign In
+              </NavLink>
+            )}
+            <NavLink to={"/account/profile-settings"}>
+              <i className="bi bi-person-circle"></i> Profile
+            </NavLink>
           </ul>
-          <Searchbar className='searchbar' products={onSearch}/>
+        </div>
+        <Searchbar className="searchbar" products={onSearch} />
       </nav>
       <Outlet />
     </>
-    
-  )
+  );
 }
