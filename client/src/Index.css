@@ -330,10 +330,6 @@ label {
     flex-direction: row;
 }
 
-
-.trial{
-    display: flex;
-    justify-content: space-between;
 .profile-box > .checkout {
   color: white;
 }

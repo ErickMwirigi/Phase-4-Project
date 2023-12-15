@@ -55,7 +55,7 @@
 
 3. Install dependancies:
 
-    pip install -r requirements.txt
+    pip install -r dependancies.txt
 
 4. Start the progragms:
 
