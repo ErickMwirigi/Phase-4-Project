@@ -60,6 +60,8 @@ class LogIn(Resource):
             jsonify(user.to_dict()),
             201,
         )
+        x = session.get("id")
+        response.set_cookie('user', str(x))
         response.access_control_allow_credentials = True
         return response
 
@@ -74,10 +76,12 @@ class UserSession(Resource):
 
         user = Customer.query.filter(Customer.id == session.get("id")).first()
         if user:
+
             response = make_response(
-                jsonify(user.to_dict()),
+                jsonify(request.cookies.get("user")),
                 200
             )
+
             response.access_control_allow_credentials = True
             return response
         
