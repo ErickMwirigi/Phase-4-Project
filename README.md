@@ -59,12 +59,13 @@
 
 4. Start the progragms:
 
-    ** Frontend **: 
-        cd ../client
-            npm start
-    ** Backend **: 
-        cd ../server
-            python3 app.py
+-  **Frontend**:
+    - cd ../client
+    - npm start
+
+-   **Backend**: 
+    - cd ../server
+    - python3 app.py
 
 ### you are now set!
 
@@ -76,6 +77,10 @@ That simple...enjoy exploring!
 
 ## Known Issues
 
+- Clicking on featured products is giving out an error
+
+
+#### fixes coming soon!
 
 ## Code Owners
 
