@@ -85,22 +85,19 @@
 .product-collection {
   display: flex;
   flex-wrap: wrap;
-  gap: 25px;
+  gap: 20px;
   justify-content: center;
 }
 
 .product-cards {
   display: flex;
   flex-wrap: wrap;
-  column-gap: 15px;
   row-gap: 10px;
-  justify-content: center;
   border: 1px solid lightgray;
-  border-radius: 16px;
+  border-radius: 14px;
   background-color: white;
-  display: flex;
   flex-direction: column;
-  padding: 10px;
+  padding: 15px;
   width: 300px;
   align-items: center;
   justify-content: space-between;
@@ -113,25 +110,25 @@
 }
 
 .product-cards img {
-  width: 200px;
-  height: 200px;
+  width: 150px;
+  height: 150px;
   background-color: white;
-  border: 1px;
-  border-radius: 16px;
+  border-radius: 8px;
   align-self: center;
 }
 
 .product-cards h4,
 h3 {
+  font-size: small;
   color: #004b49;
   padding: 2px;
-  border: none;
+  /* border: none; */
 }
 
 .product-cards p {
   background-color: white;
   color: maroon;
-  font-size: small;
+  font-size: smaller;
   border: none;
 }
 
@@ -157,8 +154,34 @@ h3 {
   cursor: pointer;
 }
 
+button {
+  color: #ffffff;
+  height: auto;
+  border: none;
+  background: #1a6f6c;
+  border-radius: 5px;
+  padding: 6px;
+}
+
+button:hover {
+  color: #247254e8;
+  height: auto;
+  border: solid;
+  border-radius: 8px;
+  background: #fff;
+} 
+
+svg > path:hover {
+  fill: #004b49;
+}
+
 .productButton>a {
   font-size: unset;
+}
+
+.productButton>a:hover {
+  font-size: unset;
+  color: #1a6f6c;
 }
 
 .fav-product-cards {

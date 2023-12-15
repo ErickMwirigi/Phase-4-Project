@@ -1,6 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { strToPrice } from "shared/helpers";
+import {ReactComponent as AddCart} from "../AddToCart.svg"
+import { ReactComponent as Like} from "../Not_Liked.svg"
 
 function ProductCard({ product, addToFavorite }) {
   return (
@@ -9,10 +11,6 @@ function ProductCard({ product, addToFavorite }) {
         <img
           src={product.imageUrl}
           alt="product-cover"
-          style={{
-            height: "auto",
-            width: "200px",
-          }}
         />
         <h3>{product.name}</h3>
         <h4>{strToPrice(product.price)}</h4>
@@ -20,11 +18,10 @@ function ProductCard({ product, addToFavorite }) {
       </div>
       <div className="view-add-btns">
         <button className="productButton">
-          <Link to={`/products/${product.id}`}>View Product</Link>
+          <Link to={`/products/${product.id}`}>View</Link>
         </button>
-        <button onClick={addToFavorite} className="productButton">
-          Add to Favorites
-        </button>
+        <Like onClick={addToFavorite} className="iconButton"/>
+        <AddCart onClick={addToFavorite} className="iconButton"/>
       </div>
     </div>
   );

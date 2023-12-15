@@ -29,6 +29,7 @@ export default function LogIn({ onLogIn }) {
     })
       .then((r) => r.json())
       .then((resp) => {
+        console.log(resp)
         onLogIn(resp);
         Swal.fire({
           title: "Success!",

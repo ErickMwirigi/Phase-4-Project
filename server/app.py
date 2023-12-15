@@ -55,11 +55,12 @@ class LogIn(Resource):
     def post():
         user = Customer.query.filter_by(lastname=request.get_json()['username']).first()
         
+        session['id'] = user.id
         response = make_response(
             jsonify(user.to_dict()),
             201,
         )
-
+        response.access_control_allow_credentials = True
         return response
 
 
@@ -70,18 +71,23 @@ class UserSession(Resource):
 
     @staticmethod
     def get():
-        x = localstorage.get('user')
-        user = Customer.query.filter(Customer.id == localstorage.getItem('user')).first()
+
+        user = Customer.query.filter(Customer.id == session.get("id")).first()
         if user:
-            return make_response(
-                jsonify(x.to_dict()),
+            response = make_response(
+                jsonify(user.to_dict()),
                 200
             )
+            response.access_control_allow_credentials = True
+            return response
+        
         else:
-            return make_response(
-                {'message': "Please enter a valid username/password"},
+            response = make_response(
+                {'message': session.get("id")},
                 200
             )
+            response.access_control_allow_credentials = True
+            return response
 
 
 api.add_resource(UserSession, '/active-session')
