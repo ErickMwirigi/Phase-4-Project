@@ -1,13 +1,18 @@
 from flask import Flask, jsonify, request, make_response, session
 from flask_migrate import Migrate
 from flask_restful import Api, Resource
-
+from flask_session import Session
+from localstorage import localstorage
 from models import db, Customer, Item, Order, Payment, Review, Favorite
 from flask_cors import CORS
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///project.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+app.config['SESSION_TYPE'] = 'sqlalchemy'
+
+app.config['SESSION_SQLALCHEMY'] = db
+Session(app)
 app.json.compact = False
 app.secret_key = 'no_key'
 
@@ -46,25 +51,18 @@ api.add_resource(Index, '/')
 
 class LogIn(Resource):
 
-    # def get(self):
-    #     user = Customer.query.filter(Customer.id == session.get('user_id')).first()
-    #     if user:
-    #         return make_response(jsonify(user.to_dict()),200)
-    #     else:
-    #         return make_response(jsonify({'message': '401: Not Authorized'}), 401)
-
     @staticmethod
     def post():
         user = Customer.query.filter_by(lastname=request.get_json()['username']).first()
-
-        res = parse_obj(user)
-
-        session['customer_id'] = user.id
+        
+        session['id'] = user.id
         response = make_response(
-            jsonify(res),
+            jsonify(user.to_dict()),
             201,
         )
-
+        x = session.get("id")
+        response.set_cookie('user', str(x))
+        response.access_control_allow_credentials = True
         return response
 
 
@@ -75,17 +73,25 @@ class UserSession(Resource):
 
     @staticmethod
     def get():
-        user = Customer.query.filter(Customer.id == session.get('customer_id')).first()
+
+        user = Customer.query.filter(Customer.id == session.get("id")).first()
         if user:
-            return make_response(
-                jsonify(user.to_dict()),
+
+            response = make_response(
+                jsonify(request.cookies.get("user")),
                 200
             )
+
+            response.access_control_allow_credentials = True
+            return response
+        
         else:
-            return make_response(
-                {'message': session.get('customer_id')},
+            response = make_response(
+                {'message': session.get("id")},
                 200
             )
+            response.access_control_allow_credentials = True
+            return response
 
 
 api.add_resource(UserSession, '/active-session')
@@ -352,10 +358,15 @@ class Orders(Resource):
 
     @staticmethod
     def post():
+
+        order = request.get_json()
+
         new_record = Order(
-            orderdate=request.form['orderdate'],
-            price=request.form['price'],
-            status=request.form['status'],
+            order_id=order['order_id'],
+            customer_id=order['customer_id'],
+            item_id=order['item_id'],
+            price=order['price'],
+            status=order['status'],
         )
 
         db.session.add(new_record)

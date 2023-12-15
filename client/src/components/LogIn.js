@@ -1,14 +1,16 @@
 import React from "react";
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Logo from "../assets/logo.png";
-import ls from "local-storage";
+import Swal from "sweetalert2";
+// import ls from "local-storage";
 
 export default function LogIn({ onLogIn }) {
   const [formData, setFormData] = useState({
     username: "",
     password: "",
   });
+
 
   const navigate = useNavigate();
   function handleSubmit(e) {
@@ -27,7 +29,14 @@ export default function LogIn({ onLogIn }) {
     })
       .then((r) => r.json())
       .then((resp) => {
+        console.log(resp)
         onLogIn(resp);
+        Swal.fire({
+          title: "Success!",
+          text: `Welcome  ${resp.lastname}`,
+          icon: "success",
+          confirmButtonText: "Okay",
+        });
         navigate("/products", { replace: true });
       });
   }
@@ -65,6 +74,7 @@ export default function LogIn({ onLogIn }) {
           <button className="login-btn" type="submit">
             Log In
           </button>
+          <Link to={'/signup'}>Sign Up</Link>
         </form>
       </div>
     </div>

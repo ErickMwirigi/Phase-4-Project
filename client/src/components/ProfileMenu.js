@@ -9,14 +9,13 @@ export default function ProfileMenu() {
         <Link to={"/account/inbox"}>Inbox</Link>
         <Link to={"/account/profile-settings"}>Profile Settings</Link>
         <Link to={"/account/orders"}>Orders</Link>
-        <Link to={"/account/saved-items"}>Saved Items</Link>
+        <Link to={"/account/checkout"}>Checkout</Link>
+        <Link to={"/account/favorites"}>Saved Items</Link>
         <Link>Need Help ?</Link>
         <Link>Give Feedback</Link>
       </div>
-      <div className="ac-content">
-        <div className="dynamic-menu">
-          <Outlet />
-        </div>
+      <div className="dynamic-menu">
+        <Outlet />
       </div>
     </div>
   );

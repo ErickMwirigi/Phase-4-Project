@@ -23,9 +23,10 @@ function ProductDetailsCard({
   usercomment = {},
   commentsDictionary,
   setCommentsDictionary,
+  addCart
 }) {
   const { productId } = useParams();
-
+  
   const product = products.filter((prod) => prod.id === parseInt(productId))[0];
 
   const fetchProductReviews = () => {
@@ -34,7 +35,7 @@ function ProductDetailsCard({
     fetch(favoriteProductsURL)
       .then((response) => response.json())
       .then((data) => {
-        if (Object.keys(data).length && product?.id) {
+        if (Object.keys(data).length && product.id) {
           const productReviews = data.reduce((acc, curr) => {
             if (acc[product.id]) {
               acc[product.id] = [...acc[product.id], curr]
@@ -54,7 +55,7 @@ function ProductDetailsCard({
 
   useEffect(() => {
     fetchProductReviews();
-  }, [product?.id]);
+  }, [product.id]);
 
   const comments = (
     <Comments
@@ -67,15 +68,18 @@ function ProductDetailsCard({
   );
 
 
-  return product && (
+  return (
     <div className="productdetails-cards">
       <div className="productdetails-details">
         <div className="productdetails-data">
-          <img
-            className="productdetails-image-1"
-            src={product?.imageUrl}
-            alt="productdetails-image"
-          />
+          <div className="prod-layout">
+            <img
+              className="productdetails-image-1"
+              src={product.imageUrl}
+              alt="productdetails-image"
+            />
+            <button onClick={addCart(product)}> Add to Cart </button>
+          </div>
           <div className="productdetails-metadata">
             <h3 className="product-name">
               {product.name}

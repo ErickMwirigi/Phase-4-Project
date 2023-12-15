@@ -1,7 +1,7 @@
 import ProductsCollection from "./ProductsCollection";
 import React from "react";
 import SideBar from "./SideBar";
-import FeaturedProducts from "./FeaturedProducts";
+// import FeaturedProducts from "./FeaturedProducts";
 
 function ProductsPage({ products, setToFavorite, fProducts }) {
   return (
