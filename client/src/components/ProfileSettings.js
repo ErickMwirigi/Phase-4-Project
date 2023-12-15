@@ -13,6 +13,7 @@ export default function ProfileSettings({ userData = {} }) {
 
     // Remove created_at field because it needs to be parsed to DateTime in the backend
     // Yet we don't have to pass it because it gets created in the backend
+    // 
 
     const { created_at: fda, ...fd } = formData;
     console.log({ formData })
