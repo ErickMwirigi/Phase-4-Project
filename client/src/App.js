@@ -15,11 +15,9 @@ import ProductDetailsCard from "./components/ProductDetailsCard";
 import ls from "local-storage"
 
 function App() {
-  const productURL = "http://127.0.0.1:5555/items";
 
   const [products, setProducts] = useState([]);
   const [favoriteProducts, setFavoriteProducts] = useState([]);
-  const [featuredProducts, setFeaturedProducts] = useState([]);
   const [orders, setOrders] = useState([]);
   const [isMember, setMember] = useState("");
   const [productsDictionary, setProductsDictionary] = useState({});
@@ -28,7 +26,7 @@ function App() {
   const [user, setUser] = useState({});
 
   function fetchProductData() {
-    fetch(productURL)
+    fetch("http://127.0.0.1:5555/items")
       .then((response) => response.json())
       .then((data) => {
         const dictionary = {};
@@ -39,11 +37,8 @@ function App() {
           commentsDict[product.id] = [];
         });
 
-        const featured = data.slice(4, 10);
-
         setProducts(data);
         setProductsDictionary(dictionary);
-        setFeaturedProducts(featured);
       });
   }
 
