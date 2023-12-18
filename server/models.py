@@ -1,7 +1,7 @@
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import func
 from sqlalchemy import ForeignKey, Column, Integer, DateTime
-from sqlalchemy.orm import relationship
+from sqlalchemy.orm import validates
 from sqlalchemy.ext.associationproxy import association_proxy
 from sqlalchemy_serializer import SerializerMixin
 
@@ -25,26 +25,15 @@ class Customer(db.Model, SerializerMixin):
     items = association_proxy('orders', 'item',
         creator=lambda it: Review(item=it))
 
-    # payments = relationship('Payment', back_populates='customer')
-    # items = association_proxy('payments', 'item',
-    #     creator=lambda it: Review(item=it))
-    #
-    # reviews = relationship('Review', back_populates='customer')
-    # items = association_proxy('reviews', 'item',
-    #     creator=lambda it: Review(item=it))
-    #
-    # favorites = relationship('Favorite', back_populates='customer')
-    # items = association_proxy('favorites', 'item',
-    #     creator=lambda it: Favorite(item=it))
-    #
-    # serialize_rules = ('-orders.customer',),
-    # serialize_rules = ('-payments.customer',),
-    # serialize_rules = ('-reviews.customer',),
-    # serialize_rules = ('-favorites.customer',)
-
 
     def __repr__(self):
         return f'<Customer Item {self.firstname}>'
+    
+    @validates("email")
+    def validate_email(self,key,value):
+        if '@' not in value:
+            raise ValueError('Please enter a valid email')
+        return value
 
 class Item(db.Model, SerializerMixin):
     __tablename__ = 'items'
@@ -62,6 +51,12 @@ class Item(db.Model, SerializerMixin):
 
     def __repr__(self):
         return f'<Item {self.name}, {self.price}, {self.description}, {self.category}, {self.imageUrl},{self.quantity}>'
+    
+    @validates("rating")
+    def validate_email(self,key,value):
+        if 0 > value > 6 not in value:
+            raise ValueError('Please provide a value between 0 - 6')
+        return value
 
 
 

@@ -74,7 +74,7 @@ export default function LogIn({ onLogIn }) {
           <button className="login-btn" type="submit">
             Log In
           </button>
-          <Link to={'/signup'}>Sign Up</Link>
+          <Link to={'/signup'} className="login-btn">Sign Up</Link>
         </form>
       </div>
     </div>
