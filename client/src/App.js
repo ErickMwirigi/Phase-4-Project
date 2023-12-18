@@ -142,6 +142,8 @@ function App() {
     console.log("check")
   }, [user.id])
 
+  console.log(cart)
+
   return (
     <Routes>
       <Route
@@ -163,6 +165,7 @@ function App() {
           <ProductsPage
             products={products}
             setToFavorite={setToFavoriteProducts}
+            cart={addToCart}
           />
         }
       />

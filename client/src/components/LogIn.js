@@ -29,7 +29,6 @@ export default function LogIn({ onLogIn }) {
     })
       .then((r) => r.json())
       .then((resp) => {
-        console.log(resp)
         onLogIn(resp);
         Swal.fire({
           title: "Success!",
@@ -74,7 +73,7 @@ export default function LogIn({ onLogIn }) {
           <button className="login-btn" type="submit">
             Log In
           </button>
-          <Link to={'/signup'} className="login-btn">Sign Up</Link>
+          <Link to={'/signup'} className="signup-btn">Sign Up</Link>
         </form>
       </div>
     </div>

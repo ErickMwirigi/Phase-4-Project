@@ -167,6 +167,20 @@ form > .login-btn {
   font-weight: bold;
 }
 
+form > .signup-btn {
+  font-weight: 400;
+  color: #1830b9;
+  padding: 5px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+form > .signup-btn:hover{
+  color: #3b18b9;
+  text-decoration: underline;
+}
+
 .search-container {
   padding-top: 4vh;
   width: 40%;

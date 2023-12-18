@@ -26,6 +26,11 @@ class Customer(db.Model, SerializerMixin):
 
     def __repr__(self):
         return f'<Customer Item {self.firstname}>'
+    @validates("firstname", "lastname")
+    def validate_names(self,key,name):
+        if not name:
+            raise ValueError('Name Field is required')
+        return name
     
     @validates("email")
     def validate_email(self,key,value):

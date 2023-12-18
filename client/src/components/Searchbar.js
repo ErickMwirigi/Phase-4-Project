@@ -27,7 +27,7 @@ export default function Searchbar({ products }) {
       <div
         className="search-details"
         key={item.id}
-        onClick={() => navigate(`/products/${item.id}`, { replace: true })
+        onClick={() => navigate(`/products/${item.id}`)
         }
       >
         <img src={item.imageUrl} alt={item.name} />
