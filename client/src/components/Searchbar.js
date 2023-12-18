@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { ReactComponent as Search } from "../SearchIco.svg";
+import { useNavigate } from "react-router-dom";
 
 export default function Searchbar({ products }) {
   const [search, setSearch] = useState();
@@ -19,13 +20,14 @@ export default function Searchbar({ products }) {
     setSearchResults(results);
   }
 
+  const navigate = useNavigate();
+
   const searchItems = searchResults.map((item) => {
     return (
       <div
         className="search-details"
         key={item.id}
-        onClick={() =>
-          alert(`You have selected from ${item.category} category`)
+        onClick={() => navigate(`/products/${item.id}`)
         }
       >
         <img src={item.imageUrl} alt={item.name} />
@@ -33,7 +35,6 @@ export default function Searchbar({ products }) {
       </div>
     );
   });
-  // <button className='submit' type="submit" onClick={(search)=>searched(search)}></button>
   return (
     <div className="search-container">
       <div className="search-bar">

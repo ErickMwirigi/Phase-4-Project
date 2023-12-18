@@ -6,7 +6,7 @@ const ordername = 'ORDER_NO'
 let num = Math.floor(Math.random() * (1001)) + Math.floor(Math.random() * 101)
 const order_id = ordername.concat(num)
 
-// console.log(user)
+console.log(cart)
 const order = cart.map((item) =>  {
   const newOrder = {
     "order_id":order_id,

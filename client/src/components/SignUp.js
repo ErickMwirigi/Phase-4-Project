@@ -2,6 +2,7 @@ import React from "react";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Logo from "../assets/logo.png";
+import Swal from "sweetalert2";
 
 export default function SignUp({ formdata }) {
   const [formData, setFormData] = useState({
@@ -23,9 +24,20 @@ export default function SignUp({ formdata }) {
 
   function handleSubmit(e) {
     e.preventDefault();
-    // if(!formData) return
 
-    // console.log(formData)
+    const emptyField = Object.keys(formData).find(
+      (key) => !formData[key].trim()
+    )
+    if (emptyField){
+      Swal.fire({
+        title: "Invalid!",
+        text: `Please enter a valid ${emptyField}`,
+        icon:"error",
+        confirmButtonText:"Okay"
+      })
+      return
+    }
+
     fetch("http://127.0.0.1:5555/customers", {
       method: "POST",
       headers: {
@@ -37,8 +49,11 @@ export default function SignUp({ formdata }) {
       .then((r) => {
         alert(`Welcome ${r.firstname}`);
         navigate("/login", { replace: true })
-      }
-      );
+      })
+      .catch((error) => {
+        console.error("Error:", error)
+        alert("Invalid")
+      })
   }
 
   return (

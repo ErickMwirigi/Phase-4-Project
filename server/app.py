@@ -2,7 +2,6 @@ from flask import Flask, jsonify, request, make_response, session
 from flask_migrate import Migrate
 from flask_restful import Api, Resource
 from flask_session import Session
-from localstorage import localstorage
 from models import db, Customer, Item, Order, Payment, Review, Favorite
 from flask_cors import CORS
 
@@ -23,13 +22,6 @@ db.init_app(app)
 api = Api(app)
 
 
-def parse_obj(obj):
-    res = obj.__dict__
-    del res["_sa_instance_state"]
-
-    return res
-
-
 class Index(Resource):
 
     @staticmethod
@@ -42,12 +34,9 @@ class Index(Resource):
             jsonify(response_dict),
             200,
         )
-
         return response
 
-
 api.add_resource(Index, '/')
-
 
 class LogIn(Resource):
 
@@ -59,44 +48,11 @@ class LogIn(Resource):
             jsonify(user.to_dict()),
             201,
         )
-        # x = session.get("id")
-        # response.set_cookie('user', str(x))
-        # response.access_control_allow_credentials = True
         return response
-
 
 api.add_resource(LogIn, '/login')
 
-
-class UserSession(Resource):
-
-    @staticmethod
-    def get():
-
-        user = Customer.query.filter(Customer.id == session.get("id")).first()
-        if user:
-
-            response = make_response(
-                jsonify(request.cookies.get("user")),
-                200
-            )
-
-            response.access_control_allow_credentials = True
-            return response
-        
-        else:
-            response = make_response(
-                {'message': session.get("id")},
-                200
-            )
-            response.access_control_allow_credentials = True
-            return response
-
-
-api.add_resource(UserSession, '/active-session')
-
-
-# CRUD for the Customer Table
+# class UserSession(Resource):
 
 class Customers(Resource):
 
@@ -108,7 +64,6 @@ class Customers(Resource):
             jsonify(response_dict_list),
             200,
         )
-
         return response
 
     @staticmethod
@@ -132,12 +87,10 @@ class Customers(Resource):
             jsonify(response_dict),
             201,
         )
-
         return response
 
 
 api.add_resource(Customers, '/customers')
-
 
 class CustomerByID(Resource):
 
@@ -149,7 +102,6 @@ class CustomerByID(Resource):
             jsonify(response_dict),
             200,
         )
-
         return response
 
     @staticmethod
@@ -157,7 +109,9 @@ class CustomerByID(Resource):
         record = Customer.query.filter_by(id=id).first()
         for attr in request.get_json():
             setattr(record, attr, request.get_json()[attr])
-            db.session.commit()
+
+        db.session.add(record)
+        db.session.commit()
 
         response_dict = record.to_dict()
 
@@ -165,7 +119,6 @@ class CustomerByID(Resource):
             jsonify(response_dict),
             200
         )
-
         return response
 
     @staticmethod
@@ -181,12 +134,9 @@ class CustomerByID(Resource):
             jsonify(response_dict),
             200
         )
-
         return response
 
-
 api.add_resource(CustomerByID, '/customers/<int:id>')
-
 
 # CRUD for the Item Table
 
@@ -224,12 +174,9 @@ class Items(Resource):
             jsonify(response_dict),
             201,
         )
-
         return response
 
-
 api.add_resource(Items, '/items')
-
 
 class ItemByID(Resource):
 
@@ -241,7 +188,6 @@ class ItemByID(Resource):
             jsonify(response_dict),
             200,
         )
-
         return response
 
     @staticmethod
@@ -259,7 +205,6 @@ class ItemByID(Resource):
             jsonify(response_dict),
             200
         )
-
         return response
 
     @staticmethod
@@ -275,12 +220,9 @@ class ItemByID(Resource):
             jsonify(response_dict),
             200
         )
-
         return response
 
-
 api.add_resource(ItemByID, '/items/<int:id>')
-
 
 # CRUD for Favorites
 
@@ -288,10 +230,10 @@ class FavoriteItems(Resource):
 
     @staticmethod
     def get():
-        items = Favorite.query.all()
+        items = [item.to_dict() for item in Favorite.query.all()]
 
         response = make_response(
-            jsonify([item.to_dict() for item in items]),
+            jsonify(items),
             200
         )
         return response
@@ -312,12 +254,9 @@ class FavoriteItems(Resource):
             jsonify([item.to_dict() for item in favorite_items]),
             201
         )
-
         return response
 
-
 api.add_resource(FavoriteItems, "/favorites")
-
 
 class FavoriteItemsID(Resource):
 
@@ -334,12 +273,9 @@ class FavoriteItemsID(Resource):
             jsonify(response_dict),
             200
         )
-
         return response
 
-
 api.add_resource(FavoriteItemsID, "/favorites/<int:id>")
-
 
 # CRUD for the Order Table
 
@@ -353,7 +289,6 @@ class Orders(Resource):
             jsonify(response_dict_list),
             200,
         )
-
         return response
 
     @staticmethod
@@ -378,12 +313,9 @@ class Orders(Resource):
             jsonify(response_dict),
             201,
         )
-
         return response
 
-
 api.add_resource(Orders, '/orders')
-
 
 class OrderByID(Resource):
 
@@ -429,12 +361,10 @@ class OrderByID(Resource):
             jsonify(response_dict),
             200
         )
-
         return response
 
 
 api.add_resource(OrderByID, '/orders/<int:id>')
-
 
 # CRUD for the Payment Table
 
@@ -447,7 +377,6 @@ class Payments(Resource):
             jsonify(response_dict_list),
             200,
         )
-
         return response
 
     def post(self):
@@ -466,12 +395,9 @@ class Payments(Resource):
             jsonify(response_dict),
             201,
         )
-
         return response
 
-
 api.add_resource(Payments, '/payments')
-
 
 class PaymentByID(Resource):
 
@@ -483,7 +409,6 @@ class PaymentByID(Resource):
             jsonify(response_dict),
             200,
         )
-
         return response
 
     def patch(self, id):
@@ -515,12 +440,10 @@ class PaymentByID(Resource):
             jsonify(response_dict),
             200
         )
-
         return response
 
 
 api.add_resource(PaymentByID, '/payments/<int:id>')
-
 
 # CRUD for the Review Table
 
@@ -528,18 +451,13 @@ class Reviews(Resource):
 
     @staticmethod
     def get():
-        reviews = Review.query.all()
 
-        response_dict_list = [n.to_dict() for n in Review.query.all()]
-        # response_dict_list = [parse_obj(n) for n in reviews]
-        # print([dict(i) for i in Review.query.all()])
-        # print(response_dict_list)
+        response_dict_list = [review.to_dict() for review in Review.query.all()]
 
         response = make_response(
-            response_dict_list,
+            jsonify(response_dict_list),
             200,
         )
-
         return response
 
     @staticmethod
@@ -559,12 +477,9 @@ class Reviews(Resource):
             jsonify(response_dict),
             201,
         )
-
         return response
 
-
 api.add_resource(Reviews, '/reviews')
-
 
 class ReviewByID(Resource):
 
@@ -576,7 +491,6 @@ class ReviewByID(Resource):
             jsonify(response_dict),
             200,
         )
-
         return response
 
     @staticmethod
@@ -594,7 +508,6 @@ class ReviewByID(Resource):
             jsonify(response_dict),
             200
         )
-
         return response
 
     @staticmethod
@@ -610,7 +523,6 @@ class ReviewByID(Resource):
             jsonify(response_dict),
             200
         )
-
         return response
 
 
@@ -618,6 +530,7 @@ api.add_resource(ReviewByID, '/reviews/<int:id>')
 
 
 class ProductReviewByID(Resource):
+
     @staticmethod
     def get():
         item_id = request.get_json()['item_id']
@@ -627,7 +540,6 @@ class ProductReviewByID(Resource):
             jsonify(response_dict),
             200,
         )
-
         return response
 
 
