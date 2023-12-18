@@ -55,14 +55,13 @@ class LogIn(Resource):
     def post():
         user = Customer.query.filter_by(lastname=request.get_json()['username']).first()
         
-        session['id'] = user.id
         response = make_response(
             jsonify(user.to_dict()),
             201,
         )
-        x = session.get("id")
-        response.set_cookie('user', str(x))
-        response.access_control_allow_credentials = True
+        # x = session.get("id")
+        # response.set_cookie('user', str(x))
+        # response.access_control_allow_credentials = True
         return response
 
 
@@ -114,6 +113,7 @@ class Customers(Resource):
 
     @staticmethod
     def post():
+        
         data = request.get_json()
         new_record = Customer(
             firstname=data['firstname'],
@@ -194,7 +194,7 @@ class Items(Resource):
 
     @staticmethod
     def get():
-        response_dict_list = [parse_obj(n) for n in Item.query.all()]
+        response_dict_list = [n for n in Item.query.all()]
 
         response = make_response(
             jsonify(response_dict_list),
