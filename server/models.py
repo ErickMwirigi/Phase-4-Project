@@ -1,6 +1,4 @@
 from flask_sqlalchemy import SQLAlchemy
-from sqlalchemy import func
-from sqlalchemy import ForeignKey, Column, Integer, DateTime
 from sqlalchemy.orm import validates
 from sqlalchemy.ext.associationproxy import association_proxy
 from sqlalchemy_serializer import SerializerMixin
@@ -18,8 +16,8 @@ class Customer(db.Model, SerializerMixin):
     email = db.Column(db.String, unique=True)
     password = db.Column(db.String, unique=True)
     address = db.Column(db.String, unique=True)
-    created_at = db.Column(DateTime(), server_default=func.now())
-    updated_at = db.Column(DateTime(), onupdate=func.now())
+    created_at = db.Column(db.DateTime(), server_default=db.func.now())
+    updated_at = db.Column(db.DateTime(), onupdate=db.func.now())
 
     # orders = relationship('Order', back_populates='customer')
     items = association_proxy('orders', 'item',
@@ -46,8 +44,8 @@ class Item(db.Model, SerializerMixin):
     imageUrl= db.Column(db.NVARCHAR)
     rating = db.Column(db.Integer)
     quantity = db.Column(db.Integer)
-    created_at = db.Column(DateTime(), server_default=func.now())
-    updated_at = db.Column(DateTime(), onupdate=func.now())
+    created_at = db.Column(db.DateTime(), server_default=db.func.now())
+    updated_at = db.Column(db.DateTime(), onupdate=db.func.now())
 
     def __repr__(self):
         return f'<Item {self.name}, {self.price}, {self.description}, {self.category}, {self.imageUrl},{self.quantity}>'
@@ -65,11 +63,11 @@ class Order(db.Model, SerializerMixin):
 
     id = db.Column(db.Integer, primary_key=True)
     order_id = db.Column(db.String)
-    orderdate = db.Column(DateTime(), server_default=func.now())
+    orderdate = db.Column(db.DateTime(), server_default=db.func.now())
     price = db.Column(db.Integer)
     status = db.Column(db.String)
-    # created_at = db.Column(DateTime(), server_default=func.now())
-    updated_at = db.Column(DateTime(), onupdate=func.now())
+    # created_at = db.Column(db.DateTime(), server_default=db.func.now())
+    updated_at = db.Column(db.DateTime(), onupdate=db.func.now())
     customer_id = db.Column(db.Integer(), db.ForeignKey('customers.id'))
     item_id = db.Column(db.Integer(), db.ForeignKey('items.id'))
 
@@ -85,8 +83,8 @@ class Payment(db.Model, SerializerMixin):
     paymentdate = db.Column(db.Integer)
     paymentmedhod = db.Column(db.String)
     amount = db.Column(db.Integer)
-    created_at = db.Column(DateTime(), server_default=func.now())
-    updated_at = db.Column(DateTime(), onupdate=func.now())
+    created_at = db.Column(db.DateTime(), server_default=db.func.now())
+    updated_at = db.Column(db.DateTime(), onupdate=db.func.now())
 
     
 class Review(db.Model, SerializerMixin):
@@ -96,8 +94,8 @@ class Review(db.Model, SerializerMixin):
     rating = db.Column(db.Integer)
     comment = db.Column(db.String)
     date = db.Column(db.Integer)
-    created_at = db.Column(DateTime(), server_default=func.now())
-    updated_at = db.Column(DateTime(), onupdate=func.now())
+    created_at = db.Column(db.DateTime(), server_default=db.func.now())
+    updated_at = db.Column(db.DateTime(), onupdate=db.func.now())
 
     customer_id = db.Column(db.Integer(), db.ForeignKey('customers.id'))
     item_id = db.Column(db.Integer(), db.ForeignKey('items.id'))
@@ -111,11 +109,11 @@ class Favorite(db.Model, SerializerMixin):
     __tablename__ = 'favorites'
 
     id = db.Column(db.Integer, primary_key=True)
-    created_at = db.Column(DateTime(), server_default=func.now())
-    updated_at = db.Column(DateTime(), onupdate=func.now())
+    created_at = db.Column(db.DateTime(), server_default=db.func.now())
+    updated_at = db.Column(db.DateTime(), onupdate=db.func.now())
 
-    customer_id = db.Column(Integer(), ForeignKey('customers.id'))
-    item_id = db.Column(Integer(), ForeignKey('items.id'))
+    customer_id = db.Column(db.Integer(), db.ForeignKey('customers.id'))
+    item_id = db.Column(db.Integer(), db.ForeignKey('items.id'))
 
     item = db.relationship("Item")
 
