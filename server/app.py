@@ -194,7 +194,7 @@ class Items(Resource):
 
     @staticmethod
     def get():
-        response_dict_list = [n for n in Item.query.all()]
+        response_dict_list = [item.to_dict() for item in Item.query.all()]
 
         response = make_response(
             jsonify(response_dict_list),
