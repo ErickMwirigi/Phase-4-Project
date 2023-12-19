@@ -26,7 +26,7 @@ function App() {
   const [user, setUser] = useState({});
 
   function fetchProductData() {
-    fetch("http://127.0.0.1:5555/items")
+    fetch("https://e-commerce-rp0t.onrender.com/items")
       .then((response) => response.json())
       .then((data) => {
         const dictionary = {};
@@ -43,7 +43,7 @@ function App() {
   }
 
   function fetchFavs() {
-    fetch("http://127.0.0.1:5555/favorites")
+    fetch("https://e-commerce-rp0t.onrender.com/favorites")
       .then((response) => response.json())
       .then((data) => setFavoriteProducts(data));
   }
@@ -55,7 +55,7 @@ function App() {
     if (favoriteProducts.includes(item.id)) {
       alert(`${item.name} has already been added to favorites`);
     } else {
-      fetch("http://127.0.0.1:5555/favorites", {
+      fetch("https://e-commerce-rp0t.onrender.com/favorites", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -71,7 +71,7 @@ function App() {
   }
 
   function removeFromFavorites(item) {
-    fetch(`http://127.0.0.1:5555/favorites/${item.id}`, {
+    fetch(`https://e-commerce-rp0t.onrender.com/favorites/${item.id}`, {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",
@@ -87,7 +87,7 @@ function App() {
   }
 
   function fetchProductReviews() {
-    const favoriteProductsURL = "http://127.0.0.1:5555/reviews";
+    const favoriteProductsURL = "https://e-commerce-rp0t.onrender.com/reviews";
 
     fetch(favoriteProductsURL)
       .then((response) => response.json())

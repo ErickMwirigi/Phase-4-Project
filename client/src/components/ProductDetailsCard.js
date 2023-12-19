@@ -30,7 +30,7 @@ function ProductDetailsCard({
   const product = products.filter((prod) => prod.id === parseInt(productId))[0];
 
   const fetchProductReviews = () => {
-    const favoriteProductsURL = "http://127.0.0.1:5555/reviews?item_id=1";
+    const favoriteProductsURL = "https://e-commerce-rp0t.onrender.com/reviews?item_id=1";
 
     fetch(favoriteProductsURL)
       .then((response) => response.json())

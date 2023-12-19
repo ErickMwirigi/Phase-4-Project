@@ -17,7 +17,7 @@ export default function ProfileSettings({ userData = {} }) {
     const { created_at: fda, ...fd } = formData;
     console.log({ formData })
 
-    fetch(`http://127.0.0.1:5555/customers/${userData.id}`, {
+    fetch(`https://e-commerce-rp0t.onrender.com/customers/${userData.id}`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",

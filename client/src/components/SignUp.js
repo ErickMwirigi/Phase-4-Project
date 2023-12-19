@@ -38,7 +38,7 @@ export default function SignUp({ formdata }) {
       return
     }
 
-    fetch("http://127.0.0.1:5555/customers", {
+    fetch("https://e-commerce-rp0t.onrender.com/customers", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
