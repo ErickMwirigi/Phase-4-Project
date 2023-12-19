@@ -3,7 +3,7 @@ import Orders from "./Orders";
 
 function CheckoutPage({ order , cart, user , setOrder }){
 
-    const ordersURL = "http://127.0.0.1:5555/orders";
+    const ordersURL = "https://e-commerce-rp0t.onrender.com/orders";
 
     console.log(cart)
     // console.log(order)

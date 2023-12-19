@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import CommentsList from "./CommentsList";
 
-const commentURL = "http://127.0.0.1:5555/reviews";
+const commentURL = "https://e-commerce-rp0t.onrender.com/reviews";
 
 function Comments({
   review,
