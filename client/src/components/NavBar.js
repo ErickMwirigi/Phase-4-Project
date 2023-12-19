@@ -1,11 +1,11 @@
 import React from "react";
-import { NavLink, Outlet, useNavigate } from "react-router-dom";
+import { NavLink, Outlet } from "react-router-dom";
 import Searchbar from "./Searchbar";
-import Logo from "../assets/logo.png";
+import Logo from "../assets/Logo.png";
 import ls from "local-storage"
 
 export default function NavBar({ onSearch, userData }) {
-  const navigate = useNavigate();
+
   return (
     <>
       <nav>

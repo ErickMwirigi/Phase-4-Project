@@ -1,6 +1,6 @@
 import React from "react";
-import { ReactComponent as Cart } from "../Cart.svg";
-import Logo from "../assets/logo.png";
+import { ReactComponent as Cart } from "../assets/Cart.svg";
+import Logo from "../assets/Logo.png";
 import ProfileMenu from "./ProfileMenu";
 import { NavLink } from "react-router-dom";
 

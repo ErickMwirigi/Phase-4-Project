@@ -93,22 +93,20 @@ function App() {
       .then((response) => response.json())
       .then((data) => {
         const parsedReviews = {};
-        console.log({ data })
         data.forEach((review) => {
           // const newCommentsForproduct = [...commentsDictionary[review.productID], review]
         });
-        // setReviews(data);
       });
   }
 
-  function addToCart(product){
+  function AddToCart(product){
     useEffect(()=>{
       const newCart = [...cart,product]
       setCart(newCart)
     },[])
   }
 
-  function handleOrder(order){
+  function HandleOrder(order){
     useEffect(()=>{
       // console.log(orders)
       const newCart = [...orders,order]
@@ -138,11 +136,9 @@ function App() {
   }
 
   useEffect(() => {
-    checkUser();
-    console.log("check")
+    checkUser()
   }, [user.id])
 
-  console.log(cart)
 
   return (
     <Routes>
@@ -165,7 +161,7 @@ function App() {
           <ProductsPage
             products={products}
             setToFavorite={setToFavoriteProducts}
-            cart={addToCart}
+            cart={AddToCart}
           />
         }
       />
@@ -177,7 +173,7 @@ function App() {
             commentsDictionary={commentsDictionary}
             setCommentsDictionary={setCommentsDictionary}
             fetchProductReviews={fetchProductReviews}
-            addCart={addToCart}
+            addCart={AddToCart}
           />}
       />
       </Route>
@@ -192,7 +188,7 @@ function App() {
           element={<AccountProfile userData={isMember} itemCount={cart} />}
         />
         <Route path="inbox" element={<Inbox />} />
-        <Route path="orders" element={<Orders cart={cart} user={user} setOrder={handleOrder}/>} />
+        <Route path="orders" element={<Orders cart={cart} user={user} setOrder={HandleOrder}/>} />
         <Route
           path="favorites"
           element={
@@ -202,7 +198,7 @@ function App() {
             />
           }
         />
-        <Route path="checkout" element={<CheckoutPage order={orders} cart={cart} user={user} setOrder={handleOrder}/>} />
+        <Route path="checkout" element={<CheckoutPage order={orders} cart={cart} user={user} setOrder={HandleOrder}/>} />
         <Route
           path="profile-settings"
           element={<ProfileSettings userData={user} />}

@@ -1,19 +1,13 @@
-from flask import Flask, jsonify, request, make_response, session
+from flask import Flask, jsonify, request, make_response
 from flask_migrate import Migrate
 from flask_restful import Api, Resource
-from flask_session import Session
 from models import db, Customer, Item, Order, Payment, Review, Favorite
 from flask_cors import CORS
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///project.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-app.config['SESSION_TYPE'] = 'sqlalchemy'
-
-app.config['SESSION_SQLALCHEMY'] = db
-Session(app)
 app.json.compact = False
-app.secret_key = 'no_key'
 
 migrate = Migrate(app, db)
 CORS(app)
@@ -546,4 +540,4 @@ class ProductReviewByID(Resource):
 api.add_resource(ProductReviewByID, '/reviews?<int:item_id>')
 
 if __name__ == '__main__':
-    app.run(port=5555, debug=True)
+    app.run(port=5555)
