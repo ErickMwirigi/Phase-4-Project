@@ -5,7 +5,7 @@ from models import db, Customer, Item, Order, Payment, Review, Favorite
 from flask_cors import CORS
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///project.db'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://our_market_ctub_user:xm33gwaQN2btM0CBWfDQkwziXWBWfxEh@dpg-cm0qjpa1hbls73def4o0-a.frankfurt-postgres.render.com/our_market_ctub'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.json.compact = False
 
