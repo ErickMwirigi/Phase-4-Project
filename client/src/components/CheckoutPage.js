@@ -19,7 +19,7 @@ function CheckoutPage({ order , cart, user , setOrder }){
                 body:JSON.stringify(item)
             })
             .then(response => response.json())
-            .then(data => console.log(data))
+            .then(data => alert(data))
         })
       }
 
