@@ -20,7 +20,7 @@ export default function LogIn({ onLogIn }) {
       username: "",
       password: "",
     });
-    fetch("https://e-commerce-rp0t.onrender.com/login", {
+    fetch("https://market-db-shuj.onrender.com/login", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

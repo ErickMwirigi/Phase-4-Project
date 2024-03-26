@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import Reviews from "./Reviews";
 
 function ProductReviewPage(props) {
-  const favoriteProductsURL = "https://e-commerce-rp0t.onrender.com/reviews";
+  const favoriteProductsURL = "https://market-db-shuj.onrender.com/reviews";
   const {
     products,
     productsDictionary,
