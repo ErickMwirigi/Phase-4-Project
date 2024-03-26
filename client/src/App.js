@@ -26,7 +26,7 @@ function App() {
   const [user, setUser] = useState({});
 
   function fetchProductData() {
-    fetch("https://e-commerce-rp0t.onrender.com/items")
+    fetch("https://market-db-shuj.onrender.com/items")
       .then((response) => response.json())
       .then((data) => {
         const dictionary = {};
@@ -43,7 +43,7 @@ function App() {
   }
 
   function fetchFavs() {
-    fetch("https://e-commerce-rp0t.onrender.com/favorites")
+    fetch("https://market-db-shuj.onrender.com/favorites")
       .then((response) => response.json())
       .then((data) => setFavoriteProducts(data));
   }
@@ -55,7 +55,7 @@ function App() {
     if (favoriteProducts.includes(item.id)) {
       alert(`${item.name} has already been added to favorites`);
     } else {
-      fetch("https://e-commerce-rp0t.onrender.com/favorites", {
+      fetch("https://market-db-shuj.onrender.com/favorites", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -71,7 +71,7 @@ function App() {
   }
 
   function removeFromFavorites(item) {
-    fetch(`https://e-commerce-rp0t.onrender.com/favorites/${item.id}`, {
+    fetch(`https://market-db-shuj.onrender.com/favorites/${item.id}`, {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",
@@ -87,7 +87,7 @@ function App() {
   }
 
   function fetchProductReviews() {
-    const favoriteProductsURL = "https://e-commerce-rp0t.onrender.com/reviews";
+    const favoriteProductsURL = "https://market-db-shuj.onrender.com/reviews";
 
     fetch(favoriteProductsURL)
       .then((response) => response.json())
@@ -129,9 +129,7 @@ function App() {
 
   const checkUser = () => {
     if (user.id) {
-      if (document.location.name == "/login") navigate("/products", { replace: true });
-    } else {
-      if (document.location.name !== "/login") navigate("/login", { replace: true });
+      if (document.location.name === "/login") navigate("/products", { replace: true });
     }
   }
 

@@ -38,7 +38,7 @@ export default function SignUp({ formdata }) {
       return
     }
 
-    fetch("https://e-commerce-rp0t.onrender.com/customers", {
+    fetch("https://market-db-shuj.onrender.com/customers", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

@@ -3,7 +3,7 @@ import Orders from "./Orders";
 
 function CheckoutPage({ order , cart, user , setOrder }){
 
-    const ordersURL = "https://e-commerce-rp0t.onrender.com/orders";
+    const ordersURL = "https://market-db-shuj.onrender.com/orders";
 
     console.log(cart)
     // console.log(order)
